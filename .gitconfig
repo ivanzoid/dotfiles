@@ -1,0 +1,38 @@
+[user]
+	name = Ivan Zezyulya
+	email = ivan@zezyulya.com
+[alias]
+	co = checkout
+	ci = commit
+	cam = commit -a -m
+	ca = commit -a
+	st = status
+	br = branch
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	undo = reset --hard
+	stat = show --stat
+	pull = pull --no-commit
+[apply]
+	whitespace = nowarn
+[color]
+	diff = auto
+	status = auto
+	branch = auto	 
+[diff] 
+#	 tool = araxis
+	tool = gvimdiff
+#[merge] 
+#	 tool = araxis
+[core]
+	quotepath = false
+	excludesfile = /Users/ivan/.gitignore_global
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = simple
