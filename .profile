@@ -193,13 +193,8 @@ alias .....='cd ../../../..'
 if [[ $OSTYPE == darwin* ]];
 then
 	alias .ap="cd '/Users/ivan/Library/Application Support/iPhone Simulator'"
-	alias .ap30="cd '/Users/ivan/Library/Application Support/iPhone Simulator/3.0/Applications'"
-	alias .ap32="cd '/Users/ivan/Library/Application Support/iPhone Simulator/3.2/Applications'"
-	alias .ap41="cd '/Users/ivan/Library/Application Support/iPhone Simulator/4.1/Applications'"
-	alias .ap42="cd '/Users/ivan/Library/Application Support/iPhone Simulator/4.2/Applications'"
-	alias .ap43="cd '/Users/ivan/Library/Application Support/iPhone Simulator/4.3/Applications'"
-	alias .ap50="cd '/Users/ivan/Library/Application Support/iPhone Simulator/5.0/Applications'"
 	alias .ap51="cd '/Users/ivan/Library/Application Support/iPhone Simulator/5.1/Applications'"
+	alias .ap60="cd '/Users/ivan/Library/Application Support/iPhone Simulator/6.6/Applications'"
 
 	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://4000000`'
 
@@ -207,6 +202,10 @@ then
 fi
 
 alias tunnel='ssh -C2qTnN -D 8080 ivan@zoid.cc'
+
+if program_exists rmtrash; then
+	alias rm=rmtrash
+fi
 
 MC_WRAPPER="$HOME/bin/mc-wrapper.sh"
 if [ -x $MC_WRAPPER ]; then
