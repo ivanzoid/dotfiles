@@ -194,7 +194,7 @@ if [[ $OSTYPE == darwin* ]];
 then
 	alias .ap="cd '/Users/ivan/Library/Application Support/iPhone Simulator'"
 	alias .ap51="cd '/Users/ivan/Library/Application Support/iPhone Simulator/5.1/Applications'"
-	alias .ap60="cd '/Users/ivan/Library/Application Support/iPhone Simulator/6.6/Applications'"
+	alias .ap60="cd '/Users/ivan/Library/Application Support/iPhone Simulator/6.0/Applications'"
 
 	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://4000000`'
 
