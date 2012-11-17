@@ -1,3 +1,5 @@
+[Adblock]
+! expires: 5 days
 
 livejournal.com##DIV[id="ljtime"][class="b-ljtimes-wrapper"]
 livejournal.com##DIV[class="lj-like"]
