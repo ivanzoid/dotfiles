@@ -23,18 +23,6 @@ if [ -d /usr/local/sbin ]; then
 	export PATH=/usr/local/sbin:$PATH
 fi
 
-if [ -d $HOME/android-sdk-macosx/tools ]; then
-	export PATH=${PATH}:~/android-sdk-macosx/tools
-fi
-
-# Add rbenv
-if [ -d $HOME/.rbenv/shims ]; then
-	export PATH=$HOME/.rbenv/shims:${PATH}
-fi
-
-#eval "$(rbenv init -)"
-
-
 program_exists () {
 	type "$1" &> /dev/null ;
 }
@@ -43,6 +31,10 @@ program_exists () {
 if [ -d ~/bin ]; then
 	export PATH=~/bin:$PATH
 fi
+
+#
+# Exports
+#
 
 export LANG='en_US.UTF-8'
 
@@ -63,24 +55,47 @@ export SVN_EDITOR=$EDITOR
 # Bash settings
 shopt -s histappend
 export HISTSIZE=1000000
-export CLICOLOR=1
 
-# Go setup
+#
+# Aliases
+#
 
-export GOPATH=$HOME/Go
-export PATH="$GOPATH/bin:$PATH"
+if [[ $OSTYPE == darwin* ]]; then
 
-if program_exists go; then
-	function setupGOROOT()
-	{
-		local GOPATH=`which go`
-		local GODIR=`dirname $GOPATH`
-		local GOPATH_BREW_RELATIVE=`readlink $GOPATH`
-		local GOPATH_BREW=`dirname $GOPATH_BREW_RELATIVE`
-		export GOROOT=`cd $GODIR; cd $GOPATH_BREW/..; pwd`
-	}
-	setupGOROOT
+	export CLICOLOR=1
+	alias ls='ls -hF'
+
+	alias .ap="cd '/Users/ivan/Library/Application Support/iPhone Simulator'"
+	alias .ap51="cd '/Users/ivan/Library/Application Support/iPhone Simulator/5.1/Applications'"
+	alias .ap60="cd '/Users/ivan/Library/Application Support/iPhone Simulator/6.0/Applications'"
+
+	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://4000000`'
+
+	alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
+
+elif [[ $OSTYPE == linux* ]]; then
+	alias ls='ls -hF --color=auto'
 fi
+
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias tunnel='ssh -C2qTnN -D 8080 ivan@zoid.cc'
+
+if [ -x "$HOME/bin/svn-color.sh" ]; then
+	. "$HOME/bin/svn-color.sh"
+fi
+
+if program_exists rmtrash; then
+	alias rm=rmtrash
+fi
+
+MC_WRAPPER="$HOME/bin/mc-wrapper.sh"
+if [ -x $MC_WRAPPER ]; then
+    alias mc=". $MC_WRAPPER" 
+fi
+unset MC_WRAPPER
+
 
 function setPS1()
 {
@@ -173,52 +188,24 @@ function setPS1()
 
 setPS1
 
-# Aliases
-alias ls='ls -hF'
+# Go setup
 
-alias св=cd
-alias ды=ls
+if program_exists go; then
 
-alias phpa='php ~/bin/phpa-norl'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
+	export GOPATH=$HOME/Go
+	export PATH="$GOPATH/bin:$PATH"
 
-#alias svn="$HOME/bin/svn-color.py"
-
-. "$HOME/bin/svn-color.sh"
-
-#alias svn=colorsvn
-
-if [[ $OSTYPE == darwin* ]];
-then
-	alias .ap="cd '/Users/ivan/Library/Application Support/iPhone Simulator'"
-	alias .ap51="cd '/Users/ivan/Library/Application Support/iPhone Simulator/5.1/Applications'"
-	alias .ap60="cd '/Users/ivan/Library/Application Support/iPhone Simulator/6.0/Applications'"
-
-	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://4000000`'
-
-	alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
-fi
-
-alias tunnel='ssh -C2qTnN -D 8080 ivan@zoid.cc'
-
-if program_exists rmtrash; then
-	alias rm=rmtrash
-fi
-
-MC_WRAPPER="$HOME/bin/mc-wrapper.sh"
-if [ -x $MC_WRAPPER ]; then
-    alias mc=". $MC_WRAPPER" 
-fi
-unset MC_WRAPPER
-
-if program_exists convert; then
-	image_add_shadow()
+	function setupGOROOT()
 	{
-		convert %@ \( +clone  -background black  -shadow 80x3+0+2 \) +swap -background none -layers merge +repage shadowed-%@
+		local GOPATH=`which go`
+		local GODIR=`dirname $GOPATH`
+		local GOPATH_BREW_RELATIVE=`readlink $GOPATH`
+		local GOPATH_BREW=`dirname $GOPATH_BREW_RELATIVE`
+		export GOROOT=`cd $GODIR; cd $GOPATH_BREW/..; pwd`
 	}
+	setupGOROOT
 fi
+
 
 if program_exists gm; then
 	deretinize()
@@ -230,70 +217,6 @@ if program_exists gm; then
 				gm convert -resize 50%x50% "$f" "$fout"
 			fi
 		done
-	}
-fi
-
-if program_exists ffmpeg && program_exists metaflac; then
-	flac2alac()
-	{
-		in=$1
-		out=${in/.flac/.m4a}
-		album_artist=$(metaflac --show-tag='ALBUM ARTIST' "$in" | sed 's/ALBUM ARTIST=//g')
-		echo "Converting $in to $out ..."
-		ffmpeg -y -i "$in" -acodec alac -metadata album_artist="$album_artist" "$out"
-	}
-
-	alias flac2alac_all="for f in *.flac; do flac2alac \"\$f\"; done"
-fi
-
-# install: shntool ffmpeg flac cueprint
-if program_exists shnsplit && program_exists cuetag && program_exists ffmpeg && program_exists metaflac; then
-	ape_cue2alac()
-	{
-		echo "Converting ape+cue to flac files ..."
-		shnsplit -f *.cue -o flac -t '%n %t' *.ape
-
-		echo "Tagging files ..."
-		cuetag *.cue *.flac
-
-		echo "Converting to ALAC ..."
-		flac2alac_all
-
-		echo "Removing temporary files ..."
-		rm *.flac
-	}
-
-	flac_cue2alac()
-	{
-		mkdir -p out
-		cd out
-
-		echo "Converting flac+cue to flac files ..."
-		shnsplit -f ../*.cue -o flac -t '%n %t' ../*.flac
-
-		echo "Tagging files ..."
-		cuetag ../*.cue *.flac
-
-		echo "Converting to ALAC ..."
-		flac2alac_all
-
-		echo "Removing temporary files ..."
-		rm *.flac
-	}
-
-	wv_cue2alac()
-	{
-		echo "Converting ape+cue to flac files ..."
-		shnsplit -f *.cue -o flac -t '%n %t' *.wv
-
-		echo "Tagging files ..."
-		cuetag *.cue *.flac
-
-		echo "Converting to ALAC ..."
-		flac2alac_all
-
-		echo "Removing temporary files ..."
-		rm *.flac
 	}
 fi
 
