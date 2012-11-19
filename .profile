@@ -206,20 +206,6 @@ if program_exists go; then
 	setupGOROOT
 fi
 
-
-if program_exists gm; then
-	deretinize()
-	{
-		for f in $@; do
-			if [[ $f == *@2x* ]]; then
-				fout=${f/@2x/}
-				echo "Converting $f to $fout ..."
-				gm convert -resize 50%x50% "$f" "$fout"
-			fi
-		done
-	}
-fi
-
 #if [ -x "`which fortune`" ]; then
 #    fortune
 #fi
