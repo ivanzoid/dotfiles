@@ -13,19 +13,9 @@
 {
     if ((self = [super initWithFrame:frame]))
     {
-        [self addViews];
+        
     }
     return self;
-}
-
-- (id) init
-{
-    return [self initWithFrame:CGRectZero];
-}
-
-- (void) addViews
-{
-    
 }
 
 - (void) layoutSubviews

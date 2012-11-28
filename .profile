@@ -27,9 +27,19 @@ program_exists () {
 	type "$1" &> /dev/null ;
 }
 
+# Add ~/alac-utils
+if [ -d ~/alac-utils ]; then
+	export PATH=~/alac-utils:$PATH
+fi
+
 # Add ~/bin
 if [ -d ~/bin ]; then
 	export PATH=~/bin:$PATH
+fi
+
+# Add ~/private/bin
+if [ -d ~/private/bin ]; then
+	export PATH=~/private/bin:$PATH
 fi
 
 #
@@ -86,9 +96,9 @@ if [ -x "$HOME/bin/svn-color.sh" ]; then
 	. "$HOME/bin/svn-color.sh"
 fi
 
-if program_exists rmtrash; then
-	alias rm=rmtrash
-fi
+#if program_exists rmtrash; then
+#	alias rm=rmtrash
+#fi
 
 MC_WRAPPER="$HOME/bin/mc-wrapper.sh"
 if [ -x $MC_WRAPPER ]; then
@@ -179,10 +189,10 @@ function setPS1()
 	#PS1='\[\033[01;32m\]\u\[\033[01;34m\] \w \$\[\033[00m\] '
 
 	#export PS1="\n${ColorBGreen}\u@\H${ColorBBlue} \w ${ColorBPurple}\$${ColorOff} "
-	export PS1="\n${ColorBRed}\h${ColorBBlue} \w \$${ColorOff} "
+	export PS1="\n${ColorBRed}\h${ColorBBlue} \w\n\$${ColorOff} "
 
 	if [[ "$HOSTNAME" == *zoid.cc* ]]; then
-		export PS1="\n${ColorBRed}\u@\H \w \$${ColorOff} "
+		export PS1="\n${ColorBRed}\u@\H \w\$${ColorOff} "
 	fi
 }
 
