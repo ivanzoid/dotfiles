@@ -42,6 +42,12 @@ if [ -d ~/private/bin ]; then
 	export PATH=~/private/bin:$PATH
 fi
 
+# Android SDK
+if [ -d /usr/local/opt/android-android-sdk ]; then
+	export ANDROID_SDK_ROOT='/usr/local/opt/android-sdk'
+fi
+
+
 #
 # Exports
 #
