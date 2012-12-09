@@ -6,6 +6,8 @@
 	st = status
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	br = branch
+	co = checkout
 [apply]
 	whitespace = nowarn
 [color]
@@ -17,12 +19,5 @@
 [core]
 	quotepath = false
 	excludesfile = /Users/ivan/.gitignore_global
-
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [push]
 	default = simple
