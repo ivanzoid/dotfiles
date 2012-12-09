@@ -42,11 +42,6 @@ if [ -d ~/private/bin ]; then
 	export PATH=~/private/bin:$PATH
 fi
 
-# Android SDK
-if [ -d /usr/local/opt/android-android-sdk ]; then
-	export ANDROID_SDK_ROOT='/usr/local/opt/android-sdk'
-fi
-
 
 #
 # Exports
@@ -106,7 +101,7 @@ fi
 #	alias rm=rmtrash
 #fi
 
-MC_WRAPPER="$HOME/bin/mc-wrapper.sh"
+MC_WRAPPER="$HOME/private/bin/mc-wrapper.sh"
 if [ -x $MC_WRAPPER ]; then
     alias mc=". $MC_WRAPPER" 
 fi
@@ -188,13 +183,6 @@ function setPS1()
 	local ColorBgICyan='\[\e[0;106m\]'    # Cyan
 	local ColorBgIWhite='\[\e[0;107m\]'   # White
 
-	#export PS1="\n\[\e[36;1m\]\\u@\h \[\e[32;1m\]\W \[\e[35;1m\]$\[\e[0m\] "
-	#export PS1="\n\[\e[36;1m\]\\u@\h \[\e[32;1m\]\w\n\[\e[35;1m\]$\[\e[0m\] "
-	#export PS1="\n\u@\h: $Green\w $Cyan\d \t\n$Purple>>$Color_Off "
-	#PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
-	#PS1='\[\033[01;32m\]\u\[\033[01;34m\] \w \$\[\033[00m\] '
-
-	#export PS1="\n${ColorBGreen}\u@\H${ColorBBlue} \w ${ColorBPurple}\$${ColorOff} "
 	export PS1="\n${ColorBRed}\h${ColorBBlue} \w\n\$${ColorOff} "
 
 	if [[ "$HOSTNAME" == *zoid.cc* ]]; then
@@ -221,10 +209,6 @@ if program_exists go; then
 	}
 	setupGOROOT
 fi
-
-#if [ -x "`which fortune`" ]; then
-#    fortune
-#fi
 
 if program_exists brew; then
 	BREW_PREFIX=`brew --prefix`
