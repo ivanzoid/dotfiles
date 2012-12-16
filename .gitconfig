@@ -5,9 +5,13 @@
 	cam = commit -a -m
 	st = status
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	br = branch
 	co = checkout
+	pul = pull
+	pus = push
+	re = remote
+	pushom = push -u origin master
 [apply]
 	whitespace = nowarn
 [color]
@@ -18,6 +22,6 @@
 	tool = gvimdiff
 [core]
 	quotepath = false
-	excludesfile = /Users/ivan/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
