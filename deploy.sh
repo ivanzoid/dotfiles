@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pushd ~ >/dev/null
+pushd $HOME >/dev/null
 
 rm -rf Library/Developer/Xcode/UserData/CodeSnippets
 mkdir -p Library/Developer/Xcode/UserData
