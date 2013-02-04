@@ -11,7 +11,7 @@ mkdir -p Library/Developer/Xcode/UserData
 ln -s -F dotfiles/Xcode/FontAndColorThemes Library/Developer/Xcode/UserData
 
 for f in dotfiles/.[^.]*; do
-	ln -s -F "$f" .
+	ln -s -f "$f" .
 done
 
 popd >/dev/null
