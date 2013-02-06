@@ -3,19 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>nsloc</string>
+	<string>lcom</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeExpression</string>
+		<string>TopLevel</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>NSLocalizedString(@"", @"")</string>
+	<string>/* 
+ * &lt;#comment#&gt;
+ */</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>7FBBEC35-C22F-4697-982D-E3500AF9B9BF</string>
+	<string>E15BE57F-24D8-432E-98F2-0534C0E6E573</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>NSLocalizedString</string>
+	<string>C-Style long comment</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

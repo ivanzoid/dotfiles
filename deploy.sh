@@ -1,12 +1,42 @@
-#!/bin/sh
+#!/bin/bash
 
-DOTFILES="$HOME/dotfiles"
+objectNotExcluded()
+{
+	object=$1
+	array=$2
+	case "$array[@]"
+		in *"$object"*)
+			return 1
+	esac
+	return 0
+}
 
-rm -rf $HOME/Library/Developer/Xcode/UserData/CodeSnippets
-mkdir -p $HOME/Library/Developer/Xcode/UserData
-ln -F -s $DOTFILES/Xcode/CodeSnippets $HOME/Library/Developer/Xcode/UserData
+symlink()
+{
+	from=$1
+	to=$2
 
-rm -rf $HOME/Library/Developer/Xcode/UserData/FontAndColorThemes
-mkdir -p $HOME/Library/Developer/Xcode/UserData
-ln -F -s $DOTFILES/Xcode/FontAndColorThemes $HOME/Library/Developer/Xcode/UserData
+	mkdir -p "$to"
+	toLastComponent="$(basename $from)"
+	fullTo="${to}/${toLastComponent}"
+	if [ -d "$fullTo" ]; then
+		rm -rf "$fullTo"
+	fi
+	ln -sf "$from" "$to"
+}
+
+pushd ~ >/dev/null
+
+symlink ~/dotfiles/Xcode/CodeSnippets ~/Library/Developer/Xcode/UserData/
+symlink ~/dotfiles/Xcode/FontAndColorThemes ~/Library/Developer/Xcode/UserData/
+
+excludeList=(.git)
+
+for f in dotfiles/.[^.]*; do
+	if objectNotExcluded "$(basename $f)" $excludeList ; then
+		symlink "$f" ~
+	fi
+done
+
+popd >/dev/null
 
