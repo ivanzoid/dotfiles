@@ -8,10 +8,6 @@
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	br = branch
 	co = checkout
-	pul = pull
-	pus = push
-	re = remote
-	pushom = push -u origin master
 [apply]
 	whitespace = nowarn
 [color]

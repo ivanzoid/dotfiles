@@ -3,32 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>iwf</string>
+	<string>typedefPacked</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>ClassImplementation</string>
+		<string>TopLevel</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>- (id) initWithFrame:(CGRect)frame
-{
-    if ((self = [super initWithFrame:frame]))
-    {
-        
-    }
-    return self;
-}
-
-- (void) layoutSubviews
-{
+	<string>typedef struct __attribute__((packed)) {
     
-}
+} &lt;#name#&gt;;
 </string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>95EDC688-B1BA-492B-BED7-A65C231DC606</string>
+	<string>944B921B-1995-4479-B9A1-E890AB6A3FF7</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>initWithFrame + layoutSubviews</string>
+	<string>Packed struct</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

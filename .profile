@@ -43,7 +43,6 @@ if [ -d ~/private/bin ]; then
 	export PATH=~/private/bin:$PATH
 fi
 
-
 #
 # Exports
 #
@@ -106,11 +105,22 @@ fi
 #	alias rm=rmtrash
 #fi
 
+#
+# mc
+#
 MC_WRAPPER="$HOME/private/bin/mc-wrapper.sh"
 if [ -x $MC_WRAPPER ]; then
     alias mc=". $MC_WRAPPER" 
 fi
 unset MC_WRAPPER
+
+
+# GIT
+#
+# Display unstaged (*) and staged(+) changes
+export GIT_PS1_SHOWDIRTYSTATE="1"
+# Display if there are untracked (%) files
+export GIT_PS1_SHOWUNTRACKEDFILES="1"
 
 
 function setPS1()
@@ -188,7 +198,9 @@ function setPS1()
 	local ColorBgICyan='\[\e[0;106m\]'    # Cyan
 	local ColorBgIWhite='\[\e[0;107m\]'   # White
 
-	export PS1="\n${ColorBRed}\h${ColorBBlue} \w\n\$${ColorOff} "
+	GitStatus='$(__git_ps1 " (%s)")'
+
+	export PS1="\n${ColorBRed}\h${ColorBGreen}${GitStatus}${ColorBBlue} \w\n\$${ColorOff} "
 
 	if [[ "$HOSTNAME" == *zoid.cc* ]]; then
 		export PS1="\n${ColorBRed}\u@\H \w\$${ColorOff} "
