@@ -14,10 +14,16 @@
 	diff = auto
 	status = auto
 	branch = auto	 
-[diff] 
-	tool = gvimdiff
+#[diff] 
+#	tool = gvimdiff
 [core]
 	quotepath = false
 	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
+[difftool "sourcetree"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustExitCode = true

@@ -43,6 +43,10 @@ if [ -d ~/private/bin ]; then
 	export PATH=~/private/bin:$PATH
 fi
 
+if [ -d /usr/local/opt/android-sdk ]; then
+	export ANDROID_HOME=/usr/local/opt/android-sdk
+fi
+
 #
 # Exports
 #
@@ -224,7 +228,7 @@ if program_exists go; then
 		local GOPATH_BREW=`dirname $GOPATH_BREW_RELATIVE`
 		export GOROOT=`cd $GODIR; cd $GOPATH_BREW/..; pwd`
 	}
-	setupGOROOT
+	#setupGOROOT
 fi
 
 if program_exists brew; then
