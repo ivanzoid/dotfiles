@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/Src/StartFX/Libs'
 let g:netrw_dirhist_2='/Src/iHermes/iHermes/iHermes.xcdatamodeld/iHermes.xcdatamodel'
+let g:netrw_dirhist_3='/Src/SalamWorld/ios/SalamWorld.xcodeproj'
+let g:netrw_dirhist_4='/Src/SalamWorld/ios/SalamWorld.xcodeproj/project.xcworkspace'

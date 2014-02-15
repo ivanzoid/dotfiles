@@ -3,25 +3,47 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>initWithStyle: reuseIdentifier:</string>
+	<string>commonInit</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+	<string>- (id) init
 {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        &lt;#initialization#&gt;
+    if ((self = [super init])) {
+        [self commonInit];
     }
     return self;
-}</string>
+}
+
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id) initWithCoder:(NSCoder *)coder
+{
+    if ((self = [super initWithCoder:coder])) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void) commonInit
+{
+    &lt;#initializations#&gt;
+}
+</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>630D233F-08E9-43FC-B915-C3748ADC7238</string>
+	<string>E96B488A-B790-4EC4-8DE3-65E5923E857F</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>initWithStyle: reuseIdentifier:</string>
+	<string>Common Init (UIViewController)</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

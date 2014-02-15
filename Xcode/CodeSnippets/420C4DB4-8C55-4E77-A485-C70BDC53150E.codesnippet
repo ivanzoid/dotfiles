@@ -3,19 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>strong</string>
+	<string>initWith</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>ClassInterfaceMethods</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (nonatomic, strong) &lt;#type#&gt; &lt;#name#&gt;;</string>
+	<string>- (id) initWith:(&lt;#type#&gt;)&lt;#object#&gt;
+{
+    if ((self = [super init])) {
+        &lt;#code#&gt;
+    }
+    return self;
+}</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>C47D96AD-0D94-4AFE-BE0B-4C98A0DB82F8</string>
+	<string>420C4DB4-8C55-4E77-A485-C70BDC53150E</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>@property (nonatomic, strong) </string>
+	<string>initWith:</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

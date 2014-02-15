@@ -3,19 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>strong</string>
+	<string>viewDidLoad</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>ClassInterfaceMethods</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (nonatomic, strong) &lt;#type#&gt; &lt;#name#&gt;;</string>
+	<string>- (void) viewDidLoad
+{
+    [super viewDidLoad];
+
+    &lt;##&gt;
+}</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>C47D96AD-0D94-4AFE-BE0B-4C98A0DB82F8</string>
+	<string>28FC8CE3-7695-4D23-A492-CB8280598D74</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>@property (nonatomic, strong) </string>
+	<string>viewDidLoad</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

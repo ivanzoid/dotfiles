@@ -20,7 +20,7 @@
     
     if (!cell)
     {
-        cell = [UIView firstViewFromXib:NSStringFromClass([Cell class])];
+        cell = [Cell newFromXib];
     }
     
     Object *object = objects[indexPath.row];
@@ -44,7 +44,7 @@
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Tableview methods</string>
+	<string>TableView methods</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

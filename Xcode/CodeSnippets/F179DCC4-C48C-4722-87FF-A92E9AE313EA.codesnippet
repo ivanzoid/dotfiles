@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>strong</string>
+	<string>insets</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>ClassInterfaceMethods</string>
+		<string>CodeExpression</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (nonatomic, strong) &lt;#type#&gt; &lt;#name#&gt;;</string>
+	<string>UIEdgeInsetsMake(&lt;#top#&gt;, &lt;#left#&gt;, &lt;#bottom#&gt;, &lt;#right#&gt;)</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>C47D96AD-0D94-4AFE-BE0B-4C98A0DB82F8</string>
+	<string>F179DCC4-C48C-4722-87FF-A92E9AE313EA</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>@property (nonatomic, strong) </string>
+	<string>UIEdgeInsetsMake</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

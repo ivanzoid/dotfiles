@@ -3,21 +3,39 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>typedefEnum</string>
+	<string>commonInit</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>TopLevel</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>typedef enum {
-    
-} &lt;#name#&gt;;</string>
+	<string>
+- (id) initWithFrame:(CGRect)frame
+{
+    if ((self = [super initWithFrame:frame])) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id) initWithCoder:(NSCoder *)coder
+{
+    if ((self = [super initWithCoder:coder])) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void) commonInit
+{
+    &lt;#initializations#&gt;
+}</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>295F80DE-F755-4D19-B5F8-5C98AF081D07</string>
+	<string>58401DCC-42A6-4B3F-8D5E-16E44F297BBB</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>typedef enum</string>
+	<string>initWithFrame + initWithCoder + commonInit</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

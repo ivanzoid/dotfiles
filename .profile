@@ -85,7 +85,7 @@ if [[ $OSTYPE == darwin* ]]; then
 	alias .ap60="cd '/Users/ivan/Library/Application Support/iPhone Simulator/6.0/Applications'"
 	alias .ap61="cd '/Users/ivan/Library/Application Support/iPhone Simulator/6.1/Applications'"
 
-	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://4000000`'
+	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://16000000`'
 
 	alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
 
