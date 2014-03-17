@@ -204,7 +204,10 @@ function setPS1()
 	local ColorBgICyan='\[\e[0;106m\]'    # Cyan
 	local ColorBgIWhite='\[\e[0;107m\]'   # White
 
-	GitStatus='$(__git_ps1 " (%s)")'
+	local GitStatus=""
+	if [ -x __git_ps1 ]; then
+		GitStatus='$(__git_ps1 " (%s)")'
+	fi
 
 	export PS1="\n${ColorBRed}\h${ColorBGreen}${GitStatus}${ColorBBlue} \w\n\$${ColorOff} "
 
