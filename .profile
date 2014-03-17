@@ -69,7 +69,9 @@ export SVN_EDITOR=$EDITOR
 
 # Bash settings
 shopt -s histappend
-export HISTSIZE=1000000
+export HISTSIZE=10000000
+export HISTTIMEFORMAT="%F %T"
+export PROMPT_COMMAND="history -a; history -n"
 
 #
 # Aliases
