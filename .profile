@@ -205,9 +205,9 @@ function setPS1()
 	local ColorBgIWhite='\[\e[0;107m\]'   # White
 
 	local GitStatus=""
-	if [ -x __git_ps1 ]; then
+#	if type __git_ps1 | grep -q '^function$' 2>/dev/null; then
 		GitStatus='$(__git_ps1 " (%s)")'
-	fi
+#	fi
 
 	export PS1="\n${ColorBRed}\h${ColorBGreen}${GitStatus}${ColorBBlue} \w\n\$${ColorOff} "
 

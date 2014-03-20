@@ -20,7 +20,7 @@
 	quotepath = false
 	excludesfile = ~/.gitignore_global
 [push]
-	default = simple
+	default = matching
 [difftool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/araxiscompare-w.sh -2 \"$LOCAL\" \"$REMOTE\"
 	path = 
