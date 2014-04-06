@@ -209,10 +209,11 @@ function setPS1()
 		GitStatus='$(__git_ps1 " (%s)")'
 #	fi
 
-	export PS1="\n${ColorBRed}\h${ColorBGreen}${GitStatus}${ColorBBlue} \w\n\$${ColorOff} "
+	#export PS1="\n${ColorBRed}\h${ColorBGreen}${GitStatus}${ColorBBlue} \w\n\$${ColorOff} "
+	export PS1="\n${ColorBBlue}\u${ColorOff}:${ColorBRed}\h${ColorBGreen}${GitStatus}${ColorBBlue} \w\n\$${ColorOff} "
 
 	if [[ "$HOSTNAME" == *zoid.cc* ]]; then
-		export PS1="\n${ColorBRed}\u@\H \w\$${ColorOff} "
+		export PS1="\n${ColorGreen}\u${ColorOff}:${ColorBRed}\u@\H \w\$${ColorOff} "
 	fi
 }
 
