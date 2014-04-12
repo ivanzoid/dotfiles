@@ -225,11 +225,17 @@ function setPS1()
 	ColorArray[1]=$BGreen
 	ColorArray[2]=$BYellow
 	ColorArray[3]=$BBlue
-	ColorArray[4]=$BBPurple
-	ColorArray[5]=$BYellow
-	ColorArray[6]=$BWhite
-	ColorArray[7]=$White
-	ColorArray[8]=$Yellow
+	ColorArray[4]=$BPurple
+	ColorArray[5]=$BCyan
+	ColorArray[6]=$BYellow
+	ColorArray[7]=$BBlack
+	ColorArray[8]=$Red
+	ColorArray[9]=$Green
+	ColorArray[10]=$Yellow
+	ColorArray[11]=$Blue
+	ColorArray[12]=$Purple
+	ColorArray[13]=$Cyan
+	ColorArray[14]=$Yellow
 
 	ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | $MD5 | sed s/[abcdef]*// | head -c 1)]}
 
