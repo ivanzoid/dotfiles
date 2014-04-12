@@ -97,12 +97,20 @@ is_linux()
 #
 
 if [[ is_osx ]]; then
+
 	export CLICOLOR=1
 	alias ls='ls -hF'
 	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://16000000`'
 	alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
+
+	MD5=md5
+
 elif [[ is_linux ]]; then
+
 	alias ls='ls -hF --color=auto'
+
+	MD5=md5sum
+
 fi
 
 alias ...='cd ../..'
@@ -223,7 +231,7 @@ function setPS1()
 	ColorArray[7]=$White
 	ColorArray[8]=$Yellow
 
-	ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | md5 | sed s/[abcdef]*// | head -c 1)]}
+	ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | $MD5 | sed s/[abcdef]*// | head -c 1)]}
 
 	local GitStatus=""
 #	if type __git_ps1 | grep -q '^function$' 2>/dev/null; then
