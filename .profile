@@ -219,7 +219,7 @@ function setPS1()
 	local BgICyan='\[\e[0;106m\]'    # Cyan
 	local BgIWhite='\[\e[0;107m\]'   # White
 
-	local ColorArray=($BRed $BGreen $BYellow $BPurple $BCyan $BYellow)
+	local ColorArray=($BRed $BGreen $BYellow $BPurple $BCyan $BRed $BGreen $BYellow $BPurple $BCyan)
 	#local ColorArray=($BBlack $IRed $BGreen $BYellow $BBlue $BPurple $BCyan $BYellow $Red $Green $Yellow $Blue $Purple $Cyan $Yellow)
 
 	local ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | $MD5 | sed s/[abcdef]*// | head -c 1)]}
