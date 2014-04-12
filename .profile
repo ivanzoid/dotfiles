@@ -77,18 +77,18 @@ export PROMPT_COMMAND="history -a; history -n"
 is_osx()
 {
 	if [[ $OSTYPE == darwin* ]]; then
-		return 1
-	else
 		return 0
+	else
+		return 1
 	fi
 }
 
 is_linux()
 {
 	if [[ $OSTYPE == linux* ]]; then
-		return 1
-	else
 		return 0
+	else
+		return 1
 	fi
 }
 
@@ -96,7 +96,7 @@ is_linux()
 # Aliases
 #
 
-if [[ is_osx ]]; then
+if [ is_osx ]; then
 
 	export CLICOLOR=1
 	alias ls='ls -hF'
