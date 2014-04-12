@@ -96,7 +96,7 @@ is_linux()
 # Aliases
 #
 
-if [ is_osx ]; then
+if is_osx; then
 
 	export CLICOLOR=1
 	alias ls='ls -hF'
@@ -105,7 +105,7 @@ if [ is_osx ]; then
 
 	MD5=md5
 
-elif [[ is_linux ]]; then
+elif is_linux; then
 
 	alias ls='ls -hF --color=auto'
 
