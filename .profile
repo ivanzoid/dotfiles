@@ -224,10 +224,10 @@ function setPS1()
 
 	local ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | $MD5 | sed s/[abcdef]*// | head -c 1)]}
 
-	local GitStatus=""
-#	if type __git_ps1 | grep -q '^function$' 2>/dev/null; then
-		GitStatus='$(__git_ps1 " (%s)")'
-#	fi
+    local GitStatus=""
+    if type __git_ps1 2>/dev/null | grep -q '^function$' 2>/dev/null; then
+        local GitStatus='$(__git_ps1 " (%s)")'
+    fi
 
 	export PS1="\n${BBlue}\u${Reset}:${ColorForHost}\h${BGreen}${GitStatus}${BBlue} \w\n\$${Reset} "
 

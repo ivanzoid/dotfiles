@@ -3,14 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>commonInit</string>
+	<string>commonInitView</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>
-- (id) initWithFrame:(CGRect)frame
+	<string>- (id) initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
         [self commonInit];
@@ -18,24 +17,23 @@
     return self;
 }
 
-- (id) initWithCoder:(NSCoder *)coder
+- (void) awakeFromNib
 {
-    if ((self = [super initWithCoder:coder])) {
-        [self commonInit];
-    }
-    return self;
+    [super awakeFromNib];
+    [self commonInit];
 }
 
 - (void) commonInit
 {
     &lt;#initializations#&gt;
-}</string>
+}
+</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>58401DCC-42A6-4B3F-8D5E-16E44F297BBB</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>initWithFrame + initWithCoder + commonInit</string>
+	<string>Common Init (UIView)</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
