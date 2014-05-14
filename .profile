@@ -230,15 +230,12 @@ function setPS1()
 	local ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | $MD5 | sed s/[abcdef]*// | head -c 1)]}
 
     local GitStatus=""
-#    if type __git_ps1 2>/dev/null | grep -q '^function$' 2>/dev/null; then
+    if program_exists git-prompt.sh; then
+        source git-prompt.sh
         local GitStatus='$(__git_ps1 " (%s)")'
-#    fi
+    fi
 
 	export PS1="\n${BBlue}\u${Reset}:${ColorForHost}\h${BGreen}${GitStatus}${BBlue} \w\n\$${Reset} "
-
-#	if [[ "$HOSTNAME" == *zoid.cc* ]]; then
-#		export PS1="\n${ColorGreen}\u${ColorReset}:${USER_HOST_COLOR}\u@\H \w\$${ColorReset} "
-#	fi
 }
 
 setPS1
