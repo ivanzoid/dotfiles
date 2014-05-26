@@ -1,0 +1,17 @@
+{
+	"licensed": false,
+	"packages":
+	[
+		"Git",
+		"Package Control",
+		"SideBarEnhancements",
+		"Theme - Soda"
+	],
+	"startup_sec": 0.280252,
+	"syntax":
+	{
+		"JSON": 3,
+		"Shell-Unix-Generic": 1
+	},
+	"time": 1400869607
+}
