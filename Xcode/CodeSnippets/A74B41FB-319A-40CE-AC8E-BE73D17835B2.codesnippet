@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>protocol</string>
+	<string>delegate</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>TopLevel</string>
@@ -11,10 +11,11 @@
 	<key>IDECodeSnippetContents</key>
 	<string>@protocol Delegate;
 
+
 @property (nonatomic, weak) id &lt;Delegate&gt; delegate;
 
-@protocol Delegate &lt;NSObject&gt;
 
+@protocol Delegate &lt;NSObject&gt;
 @end</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>A74B41FB-319A-40CE-AC8E-BE73D17835B2</string>
