@@ -3,7 +3,7 @@
 	[
 	],
 	"last_version": 3059,
-	"last_window_id": 5,
+	"last_window_id": 7,
 	"log_indexing": false,
 	"settings":
 	{
@@ -166,14 +166,6 @@
 			},
 			"buffers":
 			[
-				{
-					"file": "/Users/ivan/dotfiles/Sublime Text 3/Packages/GoSublime/USAGE.md",
-					"settings":
-					{
-						"buffer_size": 8539,
-						"line_ending": "Unix"
-					}
-				}
 			],
 			"build_system": "",
 			"command_palette":
@@ -255,38 +247,8 @@
 			"groups":
 			[
 				{
-					"selected": 0,
 					"sheets":
 					[
-						{
-							"buffer": 0,
-							"file": "/Users/ivan/dotfiles/Sublime Text 3/Packages/GoSublime/USAGE.md",
-							"semi_transient": false,
-							"settings":
-							{
-								"buffer_size": 8539,
-								"regions":
-								{
-								},
-								"selection":
-								[
-									[
-										829,
-										829
-									]
-								],
-								"settings":
-								{
-									"syntax": "Packages/Markdown/Markdown.tmLanguage",
-									"translate_tabs_to_spaces": false
-								},
-								"translation.x": 0.0,
-								"translation.y": 0.0,
-								"zoom_level": 1.0
-							},
-							"stack_index": 0,
-							"type": "text"
-						}
 					]
 				}
 			],
@@ -376,7 +338,7 @@
 			"template_settings":
 			{
 			},
-			"window_id": 5,
+			"window_id": 7,
 			"workspace_name": ""
 		}
 	],
