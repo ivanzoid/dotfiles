@@ -25,10 +25,23 @@ symlink()
 	ln -sf "$from" "$to"
 }
 
+is_osx()
+{
+	if [[ $OSTYPE == darwin* ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
 pushd ~ >/dev/null
 
-symlink ~/dotfiles/Xcode/CodeSnippets ~/Library/Developer/Xcode/UserData/
-symlink ~/dotfiles/Xcode/FontAndColorThemes ~/Library/Developer/Xcode/UserData/
+if is_osx; then
+	symlink ~/dotfiles/Xcode/CodeSnippets ~/Library/Developer/Xcode/UserData/
+	symlink ~/dotfiles/Xcode/FontAndColorThemes ~/Library/Developer/Xcode/UserData/
+	symlink ~/dotfiles/Lightroom ~/Library/Application\ Support/Adobe/
+	symlink ~/dotfiles/Sublime\ Text\ 3 ~/Library/Application\ Support/
+fi
 
 excludeList=(.git)
 

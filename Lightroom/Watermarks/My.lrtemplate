@@ -1,0 +1,33 @@
+s = {
+	id = "7F9DFAA9-DC5C-4008-9FA7-FAF6BA67CC77",
+	internalName = "My",
+	title = "My",
+	type = "WatermarkingPreset",
+	value = {
+		items = {
+			{
+				anchor = "bottomright",
+				horizontalPadding = 0,
+				kind = "text",
+				opacity = 0.4,
+				orientation = "AB",
+				sizeKind = "relative",
+				sizeRelativeAmount = 0.04,
+				text = "Ivan Zezyulya 2014",
+				textColorBlue = 1,
+				textColorGreen = 1,
+				textColorRed = 1,
+				textFontName = "MyriadWebPro",
+				textHorizontalAlignment = "left",
+				textShadowAngle = 270,
+				textShadowEnabled = true,
+				textShadowOffset = 0.1,
+				textShadowOpacity = 0.80188679245283,
+				textShadowRadius = 0.2,
+				textVerticalAlignment = "top",
+				verticalPadding = 0,
+			},
+		},
+	},
+	version = 0,
+}

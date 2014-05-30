@@ -107,6 +107,7 @@ if is_osx; then
 	alias ls='ls -hF'
 	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://16000000`'
 	alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
+    alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 
 	MD5=md5
 
