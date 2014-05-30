@@ -29,10 +29,10 @@ endif
 " ------------------------------------------------------------------
 "  Vundle
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
 
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 
 " ------------------------------------------------------------------
 
