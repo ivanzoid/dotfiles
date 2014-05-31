@@ -241,13 +241,14 @@ function setPS1()
 
 setPS1
 
-# Go setup
 
-if program_exists go; then
-	export GOPATH=$HOME/Go
-	export PATH=$PATH:$GOPATH/bin
+# Setup ~/.launchd.conf if needed
+if is_osx && [ ! -f "" $HOME/.launchd.conf ] && [ -x update-launchd-conf ]; then
+    update-launchd-conf
 fi
 
+
+# Homebrew
 if program_exists brew; then
 	BREW_PREFIX=`brew --prefix`
 	if [ -f $BREW_PREFIX/etc/bash_completion ]; then
