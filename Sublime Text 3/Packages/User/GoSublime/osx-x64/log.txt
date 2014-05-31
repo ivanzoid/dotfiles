@@ -50,17 +50,15 @@ MarGo: Missing required environment variables: GOPATH
 See the `Quirks` section of USAGE.md for info
 --------------------------------
 
-** 2014-05-31 18:51:46.996134 **:
-MarGo: Missing required environment variables: GOPATH
-See the `Quirks` section of USAGE.md for info
+** 2014-05-30 16:23:59.203868 **:
+MarGo: MarGo build failed
+cmd: `['', 'build', '-v', '-x', '-o', 'gosublime.margo_r13.12.26-3_go?.exe', 'gosubli.me/margo']`
+stdout: ``
+stderr: ``
+exception: `Cannot find command `go``
 --------------------------------
 
-** 2014-06-01 00:00:31.585441 **:
-MarGo: Missing required environment variables: GOPATH
-See the `Quirks` section of USAGE.md for info
---------------------------------
-
-** 2014-06-01 00:02:13.657529 **:
-MarGo: Missing required environment variables: GOPATH
+** 2014-05-30 16:23:59.211311 **:
+MarGo: Missing required environment variables: GOROOT GOPATH
 See the `Quirks` section of USAGE.md for info
 --------------------------------
