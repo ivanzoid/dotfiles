@@ -243,7 +243,7 @@ setPS1
 
 
 # Setup ~/.launchd.conf if needed
-if is_osx && [ ! -f "" $HOME/.launchd.conf ] && [ -x update-launchd-conf ]; then
+if is_osx && [ ! -f "$HOME/.launchd.conf" ] && [ -x update-launchd-conf ]; then
     update-launchd-conf
 fi
 
