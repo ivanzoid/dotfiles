@@ -39,7 +39,7 @@ s = {
 		tokenCustomString = "",
 		tokens = "{{image_name}}",
 		tokensArchivedToString2 = "{{image_name}}",
-		useWatermark = false,
+		useWatermark = true,
 		watermarking_id = "7F9DFAA9-DC5C-4008-9FA7-FAF6BA67CC77",
 	},
 	version = 0,
