@@ -1,12 +1,17 @@
 {
-	"licensed": false,
 	"packages":
 	[
+		"Git",
+		"Package Control",
+		"Theme - Soda",
+		"Git",
+		"Package Control",
+		"SideBarEnhancements",
+		"Theme - Soda",
 		"Git",
 		"Package Control",
 		"SideBarEnhancements",
 		"Theme - Soda"
 	],
-	"startup_sec": 0.330293,
-	"time": 1401537105
+	"time": 1401632732
 }

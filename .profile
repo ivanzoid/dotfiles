@@ -243,7 +243,7 @@ setPS1
 
 
 # Setup ~/.launchd.conf if needed
-if is_osx && [ ! -f "" $HOME/.launchd.conf ] && [ -x update-launchd-conf ]; then
+if is_osx && [ ! -f "$HOME/.launchd.conf" ] && [ -x update-launchd-conf ]; then
     update-launchd-conf
 fi
 
@@ -258,4 +258,3 @@ if program_exists brew; then
 		. $BREW_PREFIX/Library/Contributions/brew_bash_completion.sh
 	fi
 fi
-
