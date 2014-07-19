@@ -240,3 +240,18 @@ exception: `Cannot find command `go``
 MarGo: Missing required environment variables: GOROOT GOPATH
 See the `Quirks` section of USAGE.md for info
 --------------------------------
+
+** 2014-07-14 19:25:54.055734 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
+
+** 2014-07-14 19:26:11.545384 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
+
+** 2014-07-14 19:26:18.773767 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
