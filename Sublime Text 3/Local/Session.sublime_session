@@ -3,7 +3,7 @@
 	[
 	],
 	"last_version": 3059,
-	"last_window_id": 16,
+	"last_window_id": 17,
 	"log_indexing": false,
 	"settings":
 	{
@@ -116,8 +116,8 @@
 			},
 			"file_history":
 			[
-				"/Src/Qrescue/Scripts/postProcApiFiles/postProcApiFiles.sh",
 				"/Users/ivan/dotfiles/Sublime Text 3/Packages/GoSublime/USAGE.md",
+				"/Src/Qrescue/Scripts/postProcApiFiles/postProcApiFiles.sh",
 				"/Src/yfload/yfload.go",
 				"/Users/ivan/dotfiles/deploy.sh",
 				"/Users/ivan/Library/Application Support/Sublime Text 3/Packages/GoSublime/USAGE.md",
@@ -216,7 +216,7 @@
 			{
 			}
 		},
-		"new_window_width": 1234.0
+		"new_window_width": 1233.0
 	},
 	"windows":
 	[
@@ -225,6 +225,10 @@
 			{
 				"selected_items":
 				[
+					[
+						"fu",
+						"func main	func main {...} ʂ"
+					],
 					[
 						"W",
 						"Write	n int, err error ƒ"
@@ -289,19 +293,27 @@
 			},
 			"buffers":
 			[
+				{
+					"file": "/Src/Go/hello.go",
+					"settings":
+					{
+						"buffer_size": 456,
+						"line_ending": "Unix"
+					}
+				}
 			],
 			"build_system": "",
 			"command_palette":
 			{
-				"height": 247.0,
+				"height": 375.0,
 				"selected_items":
 				[
 					[
-						"inst",
+						"ins",
 						"Package Control: Install Package"
 					],
 					[
-						"ins",
+						"inst",
 						"Package Control: Install Package"
 					],
 					[
@@ -309,7 +321,7 @@
 						"Package Control: Install Package"
 					]
 				],
-				"width": 449.0
+				"width": 453.0
 			},
 			"console":
 			{
@@ -330,8 +342,8 @@
 			},
 			"file_history":
 			[
-				"/Src/Qrescue/Scripts/postProcApiFiles/postProcApiFiles.sh",
 				"/Users/ivan/dotfiles/Sublime Text 3/Packages/GoSublime/USAGE.md",
+				"/Src/Qrescue/Scripts/postProcApiFiles/postProcApiFiles.sh",
 				"/Src/yfload/yfload.go",
 				"/Users/ivan/dotfiles/deploy.sh",
 				"/Users/ivan/Library/Application Support/Sublime Text 3/Packages/GoSublime/USAGE.md",
@@ -373,8 +385,142 @@
 			"groups":
 			[
 				{
+					"selected": 0,
 					"sheets":
 					[
+						{
+							"buffer": 0,
+							"file": "/Src/Go/hello.go",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 456,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										27,
+										65
+									]
+								],
+								"settings":
+								{
+									"codeintel": true,
+									"codeintel_config":
+									{
+										"JavaScript":
+										{
+											"codeintel_max_recursive_dir_depth": 2,
+											"codeintel_scan_files_in_project": false,
+											"javascriptExtraPaths":
+											[
+											]
+										},
+										"PHP":
+										{
+											"codeintel_max_recursive_dir_depth": 5,
+											"codeintel_scan_files_in_project": false,
+											"phpExtraPaths":
+											[
+											]
+										},
+										"Python":
+										{
+											"env":
+											{
+											}
+										}
+									},
+									"codeintel_enabled_languages":
+									[
+										"JavaScript",
+										"Mason",
+										"XBL",
+										"XUL",
+										"RHTML",
+										"SCSS",
+										"Python",
+										"HTML",
+										"Ruby",
+										"Python3",
+										"XML",
+										"Sass",
+										"XSLT",
+										"Django",
+										"HTML5",
+										"Perl",
+										"CSS",
+										"Twig",
+										"Less",
+										"Smarty",
+										"Node.js",
+										"Tcl",
+										"TemplateToolkit",
+										"PHP"
+									],
+									"codeintel_live": true,
+									"codeintel_live_enabled_languages":
+									[
+										"JavaScript",
+										"Mason",
+										"XBL",
+										"XUL",
+										"RHTML",
+										"SCSS",
+										"Python",
+										"HTML",
+										"Ruby",
+										"Python3",
+										"XML",
+										"Sass",
+										"XSLT",
+										"Django",
+										"HTML5",
+										"Perl",
+										"CSS",
+										"Twig",
+										"Less",
+										"Smarty",
+										"Node.js",
+										"Tcl",
+										"TemplateToolkit",
+										"PHP"
+									],
+									"codeintel_max_recursive_dir_depth": 10,
+									"codeintel_scan_exclude_dir":
+									{
+										"JavaScript":
+										[
+											"/build/",
+											"/min/"
+										]
+									},
+									"codeintel_scan_files_in_project": true,
+									"codeintel_selected_catalogs":
+									[
+										"PyWin32",
+										"jQuery",
+										"Rails"
+									],
+									"codeintel_snippets": true,
+									"codeintel_syntax_map":
+									{
+										"Python Django": "Python"
+									},
+									"codeintel_tooltips": "popup",
+									"sublime_auto_complete": true,
+									"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+									"translate_tabs_to_spaces": false
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"type": "text"
+						}
 					]
 				}
 			],
@@ -464,7 +610,7 @@
 			"template_settings":
 			{
 			},
-			"window_id": 16,
+			"window_id": 17,
 			"workspace_name": ""
 		}
 	],

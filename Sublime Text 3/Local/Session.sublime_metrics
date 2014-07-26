@@ -1,3 +1,35 @@
 {
-	"time": 1405599958
+	"packages":
+	[
+		"Git",
+		"Package Control",
+		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
+		"Theme - Soda",
+		"Git",
+		"Package Control",
+		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
+		"Theme - Soda",
+		"Git",
+		"Package Control",
+		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
+		"Theme - Soda",
+		"Git",
+		"Package Control",
+		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
+		"Theme - Soda",
+		"Git",
+		"Package Control",
+		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
+		"Theme - Soda"
+	],
+	"syntax":
+	{
+		"GoSublime-Go": 52
+	},
+	"time": 1406313836
 }
