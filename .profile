@@ -111,6 +111,10 @@ if is_osx; then
 
 	MD5=md5
 
+    if [ -x "/Applications/VMware Fusion.app/Contents/Library/vmrun" ]; then
+        alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
+    fi
+
 elif is_linux; then
 
 	alias ls='ls -hF --color=auto'

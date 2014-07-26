@@ -240,3 +240,16 @@ exception: `Cannot find command `go``
 MarGo: Missing required environment variables: GOROOT GOPATH
 See the `Quirks` section of USAGE.md for info
 --------------------------------
+
+** 2014-07-24 05:40:59.257012 **:
+MarGo: MarGo build failed
+cmd: `['/usr/local/opt/go/bin/go', 'build', '-v', '-x', '-o', 'gosublime.margo_r13.12.26-3_go?.exe', 'gosubli.me/margo']`
+stdout: ``
+stderr: `go: cannot find GOROOT directory: /usr/local/Cellar/go/1.2.1/libexec`
+exception: `None`
+--------------------------------
+
+** 2014-07-25 03:27:21.127367 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
