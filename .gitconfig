@@ -22,7 +22,7 @@
 #	tool = gvimdiff
 [core]
 	quotepath = false
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/ivan/.gitignore_global
 [push]
 	default = matching
 [difftool "sourcetree"]
