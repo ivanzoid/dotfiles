@@ -255,3 +255,8 @@ See the `Quirks` section of USAGE.md for info
 MarGo: Missing required environment variables: GOPATH
 See the `Quirks` section of USAGE.md for info
 --------------------------------
+
+** 2014-07-26 01:43:57.605718 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
