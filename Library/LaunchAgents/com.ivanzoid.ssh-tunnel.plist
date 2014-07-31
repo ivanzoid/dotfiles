@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ivanzoid.ssh-tunnel</string>
+  <key>OnDemand</key>
+  <false/>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/ssh</string>
+    <string>-C</string>
+    <string>-N</string>
+    <string>-c</string>
+    <string>blowfish</string>
+    <string>-o</string>
+    <string>ServerAliveInterval=3</string>
+    <string>-L</string>
+    <string>8000:localhost:8000</string>
+    <string>-L</string>
+    <string>8001:localhost:8001</string>
+    <string>-L</string>
+    <string>8888:localhost:8888</string>
+    <string>zoid.cc</string>
+  </array>
+</dict>
+</plist>
+

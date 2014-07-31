@@ -42,6 +42,7 @@ if is_osx; then
 	symlink ~/dotfiles/Lightroom ~/Library/Application\ Support/Adobe/
 	symlink ~/dotfiles/Sublime\ Text\ 3 ~/Library/Application\ Support/
 	symlink ~/dotfiles/Library/LaunchAgents/local.launchd.conf.plist ~/Library/LaunchAgents
+	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
 fi
 
 excludeList=(.git)
