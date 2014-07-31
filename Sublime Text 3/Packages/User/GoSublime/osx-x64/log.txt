@@ -241,15 +241,30 @@ MarGo: Missing required environment variables: GOROOT GOPATH
 See the `Quirks` section of USAGE.md for info
 --------------------------------
 
-** 2014-07-24 05:40:59.257012 **:
+** 2014-07-14 19:25:54.055734 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
+
+** 2014-07-14 19:26:11.545384 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
+
+** 2014-07-14 19:26:18.773767 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
+
+** 2014-07-26 01:43:57.605718 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
+
+** 2014-07-26 09:20:05.411215 **:
 MarGo: MarGo build failed
 cmd: `['/usr/local/opt/go/bin/go', 'build', '-v', '-x', '-o', 'gosublime.margo_r13.12.26-3_go?.exe', 'gosubli.me/margo']`
 stdout: ``
 stderr: `go: cannot find GOROOT directory: /usr/local/Cellar/go/1.2.1/libexec`
 exception: `None`
---------------------------------
-
-** 2014-07-25 03:27:21.127367 **:
-MarGo: Missing required environment variables: GOPATH
-See the `Quirks` section of USAGE.md for info
 --------------------------------

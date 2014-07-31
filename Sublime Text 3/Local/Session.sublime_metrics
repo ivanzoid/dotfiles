@@ -1,16 +1,20 @@
 {
 	"packages":
 	[
+		"Git",
 		"Package Control",
 		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
 		"Theme - Soda",
 		"Git",
 		"Package Control",
 		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
 		"Theme - Soda",
 		"Git",
 		"Package Control",
 		"Protocol Buffer Syntax",
+		"SideBarEnhancements",
 		"Theme - Soda",
 		"Git",
 		"Package Control",
@@ -23,5 +27,9 @@
 		"SideBarEnhancements",
 		"Theme - Soda"
 	],
-	"time": 1406155258
+	"syntax":
+	{
+		"GoSublime-Go": 52
+	},
+	"time": 1406313836
 }
