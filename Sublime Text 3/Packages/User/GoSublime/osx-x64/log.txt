@@ -268,3 +268,16 @@ stdout: ``
 stderr: `go: cannot find GOROOT directory: /usr/local/Cellar/go/1.2.1/libexec`
 exception: `None`
 --------------------------------
+
+** 2014-07-26 09:30:54.235389 **:
+MarGo: MarGo build failed
+cmd: `['/usr/local/opt/go/bin/go', 'build', '-v', '-x', '-o', 'gosublime.margo_r13.12.26-3_go?.exe', 'gosubli.me/margo']`
+stdout: ``
+stderr: `go: cannot find GOROOT directory: /usr/local/Cellar/go/1.2.1/libexec`
+exception: `None`
+--------------------------------
+
+** 2014-07-30 19:28:15.318438 **:
+MarGo: Missing required environment variables: GOPATH
+See the `Quirks` section of USAGE.md for info
+--------------------------------
