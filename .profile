@@ -53,6 +53,10 @@ if program_exists docker; then
     export DOCKER_HOST=tcp://localhost:4243
 fi
 
+if [ -f .go.conf ]; then
+    source .go.conf
+fi
+
 #
 # Exports
 #
