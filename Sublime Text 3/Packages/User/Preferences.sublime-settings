@@ -2,7 +2,9 @@
 	"color_scheme": "Packages/Color Scheme - Default/Mac Classic.tmTheme",
 	"ignored_packages":
 	[
-		"Vintage"
+		"SideBarEnhancements",
+		"Vintage",
+		"GoSublime"
 	],
 	"soda_classic_tabs": true,
 	"theme": "Soda Light 3.sublime-theme"
