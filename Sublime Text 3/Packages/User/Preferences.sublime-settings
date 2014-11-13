@@ -3,8 +3,8 @@
 	"ignored_packages":
 	[
 		"SideBarEnhancements",
-		"Vintage",
-		"GoSublime"
+		"GoSublime",
+		"Vintage"
 	],
 	"soda_classic_tabs": true,
 	"theme": "Soda Light 3.sublime-theme"

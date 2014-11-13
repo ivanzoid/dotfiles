@@ -53,9 +53,8 @@ if program_exists docker; then
     export DOCKER_HOST=tcp://localhost:4243
 fi
 
-if [ -d /usr/local/opt/go/libexec/bin ]; then
-    export GOROOT="/usr/local/opt/go/libexec/bin"
-    export GOPATH="/Users/ivan/Go"
+if [ -f .go.conf ]; then
+    source .go.conf
 fi
 
 #
