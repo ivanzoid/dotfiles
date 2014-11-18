@@ -53,8 +53,13 @@ if program_exists docker; then
     export DOCKER_HOST=tcp://localhost:4243
 fi
 
+# Go
 if [ -f .go.conf ]; then
     source .go.conf
+fi
+
+if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; then
+    PATH="$GOPATH/bin":$PATH
 fi
 
 #
