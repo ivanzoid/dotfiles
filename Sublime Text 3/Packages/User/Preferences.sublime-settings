@@ -3,9 +3,13 @@
 	"ignored_packages":
 	[
 		"SideBarEnhancements",
-		"GoSublime",
 		"Vintage"
 	],
 	"soda_classic_tabs": true,
-	"theme": "Soda Light 3.sublime-theme"
+	"theme": "Soda Light 3.sublime-theme",
+	"caret_style": "solid",
+	"env": {
+	    "GOPATH": "$HOME/Go",
+	    "GOROOT": "/usr/local/opt/go/libexec",
+	}
 }
