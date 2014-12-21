@@ -45,6 +45,9 @@ if is_osx; then
 	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
 fi
 
+mkdir -p ~/.config/mc
+symlink ~/dotfiles/mc/ini ~/.config/mc
+
 excludeList=(.git)
 
 for f in dotfiles/.[^.]*; do
