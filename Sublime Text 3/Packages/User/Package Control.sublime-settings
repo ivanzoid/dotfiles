@@ -1,11 +1,16 @@
 {
+	"in_process_packages":
+	[
+	],
 	"installed_packages":
 	[
+		"ExportHtml",
 		"Git",
 		"GoSublime",
 		"GotoDocumentation",
 		"Highlight",
 		"nginx",
+		"Package Control",
 		"Protocol Buffer Syntax",
 		"SideBarEnhancements",
 		"SublimeCodeIntel",
