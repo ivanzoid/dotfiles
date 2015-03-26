@@ -1,17 +1,59 @@
 #!/bin/bash
 
-pushd $HOME >/dev/null
+objectNotExcluded()
+{
+	object=$1
+	array=$2
+	case "$array[@]"
+		in *"$object"*)
+			return 1
+	esac
+	return 0
+}
 
-rm -rf Library/Developer/Xcode/UserData/CodeSnippets
-mkdir -p Library/Developer/Xcode/UserData
-ln -s -F dotfiles/Xcode/CodeSnippets Library/Developer/Xcode/UserData
+symlink()
+{
+	from=$1
+	to=$2
 
-rm -rf Library/Developer/Xcode/UserData/FontAndColorThemes
-mkdir -p Library/Developer/Xcode/UserData
-ln -s -F dotfiles/Xcode/FontAndColorThemes Library/Developer/Xcode/UserData
+	mkdir -p "$to"
+	toLastComponent="$(basename $from)"
+	fullTo="${to}/${toLastComponent}"
+	if [ -d "$fullTo" ]; then
+		rm -rf "$fullTo"
+	fi
+	ln -sf "$from" "$to"
+}
+
+is_osx()
+{
+	if [[ $OSTYPE == darwin* ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+pushd ~ >/dev/null
+
+if is_osx; then
+	symlink ~/dotfiles/Xcode/CodeSnippets ~/Library/Developer/Xcode/UserData/
+	symlink ~/dotfiles/Xcode/FontAndColorThemes ~/Library/Developer/Xcode/UserData/
+	symlink ~/dotfiles/Lightroom ~/Library/Application\ Support/Adobe/
+	symlink ~/dotfiles/Sublime\ Text\ 3 ~/Library/Application\ Support/
+	symlink ~/dotfiles/Library/LaunchAgents/local.launchd.conf.plist ~/Library/LaunchAgents
+	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
+fi
+
+mkdir -p ~/.config/mc
+symlink ~/dotfiles/mc/ini ~/.config/mc
+
+excludeList=(.git)
 
 for f in dotfiles/.[^.]*; do
-	ln -s -f "$f" .
+	if objectNotExcluded "$(basename $f)" $excludeList ; then
+		symlink "$f" ~
+	fi
 done
 
 popd >/dev/null

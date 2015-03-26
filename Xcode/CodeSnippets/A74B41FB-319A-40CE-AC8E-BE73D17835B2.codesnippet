@@ -3,25 +3,26 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>proto</string>
+	<string>delegate</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>TopLevel</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@protocol Protocol;
+	<string>@protocol Delegate;
 
-@property (nonatomic, unsafe_unretained) id &lt;Protocol&gt; delegate;
 
-@protocol Protocol &lt;NSObject&gt;
+@property (nonatomic, weak) id &lt;Delegate&gt; delegate;
 
+
+@protocol Delegate &lt;NSObject&gt;
 @end</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>A74B41FB-319A-40CE-AC8E-BE73D17835B2</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>protocol template</string>
+	<string>Protocol (delegate) template</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

@@ -3,25 +3,34 @@
 	email = ivan@zezyulya.com
 [alias]
 	cam = commit -a -m
+	com = commit -m
 	st = status
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	lol = log --graph --pretty=format:'%C(bold cyan) %h %Creset %C(green)%ad %C(bold red)%d%Creset %s  %C(blue)(%an, %cr)%Creset' --date-order --date=short
+	ll = log --pretty=format:'%C(cyan)%h%C(bold red)%d %Creset%s%Cblue (%cn, %cr)' --decorate --numstat
 	br = branch
 	co = checkout
-	pul = pull
-	pus = push
-	re = remote
-	pushom = push -u origin master
+	aa = add -A
+	la = "!git config -l | grep alias | cut -c 7-"
+	diff = diff --word-diff
+	rh = reset --hard
 [apply]
 	whitespace = nowarn
 [color]
-	diff = auto
-	status = auto
-	branch = auto	 
-[diff] 
-	tool = gvimdiff
+	ui = auto
+	interactive = auto
+#[diff] 
+#	tool = gvimdiff
 [core]
 	quotepath = false
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/ivan/.gitignore_global
 [push]
 	default = matching
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

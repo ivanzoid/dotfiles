@@ -1,3 +1,9 @@
-.DS_Store
-
-.config/mc/panels.ini
+Sublime Text 3/Index
+**/*.cache
+**/*.last-run
+Sublime Text 3/Packages/SublimeCodeIntel
+Sublime Text 3/Local/*
+Sublime Text 3/Backup/*
+Sublime Text 3/Cache
+**/*.cache
+**/log.txt
