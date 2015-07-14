@@ -3,13 +3,14 @@
 	"color_scheme": "Packages/Color Scheme - Default/Mac Classic.tmTheme",
 	"env":
 	{
-		"GOPATH": "$HOME/Go",
-		"GOROOT": "/usr/local/opt/go/libexec"
+		"GOPATH": "$HOME/Go"
 	},
+	"font_size": 14,
 	"ignored_packages":
 	[
+		"Vintage",
 		"SideBarEnhancements",
-		"Vintage"
+		"GitGutter"
 	],
 	"soda_classic_tabs": true,
 	"theme": "Soda Light 3.sublime-theme"

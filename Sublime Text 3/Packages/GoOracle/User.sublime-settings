@@ -1,0 +1,9 @@
+{
+	"env": {
+		"GOPATH": "$HOME/Go",
+		"PATH": "$GOPATH/bin:/usr/local/bin/:$PATH"
+	},
+    "oracle_format": "json",
+    "output": "buffer",
+    "oracle_scope": ["."],
+}

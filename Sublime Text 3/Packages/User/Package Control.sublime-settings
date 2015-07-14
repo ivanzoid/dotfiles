@@ -6,6 +6,8 @@
 	[
 		"ExportHtml",
 		"Git",
+		"GitGutter",
+		"GoOracle",
 		"GoSublime",
 		"GotoDocumentation",
 		"Highlight",
