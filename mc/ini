@@ -95,7 +95,7 @@ menubar_visible=0
 free_space=1
 horizontal_split=0
 vertical_equal=1
-left_panel_size=40
+left_panel_size=52
 horizontal_equal=1
 top_panel_size=1
 
@@ -135,6 +135,8 @@ torben_fj_mode=false
 quick_search_mode=2
 
 simple_swap=false
+
+select_flags=6
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

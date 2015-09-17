@@ -1,7 +1,6 @@
 {
-    "fmt_cmd": ["goimports"],
-    "env": {
-	    "GOPATH": "$HOME/Go",
-	    "GOROOT": "/usr/local/opt/go/libexec",
-	}
+    "cmd": ["/bin/bash", "--login", "-c", "go run ${file}"],
+    "file_regex": "^([^:]*):([0-9]+):",
+	"autocomplete_closures": true,
+	"complete_builtins": true,	
 }

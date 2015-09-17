@@ -6,10 +6,11 @@
 		"GOPATH": "$HOME/Go",
 		"GOROOT": "/usr/local/opt/go/libexec"
 	},
+	"font_size": 14,
 	"ignored_packages":
 	[
-		"SideBarEnhancements",
-		"Vintage"
+		"Vintage",
+		"SideBarEnhancements"
 	],
 	"soda_classic_tabs": true,
 	"theme": "Soda Light 3.sublime-theme"
