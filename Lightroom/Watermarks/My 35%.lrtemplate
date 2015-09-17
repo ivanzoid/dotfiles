@@ -1,0 +1,33 @@
+s = {
+	id = "71FB11AF-A69D-430B-BAC3-1E10CC9C1937",
+	internalName = "My 35%",
+	title = "My 35%",
+	type = "WatermarkingPreset",
+	value = {
+		items = {
+			{
+				anchor = "bottomright",
+				horizontalPadding = 0,
+				kind = "text",
+				opacity = 0.35,
+				orientation = "BC",
+				sizeKind = "relative",
+				sizeRelativeAmount = 0.054324432588969,
+				text = "  © Ivan Zezyulya | 2015",
+				textColorBlue = 1,
+				textColorGreen = 1,
+				textColorRed = 1,
+				textFontName = "Myriad Web Pro",
+				textHorizontalAlignment = "left",
+				textShadowAngle = 270,
+				textShadowEnabled = true,
+				textShadowOffset = 0.1,
+				textShadowOpacity = 0.8,
+				textShadowRadius = 0.2,
+				textVerticalAlignment = "top",
+				verticalPadding = 0,
+			},
+		},
+	},
+	version = 0,
+}

@@ -268,9 +268,11 @@ fi
 # Homebrew
 if program_exists brew; then
 	BREW_PREFIX=`brew --prefix`
-	if [ -f $BREW_PREFIX/etc/bash_completion ]; then
-		. $BREW_PREFIX/etc/bash_completion
-	fi
+
+    if [ -f $BREW_PREFIX/etc/bash_completion.d/git-completion.bash ]; then
+        . $BREW_PREFIX/etc/bash_completion.d/git-completion.bash
+    fi
+
 	if [ -f $BREW_PREFIX/Library/Contributions/brew_bash_completion.sh ]; then
 		. $BREW_PREFIX/Library/Contributions/brew_bash_completion.sh
 	fi
