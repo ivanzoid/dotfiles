@@ -62,6 +62,10 @@ if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; then
     PATH="$GOPATH/bin":$PATH
 fi
 
+if [ -n "/usr/local/opt/go/libexec/bin" ]; then
+    export PATH=$PATH:/usr/local/opt/go/libexec/bin
+fi
+
 #
 # Exports
 #
