@@ -86,7 +86,7 @@ export SVN_EDITOR=$EDITOR
 shopt -s histappend
 export HISTSIZE=10000000
 export HISTTIMEFORMAT="%F %T"
-export PROMPT_COMMAND="history -a; history -n"
+export PROMPT_COMMAND='history -a; history -n; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 is_osx()
 {

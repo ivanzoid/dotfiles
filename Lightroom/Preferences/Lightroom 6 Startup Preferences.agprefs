@@ -1,0 +1,15 @@
+prefs = {
+	libraryToLoad20 = "/Volumes/BigData/Data/Lightroom/LR6/LR6/LR6.lrcat",
+	recentLibraries20 = "recentLibraries = {\
+	\"/Volumes/BigData/Data/Lightroom/LR6/LR6/LR6.lrcat\",\
+	\"/Volumes/BigData/Data/Lightroom/Tmp/Tmp.lrcat\",\
+}\
+",
+	recentLibraries20_missing = "recentMissingLibraries = {\
+	\"/Volumes/BigData/Photo/2014/06.21 КК-гонка Спортландия/Гонка/Гонка.lrcat\",\
+	\"/Users/ivan/Pictures/Lightroom/Lightroom 4 Catalog.lrcat\",\
+	\"/Volumes/BigData/Photo/Tmp/Tmp/Tmp.lrcat\",\
+}\
+",
+	recentLibraryBehavior20 = "UseMostRecentLibrary",
+}

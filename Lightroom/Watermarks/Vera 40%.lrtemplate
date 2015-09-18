@@ -1,0 +1,33 @@
+s = {
+	id = "F461E481-6718-4545-9651-C44EDF14CF90",
+	internalName = "Vera 40%",
+	title = "Vera 40%",
+	type = "WatermarkingPreset",
+	value = {
+		items = {
+			{
+				anchor = "bottomright",
+				horizontalPadding = 0,
+				kind = "text",
+				opacity = 0.4,
+				orientation = "BC",
+				sizeKind = "relative",
+				sizeRelativeAmount = 0.055873708607668,
+				text = "  © Vera Biryukova | 2015",
+				textColorBlue = 1,
+				textColorGreen = 1,
+				textColorRed = 1,
+				textFontName = "Myriad Web Pro",
+				textHorizontalAlignment = "left",
+				textShadowAngle = 270,
+				textShadowEnabled = true,
+				textShadowOffset = 0.1,
+				textShadowOpacity = 0.8,
+				textShadowRadius = 0.2,
+				textVerticalAlignment = "top",
+				verticalPadding = 0,
+			},
+		},
+	},
+	version = 0,
+}
