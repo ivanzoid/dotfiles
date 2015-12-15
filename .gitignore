@@ -7,3 +7,4 @@ Sublime Text 3/Backup/*
 Sublime Text 3/Cache
 **/*.cache
 **/log.txt
+mc/ini
