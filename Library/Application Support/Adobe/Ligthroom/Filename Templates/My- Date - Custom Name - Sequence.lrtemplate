@@ -1,0 +1,26 @@
+s = {
+	deflated = {
+		{
+			{
+				value = "date_YYYYMMDD",
+			},
+			"_",
+			{
+				value = "custom_token",
+			},
+			"_",
+			{
+				value = "naming_sequenceNumber_3Digits",
+			},
+			name = "My: Date - Custom Name - Sequence",
+			presetType = "Naming",
+		},
+		"AgTokenPresets",
+		"restoreTokenFromArchivedState",
+	},
+	id = "550D4BC3-7F04-4B25-9477-2F5488713019",
+	internalName = "My: Date - Custom Name - Sequence",
+	title = "My: Date - Custom Name - Sequence",
+	type = "Naming_Tokens",
+	version = 0,
+}

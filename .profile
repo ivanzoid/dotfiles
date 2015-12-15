@@ -29,6 +29,16 @@ program_exists () {
 	type "$1" &> /dev/null ;
 }
 
+check_uncommited_changes_in() {
+    pushd "$1" >/dev/null 2>&1
+    git diff --quiet HEAD
+    if [ $? -ne 0 ]; then
+        echo "Uncommited changes in $1:"
+        git status -s
+    fi
+    popd >/dev/null 2>&1
+}
+
 # Add ~/alac-utils
 if [ -d ~/alac-utils ]; then
 	export PATH=~/alac-utils:$PATH
@@ -37,11 +47,15 @@ fi
 # Add ~/bin
 if [ -d ~/bin ]; then
 	export PATH=~/bin:$PATH
+
+    check_uncommited_changes_in ~/bin
 fi
 
 # Add ~/private/bin
 if [ -d ~/private/bin ]; then
 	export PATH=~/private/bin:$PATH
+
+    check_uncommited_changes_in ~/private/bin
 fi
 
 if [ -d /usr/local/opt/android-sdk ]; then
@@ -56,6 +70,8 @@ fi
 # Go
 if [ -f .go.conf ]; then
     source .go.conf
+else
+    export GOPATH="$HOME/Go"
 fi
 
 if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; then
@@ -277,3 +293,9 @@ if program_exists brew; then
 		. $BREW_PREFIX/Library/Contributions/brew_bash_completion.sh
 	fi
 fi
+
+
+if [ -d ~/dotfiles ]; then
+    check_uncommited_changes_in ~/dotfiles
+fi
+
