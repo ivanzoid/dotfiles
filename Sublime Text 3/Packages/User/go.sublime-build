@@ -1,6 +1,0 @@
-{
-    "cmd": ["go run '${file}'"],
-    "selector": "source.go",
-    "shell": true,
-    "path": "/usr/local/bin"
-}  

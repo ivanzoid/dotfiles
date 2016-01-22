@@ -9,7 +9,7 @@
 		<string>ClassInterfaceMethods</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>- (id) initWith:(&lt;#type#&gt;)&lt;#object#&gt;;</string>
+	<string>- (instancetype) initWith:(&lt;#type#&gt;)&lt;#object#&gt;;</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>5CEEF199-F84D-47BB-B2B3-3225BD033F18</string>
 	<key>IDECodeSnippetLanguage</key>

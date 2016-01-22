@@ -39,8 +39,8 @@ pushd ~ >/dev/null
 if is_osx; then
 	symlink ~/dotfiles/Xcode/CodeSnippets ~/Library/Developer/Xcode/UserData/
 	symlink ~/dotfiles/Xcode/FontAndColorThemes ~/Library/Developer/Xcode/UserData/
-	symlink ~/dotfiles/Lightroom ~/Library/Application\ Support/Adobe/
-	symlink ~/dotfiles/Sublime\ Text\ 3 ~/Library/Application\ Support/
+#	symlink ~/dotfiles/Lightroom ~/Library/Application\ Support/Adobe/
+#	symlink ~/dotfiles/Sublime\ Text\ 3 ~/Library/Application\ Support/
 	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
 	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.environment.plist ~/Library/LaunchAgents
 fi

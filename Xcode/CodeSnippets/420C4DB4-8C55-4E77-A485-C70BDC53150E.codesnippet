@@ -9,7 +9,13 @@
 		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>- (id) initWith:(&lt;#type#&gt;)&lt;#object#&gt;
+	<string>- (instancetype) init
+{
+    NSAssert(NO, @"Use initWith* version");
+    return nil;
+}
+
+- (instancetype) initWith:(&lt;#type#&gt;)&lt;#object#&gt;
 {
     if ((self = [super init])) {
         &lt;#code#&gt;
