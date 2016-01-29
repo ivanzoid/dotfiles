@@ -30,6 +30,7 @@ program_exists () {
 }
 
 check_uncommited_changes_in() {
+    return
     pushd "$1" >/dev/null 2>&1
     git diff --quiet HEAD
     if [ $? -ne 0 ]; then
@@ -293,7 +294,6 @@ if program_exists brew; then
 		. $BREW_PREFIX/Library/Contributions/brew_bash_completion.sh
 	fi
 fi
-
 
 if [ -d ~/dotfiles ]; then
     check_uncommited_changes_in ~/dotfiles
