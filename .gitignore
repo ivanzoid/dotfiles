@@ -8,3 +8,5 @@ Sublime Text 3/Cache
 **/*.cache
 **/log.txt
 mc/ini
+.config/.xnviewmp/*.db
+.config/xnviewmp/*.db

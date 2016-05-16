@@ -2,7 +2,7 @@
 "set guifont=Luxi_Mono:h10:cANSI 
 "set guifont=Lucida_Sans_Typewriter:h10:cANSI
 if has("macunix")
-	set guifont=Menlo\ Regular:h12
+	set guifont=Menlo\ Regular:h14
 else
 	set guifont=Consolas:h10:cRUSSIAN
 endif

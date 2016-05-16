@@ -16,6 +16,8 @@ if [ -n "$BASH_VERSION" ]; then
 	fi
 fi
 
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 # Add homebrew/macports
 if [ -d /usr/local/bin ]; then
 	export PATH=/usr/local/bin:$PATH
@@ -30,7 +32,6 @@ program_exists () {
 }
 
 check_uncommited_changes_in() {
-    return
     pushd "$1" >/dev/null 2>&1
     git diff --quiet HEAD
     if [ $? -ne 0 ]; then
