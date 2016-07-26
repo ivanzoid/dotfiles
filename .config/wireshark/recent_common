@@ -11,6 +11,8 @@
 
 ######## Recent display filters (latest last), cannot be altered through command line ########
 
+recent.display_filter: ip.dst == 52.16.187.145
+recent.display_filter: ip.src == 52.16.187.145
 recent.display_filter: http
 
 # Main window geometry.

@@ -241,6 +241,7 @@ cmd_rating4m
 cmd_rating5 Ctrl+5
 cmd_rating5m 
 cmd_realSize Ctrl+/
+cmd_redeyes 
 cmd_redo Ctrl+Y
 cmd_reload Ctrl+R
 cmd_renameFile F2

@@ -36,3 +36,8 @@
 	smudge = git-media-smudge %f
 [credential]
 	helper = osxkeychain
+#driver for merging Xcode project files
+[mergetool "mergepbx"]
+    cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+
+	
