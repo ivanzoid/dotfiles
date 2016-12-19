@@ -1,10 +1,10 @@
 [user]
-	name = Ivan Zezyulya
-	email = ivan@zezyulya.com
+	name = 
+	email = 
 [alias]
 	cam = commit -a -m
 	com = commit -m
-	amend = commit --amend
+	am = commit --amend
 	st = status
 	lol = log --graph --pretty=format:'%C(bold cyan) %h %Creset %C(green)%ad %C(bold red)%d%Creset %s  %C(blue)(%an, %cr)%Creset' --date-order --date=short
 	ll = log --pretty=format:'%C(cyan)%h%C(bold red)%d %Creset%s%Cblue (%cn, %cr)' --decorate --numstat
@@ -13,31 +13,29 @@
 	aa = add -A
 	alias = "!git config -l | grep alias | cut -c 7-"
 	diff = diff --word-diff
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+	pub = "!git push -u origin $(git branch-name)"
+	unpub = "!git push origin :$(git branch-name))"
 [apply]
 	whitespace = nowarn
 [color]
 	ui = auto
 	interactive = auto
-#[diff] 
-#	tool = gvimdiff
 [core]
 	quotepath = false
 	excludesfile = /Users/ivan/.gitignore_global
 [push]
 	default = simple
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[credential]
+	helper = osxkeychain
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
-[credential]
-	helper = osxkeychain
-#driver for merging Xcode project files
 [mergetool "mergepbx"]
     cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
-
-	

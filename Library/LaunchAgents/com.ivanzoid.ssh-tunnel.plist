@@ -11,13 +11,11 @@
     <string>/usr/bin/ssh</string>
     <string>-C</string>
     <string>-N</string>
-    <string>-c</string>
-    <string>blowfish</string>
     <string>-o</string>
     <string>ServerAliveInterval=3</string>
     <string>-D</string>
     <string>8000</string>
-    <string>zoid.cc</string>
+    <string>ivan@do.zoid.cc</string>
   </array>
 </dict>
 </plist>
