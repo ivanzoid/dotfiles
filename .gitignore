@@ -12,4 +12,4 @@ mc/ini
 .config/xnviewmp/*.db
 .config/wireshark/recent
 .config/wireshark/recent_common
-
+.config/hub

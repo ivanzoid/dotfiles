@@ -47,7 +47,7 @@ fi
 mkdir -p ~/.config/mc
 symlink ~/dotfiles/mc/ini ~/.config/mc
 
-excludeList=(.git)
+excludeList=(.git .config/hub)
 
 for f in dotfiles/.[^.]*; do
 	if objectNotExcluded "$(basename $f)" $excludeList ; then
