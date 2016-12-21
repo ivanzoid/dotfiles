@@ -1,12 +1,8 @@
-"set guifont=Consolas:h10:cRUSSIAN 
-"set guifont=Luxi_Mono:h10:cANSI 
-"set guifont=Lucida_Sans_Typewriter:h10:cANSI
-if has("macunix")
+if $HOSTNAME == 'IvanMac.local'
 	set guifont=Go\ Mono:h18
 else
-	set guifont=Consolas:h10:cRUSSIAN
+	set guifont=Go\ Mono:h16
 endif
 set guicursor+=a:blinkwait0		" no cursor flashing!
-set vb t_vb=				" no beeping and no flashing!
-"set guioptions=agit			" no menu & no toolbars & no scrollbars!
+set vb t_vb=					" no beeping and no flashing!
 set guioptions=aeigrtb			" default is emgrLtT
