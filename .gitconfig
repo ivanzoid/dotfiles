@@ -1,6 +1,6 @@
 [user]
-	name = 
-	email = 
+	name = Ivan Zezyulya
+	email = ivan@zoid.cc
 [alias]
 	cam = commit -a -m
 	com = commit -m
