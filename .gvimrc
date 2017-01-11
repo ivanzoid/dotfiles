@@ -1,4 +1,5 @@
-if $HOSTNAME == 'IvanMac.local'
+let hostname = substitute(system('hostname'), '\n', '', '')
+if hostname == 'IvanMac.local'
 	set guifont=Go\ Mono:h18
 else
 	set guifont=Go\ Mono:h16
