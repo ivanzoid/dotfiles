@@ -84,6 +84,10 @@ if [ -n "/usr/local/opt/go/libexec/bin" ]; then
     export PATH=$PATH:/usr/local/opt/go/libexec/bin
 fi
 
+if [ -n "$HOME/.fastlane/bin" ]; then
+    export PATH="$PATH:$HOME/.fastlane/bin"
+fi
+
 #
 # Exports
 #
