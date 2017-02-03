@@ -16,7 +16,7 @@ if [ -n "$BASH_VERSION" ]; then
 	fi
 fi
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$(/usr/libexec/java_home >/dev/null 2>&1)
 
 # Add homebrew/macports
 if [ -d /usr/local/bin ]; then

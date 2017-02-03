@@ -9,6 +9,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/usr/bin/ssh</string>
+	<string>-o StrictHostKeyChecking=no</string>
     <string>-C</string>
     <string>-N</string>
     <string>-o</string>
