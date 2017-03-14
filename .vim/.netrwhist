@@ -1,8 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Src/StartFX/Libs'
 let g:netrw_dirhist_2='/Src/iHermes/iHermes/iHermes.xcdatamodeld/iHermes.xcdatamodel'
 let g:netrw_dirhist_3='/Src/SalamWorld/ios/SalamWorld.xcodeproj'
 let g:netrw_dirhist_4='/Src/SalamWorld/ios/SalamWorld.xcodeproj/project.xcworkspace'
 let g:netrw_dirhist_5='/Src/Qrescue/Scripts/updateApiFiles'
 let g:netrw_dirhist_6='/Src/Go/src/github.com/triggit/adserver/.git'
+let g:netrw_dirhist_7='/Users/ivan/bin'
+let g:netrw_dirhist_8='/Users/ivan'
+let g:netrw_dirhist_9='/Users/ivan/bin'

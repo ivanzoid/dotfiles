@@ -1,5 +1,5 @@
 let hostname = substitute(system('hostname'), '\n', '', '')
-if hostname == 'IvanMac.local'
+if hostname == 'IvanMac.local' || hostname == 'IvanBookPro.local'
 	set guifont=Go\ Mono:h18
 else
 	set guifont=Go\ Mono:h16
