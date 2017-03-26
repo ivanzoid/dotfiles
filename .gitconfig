@@ -14,7 +14,8 @@
 	diff = diff --word-diff
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	pub = "!git push -u origin $(git branch-name)"
-	unpub = "!git push origin :$(git branch-name))"
+	unpub = "!git push origin :$(git branch-name)"
+	poll = "!git pull origin $(git branch-name) && git branch --set-upstream-to=origin/$(git branch-name)"
 	rh = reset --hard
 	cdf = clean -d -f
 [apply]
