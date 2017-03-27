@@ -73,7 +73,7 @@ fi
 if [ -f .go.conf ]; then
     source .go.conf
 else
-    export GOPATH="$HOME/Go"
+    export GOPATH="$HOME/go"
 fi
 
 if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; then
