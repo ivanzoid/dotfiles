@@ -21,7 +21,7 @@
 [apply]
 	whitespace = nowarn
 [color]
-	ui = auto
+	ui = true
 	interactive = auto
 [core]
 	quotepath = false
