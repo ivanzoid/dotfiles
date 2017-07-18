@@ -8,6 +8,7 @@ cmd_category
 cmd_changeTime 
 cmd_clean 
 cmd_compare Shift+C
+cmd_contactSheet 
 cmd_convert Ctrl+U
 cmd_copyFile Ctrl+C
 cmd_copyFileTo Ctrl+C
@@ -18,6 +19,7 @@ cmd_copyPathname
 cmd_createMulti 
 cmd_cutFile Ctrl+X
 cmd_deleteFile Del
+cmd_editGPS 
 cmd_editIPTC Ctrl+I
 cmd_email 
 cmd_exifThumb90L 
@@ -70,6 +72,7 @@ cmd_lvflip
 cmd_moveFileTo Ctrl+M
 cmd_newFolder F7
 cmd_open Ctrl+O
+cmd_openAll 
 cmd_openContainer Ctrl+O
 cmd_openExplorer 
 cmd_openFile Ctrl+O
@@ -223,6 +226,7 @@ cmd_pageFirst
 cmd_pageLast 
 cmd_pageNext 
 cmd_pagePrevious 
+cmd_paint Shift+D
 cmd_paste Ctrl+V
 cmd_posterize 
 cmd_print Ctrl+P
@@ -255,6 +259,8 @@ cmd_saveSelection
 cmd_saveas Ctrl+Shift+S
 cmd_selectAll Ctrl+A
 cmd_selectNone 
+cmd_selectionRestore C
+cmd_selectionSave 
 cmd_selectionSwap W
 cmd_sepia 
 cmd_setComment Ctrl+D

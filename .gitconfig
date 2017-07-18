@@ -4,7 +4,7 @@
 [alias]
 	cam = commit -a -m
 	com = commit -m
-	am = commit --amend
+	coma = commit --amend
 	st = status
 	lol = log --graph --pretty=format:'%C(bold cyan) %h %Creset %C(green)%ad %C(bold red)%d%Creset %s  %C(blue)(%an, %cr)%Creset' --date-order --date=short
 	br = branch
