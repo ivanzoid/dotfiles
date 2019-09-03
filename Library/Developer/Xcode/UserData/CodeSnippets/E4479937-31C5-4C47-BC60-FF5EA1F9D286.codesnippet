@@ -3,19 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>mutArray</string>
+	<string>ov</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeBlock</string>
+		<string>All</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>NSMutableArray *&lt;#name#&gt; = [NSMutableArray new];</string>
+	<string>    //----------------------------------------------------------------------------------------
+    // MARK: - Overridden -
+    //----------------------------------------------------------------------------------------
+</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>0B5FA322-57E5-456C-BA22-72D1ED6A519D</string>
+	<string>E4479937-31C5-4C47-BC60-FF5EA1F9D286</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>NSMutableArray</string>
+	<string>Overridden</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

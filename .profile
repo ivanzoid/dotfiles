@@ -163,10 +163,6 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias tunnel='ssh -C2qTnN -D 8080 ivan@zoid.cc'
 
-if [ -x "$HOME/bin/svn-color.sh" ]; then
-	. "$HOME/bin/svn-color.sh"
-fi
-
 #if program_exists rmtrash; then
 #	alias rm=rmtrash
 #fi
@@ -302,5 +298,12 @@ fi
 
 if [ -d ~/dotfiles ]; then
     check_uncommited_changes_in ~/dotfiles
+fi
+
+if is_osx; then
+    VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    if [ -n "$VSCODE" ]; then
+        export PATH="$PATH:$VSCODE"
+   fi
 fi
 

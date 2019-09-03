@@ -18,7 +18,7 @@ cmd_copyName
 cmd_copyPathname 
 cmd_createMulti 
 cmd_cutFile Ctrl+X
-cmd_deleteFile Del
+cmd_deleteFile 
 cmd_editGPS 
 cmd_editIPTC Ctrl+I
 cmd_email 
@@ -122,6 +122,8 @@ cmd_showPreview
 cmd_showRecursive 
 cmd_showRed 
 cmd_similar 
+cmd_slideshow 
+cmd_split 
 cmd_stop 
 cmd_tag Space
 cmd_tagClearAll 
@@ -152,11 +154,13 @@ cmd_zoomOut -
 cmd_align 
 cmd_animation 
 cmd_autoContrast Ctrl+Alt+O
+cmd_autoDeskew 
 cmd_autoLevels Ctrl+Alt+L
 cmd_browse 
 cmd_canvasResize Shift+C
 cmd_changeDepth 
 cmd_clear 
+cmd_close 
 cmd_colorsCount 
 cmd_conbright 
 cmd_convert Ctrl+U
@@ -167,8 +171,11 @@ cmd_copyImage Ctrl+Shift+C
 cmd_copyName 
 cmd_copyPathname 
 cmd_crop Shift+X
+cmd_curves 
 cmd_cut Ctrl+X
 cmd_deleteFile 
+cmd_editCmap 
+cmd_editIPTC Ctrl+I
 cmd_enhance Shift+E
 cmd_equalize 
 cmd_export Ctrl+Alt+S
@@ -176,6 +183,7 @@ cmd_fileFirst Home
 cmd_fileLast End
 cmd_fileNext .
 cmd_filePrevious ,
+cmd_film 
 cmd_filter 
 cmd_fitAll '
 cmd_fitHeight 
@@ -232,7 +240,7 @@ cmd_posterize
 cmd_print Ctrl+P
 cmd_properties 
 cmd_quickSlide Pause
-cmd_rating0 Ctrl+0
+cmd_rating0 0
 cmd_rating0m 
 cmd_rating1 Ctrl+1
 cmd_rating1m 
@@ -240,9 +248,9 @@ cmd_rating2 Ctrl+2
 cmd_rating2m 
 cmd_rating3 Ctrl+3
 cmd_rating3m 
-cmd_rating4 Ctrl+4
+cmd_rating4 4
 cmd_rating4m 
-cmd_rating5 Ctrl+5
+cmd_rating5 5
 cmd_rating5m 
 cmd_realSize Ctrl+/
 cmd_redeyes 
@@ -259,6 +267,8 @@ cmd_saveSelection
 cmd_saveas Ctrl+Shift+S
 cmd_selectAll Ctrl+A
 cmd_selectNone 
+cmd_selectionFree A
+cmd_selectionImage D
 cmd_selectionRestore C
 cmd_selectionSave 
 cmd_selectionSwap W

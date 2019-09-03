@@ -3,19 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>sn</string>
+	<string>pu</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeExpression</string>
+		<string>All</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>UIControlStateNormal</string>
+	<string>    //----------------------------------------------------------------------------------------
+    // MARK: - Public methods -
+    //----------------------------------------------------------------------------------------
+</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>D4B4D363-CB8E-4E92-8265-A91980E72DE8</string>
+	<string>CB637091-F783-47E7-B65C-ECCA2CE81576</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>UIControlStateNormal</string>
+	<string>Public methods</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

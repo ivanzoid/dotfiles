@@ -3,19 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>addTarget</string>
+	<string>pv</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeExpression</string>
+		<string>All</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>addTarget:self action:@selector(&lt;#selector#&gt;) forControlEvents:UIControlEventTouchUpInside</string>
+	<string>    //----------------------------------------------------------------------------------------
+    // MARK: - Public vars
+    //----------------------------------------------------------------------------------------
+</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>98A86228-368D-4D9B-A3AB-63030740DA6C</string>
+	<string>BB5A1FCE-066C-4FAF-A2F4-34FF245D5060</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Add target to UIButton</string>
+	<string>Public vars</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

@@ -4,7 +4,7 @@
 [alias]
 	cam = commit -a -m
 	com = commit -m
-	coma = commit --amend
+	coma = commit --amend -m
 	st = status
 	lol = log --graph --pretty=format:'%C(bold cyan) %h %Creset %C(green)%ad %C(bold red)%d%Creset %s  %C(blue)(%an, %cr)%Creset' --date-order --date=short
 	br = branch
@@ -13,12 +13,13 @@
 	alias = "!git config -l | grep alias | cut -c 7-"
 	diff = diff --word-diff
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
-	pub = "!git push -u origin $(git branch-name)"
+	pub = "!git push -u origin $(git branch-name) --tags"
 	unpub = "!git push origin :$(git branch-name)"
 	poll = "!git pull origin $(git branch-name) && git branch --set-upstream-to=origin/$(git branch-name)"
 	mema = "!git fetch && git merge origin/master --ff"
 	rh = reset --hard
 	cdf = clean -d -f
+	rso = remote show origin
 [apply]
 	whitespace = nowarn
 [color]
@@ -41,4 +42,7 @@
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [mergetool "mergepbx"]
-    cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+    cmd = /Users/ivan/bin/mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+[gui]
+	fontdiff = -family \"Fira Code\" -size 16 -weight normal -slant roman -underline 0 -overstrike 0
+	fontui = -family \"SF UI Display\" -size 15 -weight normal -slant roman -underline 0 -overstrike 0
