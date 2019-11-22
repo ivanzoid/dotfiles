@@ -95,18 +95,8 @@ fi
 export LANG='en_US.UTF-8'
 
 # set editor
-if program_exists mvim; then
-	export EDITOR="mvim --nofork -f"
-elif program_exists gvim; then
-	export EDITOR="gvim -f"
-elif program_exists vim; then
-	export EDITOR="vim -f"
-elif program_exists vi; then
-	export EDITOR="vi -f"
-fi
-
+export EDITOR="vim g -f"
 export VISUAL=$EDITOR
-export SVN_EDITOR=$EDITOR
 
 # Bash settings
 shopt -s histappend
