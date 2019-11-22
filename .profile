@@ -140,11 +140,7 @@ if is_osx; then
 
 	export CLICOLOR=1
 	alias ls='ls -hF'
-	alias ramdisk='diskutil erasevolume HFS+ "Ramdisk" `hdiutil attach -nomount ram://16000000`'
-	alias lock='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
-    alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-
-	MD5=md5
+    alias mvim='vim -g'
 
     if [ -x "/Applications/VMware Fusion.app/Contents/Library/vmrun" ]; then
         alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
@@ -161,7 +157,6 @@ fi
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias tunnel='ssh -C2qTnN -D 8080 ivan@zoid.cc'
 
 #if program_exists rmtrash; then
 #	alias rm=rmtrash
