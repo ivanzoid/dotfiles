@@ -9,23 +9,15 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
-# Include .bashrc if needed
 if [ -n "$BASH_VERSION" ]; then
 	if [ -f "$HOME/.bashrc" ]; then
 		. "$HOME/.bashrc"
 	fi
 fi
 
-export JAVA_HOME=$(/usr/libexec/java_home >/dev/null 2>&1)
-
-# Add homebrew/macports
-if [ -d /usr/local/bin ]; then
-	export PATH=/usr/local/bin:$PATH
-fi
-
-if [ -d /usr/local/sbin ]; then
-	export PATH=/usr/local/sbin:$PATH
-fi
+#============================================================================
+# Functions
+#============================================================================
 
 program_exists () {
 	type "$1" &> /dev/null ;
@@ -41,33 +33,62 @@ check_uncommited_changes_in() {
     popd >/dev/null 2>&1
 }
 
-# Add ~/alac-utils
-if [ -d ~/alac-utils ]; then
-	export PATH=~/alac-utils:$PATH
-fi
+is_osx() {
+	if [[ $OSTYPE == darwin* ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
 
-# Add ~/bin
-if [ -d ~/bin ]; then
-	export PATH=~/bin:$PATH
+is_linux() {
+	if [[ $OSTYPE == linux* ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
 
-    check_uncommited_changes_in ~/bin
-fi
+#============================================================================
+# Exports
+#============================================================================
 
-# Add ~/private/bin
-if [ -d ~/private/bin ]; then
-	export PATH=~/private/bin:$PATH
-
-    check_uncommited_changes_in ~/private/bin
+if [ -x /usr/libexec/java_home ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home >/dev/null 2>&1)
 fi
 
 if [ -d /usr/local/opt/android-sdk ]; then
 	export ANDROID_HOME=/usr/local/opt/android-sdk
 fi
 
+# Homebrew
+if [ -d /usr/local/bin ]; then
+	export PATH=/usr/local/bin:$PATH
+fi
+
+if [ -d /usr/local/sbin ]; then
+	export PATH=/usr/local/sbin:$PATH
+fi
+
+if [ -d ~/bin ]; then
+	export PATH=~/bin:$PATH
+
+    check_uncommited_changes_in ~/bin
+fi
+
+if [ -d ~/private/bin ]; then
+	export PATH=~/private/bin:$PATH
+fi
+
+if [ -d ~/private ]; then
+    check_uncommited_changes_in ~/private
+fi
+
 # Docker
 if program_exists docker; then
     export DOCKER_HOST=tcp://localhost:4243
 fi
+
 
 # Go
 if [ -f .go.conf ]; then
@@ -84,94 +105,61 @@ if [ -n "/usr/local/opt/go/libexec/bin" ]; then
     export PATH=$PATH:/usr/local/opt/go/libexec/bin
 fi
 
+
 if [ -n "$HOME/.fastlane/bin" ]; then
     export PATH="$PATH:$HOME/.fastlane/bin"
 fi
 
-#
-# Exports
-#
 
 export LANG='en_US.UTF-8'
-
-# set editor
-export EDITOR="vim g -f"
+export EDITOR="vim -g -f"
 export VISUAL=$EDITOR
 
-# Bash settings
-shopt -s histappend
-export HISTSIZE=10000000
-export HISTTIMEFORMAT="%F %T"
-export PROMPT_COMMAND='history -a; history -n; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+# VSCode
+if is_osx; then
+    VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    if [ -n "$VSCODE" ]; then
+        export PATH="$PATH:$VSCODE"
+   fi
+fi
 
-is_osx()
-{
-	if [[ $OSTYPE == darwin* ]]; then
-		return 0
-	else
-		return 1
-	fi
-}
 
-is_linux()
-{
-	if [[ $OSTYPE == linux* ]]; then
-		return 0
-	else
-		return 1
-	fi
-}
-
-#
+#============================================================================
 # Aliases
-#
+#============================================================================
 
 if is_osx; then
-
 	export CLICOLOR=1
 	alias ls='ls -hF'
     alias mvim='vim -g'
 
-    if [ -x "/Applications/VMware Fusion.app/Contents/Library/vmrun" ]; then
-        alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
-    fi
-
 elif is_linux; then
-
 	alias ls='ls -hF --color=auto'
-
 	MD5=md5sum
-
 fi
-
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
 
 #if program_exists rmtrash; then
 #	alias rm=rmtrash
 #fi
 
-#
-# mc
-#
-MC_WRAPPER="$HOME/private/bin/mc-wrapper.sh"
-if [ -x $MC_WRAPPER ]; then
-    alias mc=". $MC_WRAPPER" 
-fi
-unset MC_WRAPPER
-
-
-# GIT
+# Git
 #
 # Display unstaged (*) and staged(+) changes
-export GIT_PS1_SHOWDIRTYSTATE="1"
+#export GIT_PS1_SHOWDIRTYSTATE="1"
 # Display if there are untracked (%) files
-export GIT_PS1_SHOWUNTRACKEDFILES="1"
+#export GIT_PS1_SHOWUNTRACKEDFILES="1"
+
+#============================================================================
+# Bash settings
+#============================================================================
+
+shopt -s histappend
+export HISTSIZE=10000000
+export HISTTIMEFORMAT="%F %T"
+export PROMPT_COMMAND='history -a; history -n; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
 
-function setPS1()
-{
+function setPS1() {
 	# Reset
 	local Reset='\[\e[0m\]'             # Text Reset
 
@@ -246,8 +234,6 @@ function setPS1()
 	local BgIWhite='\[\e[0;107m\]'   # White
 
 	local ColorArray=($BRed $BGreen $BYellow $BPurple $BCyan $BRed $BGreen $BYellow $BPurple $BCyan)
-	#local ColorArray=($BBlack $IRed $BGreen $BYellow $BBlue $BPurple $BCyan $BYellow $Red $Green $Yellow $Blue $Purple $Cyan $Yellow)
-
 	local ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | $MD5 | sed s/[abcdef]*// | head -c 1)]}
 
     local GitStatus=""
@@ -283,12 +269,5 @@ fi
 
 if [ -d ~/dotfiles ]; then
     check_uncommited_changes_in ~/dotfiles
-fi
-
-if is_osx; then
-    VSCODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    if [ -n "$VSCODE" ]; then
-        export PATH="$PATH:$VSCODE"
-   fi
 fi
 
