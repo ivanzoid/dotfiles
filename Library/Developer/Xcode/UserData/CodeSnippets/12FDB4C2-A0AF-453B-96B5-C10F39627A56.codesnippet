@@ -3,25 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ov</string>
+	<string>fu</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
-		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>    //----------------------------------------------------------------------------------------
-    // MARK: - Overridden -
-    //----------------------------------------------------------------------------------------
-</string>
+	<string>func &lt;#name#&gt;() {
+    &lt;#body#&gt;
+}</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>E4479937-31C5-4C47-BC60-FF5EA1F9D286</string>
+	<string>12FDB4C2-A0AF-453B-96B5-C10F39627A56</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Overridden</string>
+	<string>Func () -&gt; Void</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

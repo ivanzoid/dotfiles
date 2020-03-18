@@ -237,8 +237,8 @@ function setPS1() {
 	local ColorForHost=${ColorArray[$(echo "${USER}@${HOSTNAME}" | $MD5 | sed s/[abcdef]*// | head -c 1)]}
 
     local GitStatus=""
-    if program_exists git-prompt.sh; then
-        source git-prompt.sh
+    if [ -f /usr/local/opt/git/etc/bash_completion.d/git-prompt.sh ]; then
+        source /usr/local/opt/git/etc/bash_completion.d/git-prompt.sh 
         local GitStatus='$(__git_ps1 " (%s)")'
     fi
 
@@ -270,4 +270,5 @@ fi
 if [ -d ~/dotfiles ]; then
     check_uncommited_changes_in ~/dotfiles
 fi
+
 
