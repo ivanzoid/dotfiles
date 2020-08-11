@@ -7,6 +7,7 @@
 	am = commit --amend -m
 	st = status
 	lol = log --graph --pretty=format:'%C(bold cyan) %h %Creset %C(green)%ad %C(bold red)%d%Creset %s  %C(blue)(%an, %cr)%Creset' --date-order --date=short
+	lom = log --author=Ivan --branches --date=local --date-order --date=format:'%Y-%m-%d' --pretty=format:'%ad %s' --since=100.days
 	br = branch
 	co = checkout
 	aa = add -A
@@ -46,3 +47,5 @@
 [gui]
 	fontdiff = -family \"Fira Code\" -size 16 -weight normal -slant roman -underline 0 -overstrike 0
 	fontui = -family \"SF UI Display\" -size 15 -weight normal -slant roman -underline 0 -overstrike 0
+[pull]
+	rebase = false
