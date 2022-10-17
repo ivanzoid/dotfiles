@@ -16,7 +16,7 @@
     <string>ServerAliveInterval=3</string>
     <string>-D</string>
     <string>8000</string>
-    <string>ivan@zoid.cc</string>
+    <string>ivan@vpn.zoid.cc</string>
   </array>
 </dict>
 </plist>

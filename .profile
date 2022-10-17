@@ -272,3 +272,6 @@ if [ -d ~/dotfiles ]; then
 fi
 
 
+# Nodenv
+eval "$(nodenv init -)"
+
