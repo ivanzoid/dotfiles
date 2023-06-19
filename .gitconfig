@@ -29,6 +29,7 @@
 [core]
 	quotepath = false
 	excludesfile = /Users/ivan/.gitignore_global
+	autocrlf = false
 [push]
 	default = simple
 [filter "media"]
