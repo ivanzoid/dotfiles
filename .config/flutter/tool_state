@@ -1,5 +1,7 @@
 {
   "is-bot": false,
-  "license-hash": "3e8c85e63b26ce223cda96a9a8fbb410",
-  "last-devtools-activation-time": "2021-09-09 17:24:08.892684"
+  "license-hash": "dc96c9af3fbf254412ffc24bd11a3dc4",
+  "last-devtools-activation-time": "2021-09-09 17:24:08.892684",
+  "last-active-stable-version": "41456452f29d64e8deb623a3c927524bcf9f111b",
+  "redisplay-welcome-message": true
 }

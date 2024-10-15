@@ -1,4 +1,4 @@
-# Common recent settings file for Wireshark 4.0.1.
+# Common recent settings file for Wireshark 4.2.3.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -7,7 +7,7 @@
 ######## Recent capture files (latest last), cannot be altered through command line ########
 
 
-######## Recent capture filters (latest last), cannot be altered through command line ########
+######## Recent capture filters (latest first), cannot be altered through command line ########
 
 
 ######## Recent display filters (latest last), cannot be altered through command line ########
@@ -19,8 +19,8 @@ recent.display_filter: http
 
 # Main window geometry.
 # Decimal numbers.
-gui.geometry_main_x: 405
-gui.geometry_main_y: 182
+gui.geometry_main_x: -2547
+gui.geometry_main_y: 120
 gui.geometry_main_width: 2340
 gui.geometry_main_height: 1349
 
@@ -31,14 +31,6 @@ gui.geometry_main_maximized: FALSE
 # Leftalign Action Buttons.
 # TRUE or FALSE (case-insensitive).
 gui.geometry_leftalign_actions: FALSE
-
-# Statusbar left pane size.
-# Decimal number.
-gui.geometry_status_pane: 250
-
-# Statusbar middle pane size.
-# Decimal number.
-gui.geometry_status_pane_right: 250
 
 # Last used Configuration Profile.
 gui.last_used_profile: Default
@@ -69,7 +61,7 @@ gui.search_case_sensitive: FALSE
 
 # Find packet search type.
 # One of: DISPLAY_FILTER, HEX_VALUE, STRING, REGEX
-gui.search_type: DISPLAY_FILTER
+gui.search_type: STRING
 
 # Geometry and maximized state of PreferencesDialog window.
 # Decimal integers.

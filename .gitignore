@@ -28,3 +28,7 @@ mc/ini
 .config/gtk-2.0
 .config/iterm2
 .config/qalculate
+.config/flutter/**
+.config/.jira
+.config/gh
+.config/spicetify
