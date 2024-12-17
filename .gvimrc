@@ -1,7 +1,7 @@
 let hostname = substitute(system('hostname'), '\n', '', '')
-if hostname == 'IvanMacPro.local'
+if hostname == 'IvanMacPro'
 	set guifont=Fira\ Code\ Regular:h20
-elseif hostname == 'IvanBookPro.local'
+elseif hostname == 'IvanBookPro'
 	set guifont=Fira\ Code\ Regular:h16
 else
 	set guifont=Fira\ Code\ Regular:h16
