@@ -3,6 +3,7 @@
 export LANG='en_US.UTF-8'
 export EDITOR="vim"
 export VISUAL="$EDITOR"
+export CLICOLOR=1
 
 if [ -x /usr/libexec/java_home ]; then
     export JAVA_HOME=$(/usr/libexec/java_home >/dev/null 2>&1)
