@@ -24,7 +24,7 @@ setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS
 fpath=($HOME $fpath)
 autoload -Uz .zprompt && .zprompt
 
-alias ls='ls -hF'
+alias ls='ls -AhF'
 alias mvim='vim -g'
 
 # source <(fzf --zsh)
