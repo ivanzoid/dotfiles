@@ -21,6 +21,8 @@ SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
 setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS
 
+unset MAILCHECK
+
 fpath=($HOME $fpath)
 autoload -Uz .zprompt && .zprompt
 
