@@ -84,11 +84,6 @@ if [ -d ~/private ]; then
     check_uncommited_changes_in ~/private
 fi
 
-# Docker
-if program_exists docker; then
-    export DOCKER_HOST=tcp://localhost:4243
-fi
-
 
 # Go
 if [ -f .go.conf ]; then
@@ -112,7 +107,7 @@ fi
 
 
 export LANG='en_US.UTF-8'
-export EDITOR="vim -g -f"
+export EDITOR="vim -f"
 export VISUAL=$EDITOR
 
 # VSCode
@@ -122,6 +117,12 @@ if is_osx; then
         export PATH="$PATH:$VSCODE"
    fi
 fi
+
+if [ -d ~/.local/bin ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+
 
 
 #============================================================================
@@ -134,7 +135,7 @@ if is_osx; then
     alias mvim='vim -g'
 
 elif is_linux; then
-	alias ls='ls -hF --color=auto'
+	alias ls='ls -ahF --color=auto'
 	MD5=md5sum
 fi
 
@@ -245,6 +246,14 @@ function setPS1() {
 	export PS1="\n${BBlue}\u${Reset}:${ColorForHost}\h${BGreen}${GitStatus}${BBlue} \w\n\$${Reset} "
 }
 
+# Enhanced history search
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\eOA": history-search-backward'
+bind '"\eOB": history-search-forward'
+bind '"\C-p": history-search-backward'
+bind '"\C-n": history-search-forward'
+
 setPS1
 
 
@@ -262,9 +271,17 @@ if program_exists brew; then
         . $BREW_PREFIX/etc/bash_completion.d/git-completion.bash
     fi
 
+    # Bash completion
 	if [ -f $BREW_PREFIX/Library/Contributions/brew_bash_completion.sh ]; then
 		. $BREW_PREFIX/Library/Contributions/brew_bash_completion.sh
 	fi
+fi
+
+# Bash completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
 fi
 
 if [ -d ~/dotfiles ]; then
@@ -273,9 +290,21 @@ fi
 
 
 # Nodenv
-eval "$(nodenv init -)"
+if program_exists nodenv; then
+    eval "$(nodenv init -)"
+fi
 
+if [ -d ~/.local ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/ivan/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+# bun
+if [ -d ~/.bun ]; then
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# Mise
+if command -v mise &> /dev/null; then
+  eval "$(mise activate bash)"
+fi

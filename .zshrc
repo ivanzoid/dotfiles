@@ -48,11 +48,20 @@ check_uncommited_changes_in() {
 [[ -d ~/private ]] && check_uncommited_changes_in ~/private
 [[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
 
+if [[ -d "$HOME/.rd" ]]; then
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/ivan/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+fi
 
+
+if [[ -d "$HOME/.dart-cli-completion" ]]; then
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f /Users/ivan/.dart-cli-completion/zsh-config.zsh ]] && . /Users/ivan/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
+fi
+
+if command -v mise >/dev/null 2>&1; then
+	eval "$(mise activate zsh)"
+fi
