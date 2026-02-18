@@ -3,12 +3,7 @@
 setopt EMACS
 
 # Autocompletion
-
-#if [[ -f /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]]; then
-#    source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-#else
-	autoload -U compinit && compinit
-#fi
+autoload -U compinit && compinit
 
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -21,13 +16,13 @@ SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
 setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS
 
+unset MAILCHECK
+
 fpath=($HOME $fpath)
 autoload -Uz .zprompt && .zprompt
 
 alias ls='ls -AhF'
 alias mvim='vim -g'
-
-# source <(fzf --zsh)
 
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
@@ -50,15 +45,14 @@ check_uncommited_changes_in() {
 
 if [[ -d "$HOME/.rd" ]]; then
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/ivan/.rd/bin:$PATH"
+export PATH="$HOME/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 fi
-
 
 if [[ -d "$HOME/.dart-cli-completion" ]]; then
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
-[[ -f /Users/ivan/.dart-cli-completion/zsh-config.zsh ]] && . /Users/ivan/.dart-cli-completion/zsh-config.zsh || true
+[[ -f "$HOME/.dart-cli-completion/zsh-config.zsh" ]] && . "$HOME/.dart-cli-completion/zsh-config.zsh" || true
 ## [/Completion]
 fi
 
