@@ -1,18 +1,5 @@
 # ~/.zprofile
 
-#setopt EMACS
-
-# Autocompletion
-#autoload -U compinit && compinit
-
-# Up/down arrows completion
-#autoload -Uz history-search-end
-#zle -N history-beginning-search-backward-end history-search-end
-#zle -N history-beginning-search-forward-end history-search-end
-#bindkey "$terminfo[kcuu1]" history-beginning-search-backward-end
-#bindkey "$terminfo[kcud1]" history-beginning-search-forward-end
-
-
 # Go
 if [[ -d $HOME/go ]]; then 
 	export GOPATH="$HOME/go"
