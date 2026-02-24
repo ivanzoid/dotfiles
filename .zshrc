@@ -21,7 +21,7 @@ unset MAILCHECK
 fpath=($HOME $fpath)
 autoload -Uz .zprompt && .zprompt
 
-alias ls='ls -AhF'
+alias ls='ls -AhF --color=auto'
 alias mvim='vim -g'
 
 # zsh-z
