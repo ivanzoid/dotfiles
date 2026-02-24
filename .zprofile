@@ -1,5 +1,18 @@
 # ~/.zprofile
 
+# Go
+if [[ -d $HOME/go ]]; then 
+	export GOPATH="$HOME/go"
+fi
+
+if [[ "$OSTYPE" == "darwin"* ]] && command -v mvim >/dev/null; then
+    export EDITOR='mvim -f' VISUAL='mvim -f'
+#	alias mvim='vim -g'
+else
+    export EDITOR='vim' VISUAL='vim'
+fi
+
+
 [[ -d /usr/local/bin ]] && path=("/usr/local/bin" $path)
 [[ -d /usr/local/sbin ]] && path=("/usr/local/sbin" $path)
 
@@ -21,6 +34,42 @@ fi
 
 [[ -f "$HOME/.jetbrains.vmoptions.sh" ]] && source "$HOME/.jetbrains.vmoptions.sh"
 
-if [[ "$OSTYPE" == darwin* ]] && [[ ! -f "$HOME/.launchd.conf" ]] && (( $+commands[update-launchd-conf] )); then
-    update-launchd-conf
+# Java
+if [ -x /usr/libexec/java_home ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home >/dev/null 2>&1)
 fi
+
+# Android SDK
+if [[ -d $HOME/Library/Android/sdk ]]; then
+    export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
+    export PATH="$PATH:$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/platform-tools"
+fi
+
+# VS Code
+if [[ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]]; then
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
+
+# Rancher desktop
+if [[ -d "$HOME/.rd" ]]; then
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="$HOME/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+fi
+
+# Dart comletion
+if [[ -d "$HOME/.dart-cli-completion" ]]; then
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f "$HOME/.dart-cli-completion/zsh-config.zsh" ]] && . "$HOME/.dart-cli-completion/zsh-config.zsh" || true
+## [/Completion]
+fi
+
+# Mise
+if command -v mise >/dev/null 2>&1; then
+	eval "$(mise activate zsh)"
+fi
+
+
+
