@@ -17,8 +17,21 @@ autoload -U compinit && compinit
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey '^[[A' history-beginning-search-backward-end
-bindkey '^[[B' history-beginning-search-forward-end
+
+bind-updown() {
+  local keymap=$1 up=$2 down=$3
+
+  [[ -n "$up"   ]] && bindkey -M "$keymap" "$up"   history-beginning-search-backward-end
+  [[ -n "$down" ]] && bindkey -M "$keymap" "$down" history-beginning-search-forward-end
+}
+
+# terminfo (preferred when correct)
+bind-updown emacs "$terminfo[kcuu1]" "$terminfo[kcud1]"
+bind-updown viins "$terminfo[kcuu1]" "$terminfo[kcud1]"
+
+# ANSI arrows (most terminals + macOS + ssh)
+bind-updown emacs '^[[A' '^[[B'
+bind-updown viins '^[[A' '^[[B'
 
 
 # Shell
