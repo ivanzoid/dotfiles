@@ -27,20 +27,10 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
       printf "%-300s\n" "➕ NEW  ($new_session)"
 
       for s in ${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"}; do
-        meta="$(tmux display-message -p -t "$s" '#{session_activity}|#{session_windows}|#{?session_attached,attached,detached}|#{pane_pid}' 2>/dev/null)" || continue
+        meta="$(tmux display-message -p -t "$s" '#{session_activity}|#{session_windows}|#{?session_attached,attached,detached}|#{pane_current_command}' 2>/dev/null)" || continue
         activity="${meta%%|*}"; meta="${meta#*|}"
         win="${meta%%|*}"; meta="${meta#*|}"
-        attached="${meta%%|*}"; pid="${meta#*|}"
-
-        cmdline="$(ps -o args= -p "$pid" 2>/dev/null || ps -o command= -p "$pid" 2>/dev/null)"
-        cmdline="${cmdline#"${cmdline%%[![:space:]]*}"}"
-        cmdline="${cmdline%"${cmdline##*[![:space:]]}"}"
-
-        if (( ${#cmdline} > maxlen )); then
-          short="${cmdline[1,maxlen]}…"
-        else
-          short="$cmdline"
-        fi
+        attached="${meta%%|*}"; short="${meta#*|}"
 
         printf "%-300s\n" "$(printf '%-26s %-3s %-9s %s' "$s" "$win" "$attached" "$short")"
       done
