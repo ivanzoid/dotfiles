@@ -13,12 +13,12 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
   # If all sessions are attached, start a new one
   detached_count="$(tmux list-sessions -F '#{session_attached}' 2>/dev/null | grep -c '^0$')"
   if [[ "$detached_count" == "0" ]]; then
-    exec tmux new -s "${host}-$(date +%m%d-%H%M)"
+    exec tmux new -s "${host}-$(date +%m%d-%H%M%S)"
   fi
 
   # Detached sessions exist: show a chooser (requires fzf); otherwise attach to last
   if command -v fzf >/dev/null 2>&1; then
-    new_session="${host}-$(date +%m%d-%H%M)"
+    new_session="${host}-$(date +%m%d-%H%M%S)"
 
     _tmux_menu_lines() {
       local s meta activity win attached pid cmdline short maxlen
@@ -50,7 +50,7 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
     if [[ "$selection" == ➕* ]]; then
       exec tmux new -s "$new_session"
     else
-      exec tmux attach -t "$session"
+      exec tmux attach -t "${selection%% *}"
     fi
   fi
 
