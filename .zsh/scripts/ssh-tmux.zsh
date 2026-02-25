@@ -2,30 +2,6 @@
 if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v tmux >/dev/null 2>&1; then
   host="${HOST%%.*}"
 
-  _tmux_session_rows() {
-    local s meta activity win attached pid cmdline short maxlen
-    maxlen=80
-
-    for s in ${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"}; do
-      meta="$(tmux display-message -p -t "$s" '#{session_activity}|#{session_windows}|#{?session_attached,attached,detached}|#{pane_pid}' 2>/dev/null)" || continue
-      activity="${meta%%|*}"; meta="${meta#*|}"
-      win="${meta%%|*}"; meta="${meta#*|}"
-      attached="${meta%%|*}"; pid="${meta#*|}"
-
-      cmdline="$(ps -o args= -p "$pid" 2>/dev/null || ps -o command= -p "$pid" 2>/dev/null)"
-      cmdline="${cmdline#"${cmdline%%[![:space:]]*}"}"
-      cmdline="${cmdline%"${cmdline##*[![:space:]]}"}"
-
-      if (( ${#cmdline} > maxlen )); then
-        short="${cmdline[1,maxlen]}…"
-      else
-        short="$cmdline"
-      fi
-
-      print -r -- "$activity|$s|$win|$attached|$short"
-    done
-  }
-
   # Count existing sessions (0 if tmux server not running)
   session_count="$(tmux list-sessions -F '#S' 2>/dev/null | wc -l | tr -d ' ')"
 
@@ -34,22 +10,21 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
     exec tmux new -s main
   fi
 
-  # If exactly one session exists, auto-attach
-  if [[ "$session_count" == "1" ]]; then
-    exec tmux attach
+  # If all sessions are attached, start a new one
+  detached_count="$(tmux list-sessions -F '#{session_attached}' 2>/dev/null | grep -c '^0$')"
+  if [[ "$detached_count" == "0" ]]; then
+    exec tmux new -s "${host}-$(date +%m%d-%H%M)"
   fi
 
-# Multiple sessions: show a chooser (requires fzf); otherwise attach to last
+  # Detached sessions exist: show a chooser (requires fzf); otherwise attach to last
   if command -v fzf >/dev/null 2>&1; then
     new_session="${host}-$(date +%m%d-%H%M)"
 
     _tmux_menu_lines() {
-      # Prints: DISPLAY<TAB>SESSION
       local s meta activity win attached pid cmdline short maxlen
       maxlen=80
 
-      # Header-like NEW row
-      printf "%-26s %-3s %-9s %s\t%s\n" "➕ NEW" "" "" "($new_session)" "__NEW__"
+      printf "%-300s\n" "➕ NEW  ($new_session)"
 
       for s in ${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"}; do
         meta="$(tmux display-message -p -t "$s" '#{session_activity}|#{session_windows}|#{?session_attached,attached,detached}|#{pane_pid}' 2>/dev/null)" || continue
@@ -67,27 +42,22 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
           short="$cmdline"
         fi
 
-        # Nicely aligned display columns
-        # (session name | win | attached | cmdline)
-        printf "%-26s %-3s %-9s %s\t%s\n" "$s" "$win" "$attached" "$short" "$s"
+        printf "%-300s\n" "$(printf '%-26s %-3s %-9s %s' "$s" "$win" "$attached" "$short")"
       done
     }
 
     selection="$(
       _tmux_menu_lines \
-      | fzf --delimiter=$'\t' \
-            --with-nth=1 \
-            --prompt="tmux> " \
+      | fzf --prompt="tmux> " \
             --height=60% --reverse \
+            --color='bg+:#d0d0e0,fg+:#202020,hl:#3060b0,hl+:#3060b0,pointer:#3060b0,prompt:#808090' \
             --preview-window='right:60%:wrap' \
-            --preview=$'if [[ "{2}" == "__NEW__" ]]; then echo "Create new session:\n  '"$new_session"'"; else tmux list-windows -t {2} 2>/dev/null; echo; tmux capture-pane -pt {2} -S -80 2>/dev/null; fi'
+            --preview=$'s={1}; if [[ "$s" == "➕" ]]; then echo "Create new session:\n  '"$new_session"'"; else tmux list-windows -t "$s" 2>/dev/null; echo; tmux capture-pane -pt "$s" -S -80 2>/dev/null; fi'
     )"
 
     [[ -z "$selection" ]] && exit
 
-    session="$(print -r -- "$selection" | cut -f2)"
-
-    if [[ "$session" == "__NEW__" ]]; then
+    if [[ "$selection" == ➕* ]]; then
       exec tmux new -s "$new_session"
     else
       exec tmux attach -t "$session"
