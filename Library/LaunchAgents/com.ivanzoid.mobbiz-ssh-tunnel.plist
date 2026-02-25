@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ivanzoid.mobbiz-ssh-tunnel</string>
+  <key>OnDemand</key>
+  <false/>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/ssh</string>
+	<string>-o StrictHostKeyChecking=no</string>
+    <string>-C</string>
+    <string>-N</string>
+    <string>-o</string>
+    <string>ServerAliveInterval=3</string>
+    <string>-D</string>
+    <string>8080</string>
+    <string>ivan@10.0.0.32</string>
+  </array>
+</dict>
+</plist>
+

@@ -61,3 +61,5 @@ check_uncommited_changes_in() {
 [[ -d ~/bin ]] && check_uncommited_changes_in ~/bin
 [[ -d ~/private ]] && check_uncommited_changes_in ~/private
 [[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
+
+[[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
