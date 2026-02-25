@@ -50,13 +50,12 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
         _tmux_session_rows
       } \
       | sort -t'|' -k1,1nr \
-      | fzf --delimiter='|' \
+      | fzf --delimiter='[|]' \
             --with-nth=2,3,4,5 \
             --prompt="tmux> " \
             --height=60% --reverse \
             --preview-window='right:60%:wrap' \
-            --preview=$'if [[ "{2}" == "__NEW__" ]]; then echo "Create new session:\n  '"$new_session"'"; else tmux list-windows -t {2} 2>/dev/null; echo; tmux capture-pane -pt {2} -S -80 2>/dev/null; fi'
-    )"
+            --preview=$'if [[ "{2}" == "__NEW__" ]]; then echo "Create new session:\n  '"$new_session"'"; else tmux list-windows -t {2} 2>/dev/null; echo; tmux capture-pane -pt {2} -S -80 2>/dev/null; fi'    )"
 
     # If user hit ESC / nothing selected, fall back to tmux attach (tmux decides)
     if [[ -z "$selection" ]]; then
