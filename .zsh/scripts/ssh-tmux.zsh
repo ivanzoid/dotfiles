@@ -41,7 +41,7 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
 
 # Multiple sessions: show a chooser (requires fzf); otherwise attach to last
   if command -v fzf >/dev/null 2>&1; then
-    new_session="ssh-${host}-$(date +%Y%m%d-%H%M%S)-$$"
+    new_session="${host}-$(date +%m%d-%H%M)"
 
     _tmux_menu_lines() {
       # Prints: DISPLAY<TAB>SESSION
@@ -83,7 +83,7 @@ if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v
             --preview=$'if [[ "{2}" == "__NEW__" ]]; then echo "Create new session:\n  '"$new_session"'"; else tmux list-windows -t {2} 2>/dev/null; echo; tmux capture-pane -pt {2} -S -80 2>/dev/null; fi'
     )"
 
-    [[ -z "$selection" ]] && exec tmux attach
+    [[ -z "$selection" ]] && exit
 
     session="$(print -r -- "$selection" | cut -f2)"
 
