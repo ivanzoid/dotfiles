@@ -26,6 +26,7 @@ fi
 [[ -d "$HOME/.fastlane/bin" ]] && path+=("$HOME/.fastlane/bin")
 [[ -d "$HOME/.spicetify" ]] && path+=("$HOME/.spicetify")
 [[ -d "$HOME/fvm/default/bin" ]] && path+=("$HOME/fvm/default/bin")
+[[ -d "$HOME/flutter/bin" ]] && path=("$HOME/flutter/bin" $path)
 [[ -d "$HOME/.local/bin" ]] && path+=("$HOME/.local/bin")
 
 if (( $+commands[nodenv] )); then

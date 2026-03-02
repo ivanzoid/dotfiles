@@ -47,6 +47,7 @@ source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
 zstyle ':completion:*' menu select # improve completion menu style
 
+[[ -d "$HOME/opt/zsh-completions" ]] && fpath=($HOME/opt/zsh-completions/src $fpath)
 
 check_uncommited_changes_in() {
     local dir=$1

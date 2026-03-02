@@ -1,5 +1,6 @@
 # Auto-tmux on SSH only (zsh) — always offer selection when multiple sessions exist
-if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && command -v tmux >/dev/null 2>&1; then
+# Set NOTMUX=1 to skip: ssh -t host 'NOTMUX=1 exec zsh -l'
+if [[ -o interactive ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && [[ -z "$NOTMUX" ]] && command -v tmux >/dev/null 2>&1; then
   host="${HOST%%.*}"
 
   # Count existing sessions (0 if tmux server not running)
