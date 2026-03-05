@@ -10,6 +10,13 @@ setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS
 fpath=($HOME $fpath)
 autoload -Uz .zprompt && .zprompt
 
+# git me completion (remote branch names)
+_git-me() {
+  local -a branches
+  branches=(${(f)"$(git branch -r --format='%(refname:short)' 2>/dev/null | sed 's|^origin/||' | grep -v '^HEAD')"})
+  _describe 'branch' branches
+}
+
 # Autocompletion
 autoload -U compinit && compinit
 
@@ -41,6 +48,8 @@ unset MAILCHECK
 
 # Aliases
 alias ls='ls -AhF --color=auto'
+alias g='git'
+compdef g=git
 
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
