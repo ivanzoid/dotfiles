@@ -50,3 +50,8 @@
 	fontui = -family \"SF UI Display\" -size 15 -weight normal -slant roman -underline 0 -overstrike 0
 [pull]
 	rebase = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

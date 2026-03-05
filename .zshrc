@@ -64,3 +64,16 @@ check_uncommited_changes_in() {
 [[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
 
 [[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/usr/local/opt/micromamba/bin/mamba';
+export MAMBA_ROOT_PREFIX='/Users/ivan/mamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
