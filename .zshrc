@@ -42,6 +42,16 @@ unset MAILCHECK
 # Aliases
 alias ls='ls -AhF --color=auto'
 
+# Utils
+run_cmds() {
+  while IFS= read -r cmd; do
+    [[ -z "$cmd" || "$cmd" =~ ^[[:space:]]*# ]] && continue
+    echo "> $cmd"
+    eval "$cmd"
+    echo
+  done
+}
+
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
@@ -49,32 +59,12 @@ zstyle ':completion:*' menu select # improve completion menu style
 
 [[ -d "$HOME/opt/zsh-completions" ]] && fpath=($HOME/opt/zsh-completions/src $fpath)
 
-check_uncommited_changes_in() {
-    local dir=$1
-    pushd "$dir" >/dev/null 2>&1
-    if ! git diff --quiet HEAD; then
-        echo "Uncommitted changes in $dir:"
-        git status -s
-    fi
-    popd >/dev/null 2>&1
-}
-
-[[ -d ~/bin ]] && check_uncommited_changes_in ~/bin
-[[ -d ~/private ]] && check_uncommited_changes_in ~/private
-[[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
-
-[[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
-
 # >>> mamba initialize >>>
 if [[ -x '/usr/local/opt/micromamba/bin/mamba' ]]; then
-    export MAMBA_EXE='/usr/local/opt/micromamba/bin/mamba'
-    export MAMBA_ROOT_PREFIX="$HOME/mamba"
-    __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__mamba_setup"
-    else
-        alias mamba="$MAMBA_EXE"
-    fi
-    unset __mamba_setup
+	export MAMBA_ROOT_PREFIX="$HOME/mamba"
+	eval "$(/usr/local/bin/micromamba shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX")"
+	export PATH="$HOME/mamba/bin:$PATH"
+	#micromamba activate base
 fi
 # <<< mamba initialize <<<
+
