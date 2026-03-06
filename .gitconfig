@@ -18,6 +18,7 @@
 	unpub = "!git push origin :$(git branch-name)"
 	poll = "!git pull origin $(git branch-name) && git branch --set-upstream-to=origin/$(git branch-name)"
 	mema = "!git fetch && git merge origin/master --ff"
+	me = "!f() { git fetch origin $1 && git merge origin/$1; }; f"
 	rh = reset --hard
 	cdf = clean -d -f
 	rso = remote show origin
