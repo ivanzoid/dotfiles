@@ -61,6 +61,9 @@ run_cmds() {
   done
 }
 
+# SSH tmux auto-attach & chooser
+source ~/.zsh/scripts/ssh-tmux.zsh
+
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive

@@ -135,7 +135,11 @@ prompt_purification_setup() {
     prompt_git_branch
 
     # Configure prompts
-    PROMPT=$'%B%F{blue}%~%f%b $(prompt_git_info)$(git_prompt_status) %(?..%F{red}[%?]%f )\n%B%F{blue}❯%f%b '
+    local ssh_info=""
+    if [[ -n "$SSH_TTY" ]]; then
+        ssh_info="%F{yellow}%n@%m%f "
+    fi
+    PROMPT=$'${ssh_info}%B%F{blue}%~%f%b $(prompt_git_info)$(git_prompt_status) %(?..%F{red}[%?]%f )\n%B%F{blue}❯%f%b '
     RPROMPT='%F{white}%*%f'
 }
 
