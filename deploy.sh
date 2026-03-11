@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 objectNotExcluded()
 {
@@ -37,12 +37,8 @@ is_osx()
 pushd ~ >/dev/null
 
 if is_osx; then
-	symlink "$HOME/dotfiles/Library/Developer/Xcode/UserData/CodeSnippets" "$HOME/Library/Developer/Xcode/UserData"
-	symlink "$HOME/dotfiles/Library/Developer/Xcode/UserData/FontAndColorThemes" "$HOME/Library/Developer/Xcode/UserData"
-	symlink "$HOME/dotfiles/Library/Developer/Xcode/Templates" "$HOME/Library/Developer/Xcode"
 	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
-	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.environment.plist ~/Library/LaunchAgents
-	symlink "$HOME/dotfiles/Library/Application Support/com.mitchellh.ghostty" "$HOME/Library/Application\ Support/"
+	ln -sf "$HOME/dotfiles/Library/Application Support/com.mitchellh.ghostty" "$HOME/Library/Application Support/"
 fi
 
 mkdir -p ~/.config/mc
