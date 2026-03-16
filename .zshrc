@@ -48,6 +48,8 @@ unset MAILCHECK
 
 # Aliases
 alias ls='ls -AhF --color=auto'
+alias l1='ls -1'
+alias ll='ls -I ".*"'
 alias g='git'
 compdef g=git
 
@@ -61,14 +63,29 @@ run_cmds() {
   done
 }
 
+check_uncommited_changes_in() {
+    local dir=$1
+    pushd "$dir" >/dev/null 2>&1
+    if ! git diff --quiet HEAD; then
+        echo "Uncommitted changes in $dir:"
+        git status -s
+    fi
+    popd >/dev/null 2>&1
+}
+
+[[ -d ~/bin ]] && check_uncommited_changes_in ~/bin
+[[ -d ~/private ]] && check_uncommited_changes_in ~/private
+[[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
+
 # SSH tmux auto-attach & chooser
-source ~/.zsh/scripts/ssh-tmux.zsh
+[[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
 
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
 zstyle ':completion:*' menu select # improve completion menu style
 
+# zsh-completions
 [[ -d "$HOME/opt/zsh-completions" ]] && fpath=($HOME/opt/zsh-completions/src $fpath)
 
 # >>> mamba initialize >>>
