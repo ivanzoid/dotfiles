@@ -1,6 +1,8 @@
 # Default optinos:
 # ghostty +show-config --default --docs` to view a list of
 #
+# Reload config: Cmd + Shift + ,
+#
 # Docs:
 # https://ghostty.org/docs/config/reference
 #
