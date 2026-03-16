@@ -47,9 +47,11 @@ export CLICOLOR=1
 unset MAILCHECK
 
 # Aliases
-alias ls='ls -AhF --color=auto'
-alias l1='ls -1'
-alias ll='ls -I ".*"'
+alias ls='ls --color=auto'
+alias ll='ls -l'	# hide hidden files, details format (table)
+alias l1='ls -1'	# hide hidden files, short format (single column)
+alias l='ls -A'		# all files, short format (multi-columns)
+alias la='ls -lA'	# all files, details format (table)
 alias g='git'
 compdef g=git
 
