@@ -17,12 +17,9 @@ symlink()
 	to=$2
 
 	mkdir -p "$to"
-	toLastComponent="$(basename $from)"
-	fullTo="${to}/${toLastComponent}"
-	if [ -d "$fullTo" ]; then
-		rm -rf "$fullTo"
-	fi
-	ln -sf "$from" "$to"
+	fullTo="${to}/$(basename "$from")"
+	rm -rf "$fullTo"
+	ln -sf "$from" "$fullTo"
 }
 
 is_osx()
@@ -38,7 +35,7 @@ pushd ~ >/dev/null
 
 if is_osx; then
 	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
-	ln -sf "$HOME/dotfiles/Library/Application Support/com.mitchellh.ghostty" "$HOME/Library/Application Support/"
+	symlink "$HOME/dotfiles/Library/Application Support/com.mitchellh.ghostty" "$HOME/Library/Application Support"
 fi
 
 mkdir -p ~/.config/mc
