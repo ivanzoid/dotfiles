@@ -99,3 +99,5 @@ if [[ -x '/usr/local/opt/micromamba/bin/mamba' ]]; then
 fi
 # <<< mamba initialize <<<
 
+# Rust
+[[ -r "$HOME/.cargo" ]] && source "$HOME/.cargo/env"
