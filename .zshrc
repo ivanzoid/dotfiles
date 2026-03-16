@@ -47,7 +47,7 @@ export CLICOLOR=1
 unset MAILCHECK
 
 # Aliases
-alias ls='ls --color=auto'
+alias ls='ls -h --color=auto'
 alias ll='ls -l'	# hide hidden files, details format (table)
 alias l1='ls -1'	# hide hidden files, short format (single column)
 alias l='ls -A'		# all files, short format (multi-columns)
