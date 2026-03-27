@@ -29,18 +29,46 @@ tmux-chooser() {
     local new_session="${host}-$(date +%m%d-%H%M%S)"
 
     _tmux_menu_lines() {
-      local s meta activity win attached pid cmdline short maxlen
-      maxlen=80
+      local s meta activity win attached pid cmdline short sdir
+      local -a lines=()
 
-      printf "%-300s\n" "➕ NEW  ($new_session)"
+      printf '%s\n' "➕ NEW  ($new_session)"
 
       for s in ${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"}; do
-        meta="$(tmux display-message -p -t "$s" '#{session_activity}|#{session_windows}|#{?session_attached,attached,detached}|#{pane_current_command}' 2>/dev/null)" || continue
+        meta="$(tmux display-message -p -t "$s" '#{session_activity}|#{session_attached}|#{?session_attached,attached,detached}|#{pane_current_command}' 2>/dev/null)" || continue
         activity="${meta%%|*}"; meta="${meta#*|}"
-        win="${meta%%|*}"; meta="${meta#*|}"
+        natt="${meta%%|*}"; meta="${meta#*|}"
         attached="${meta%%|*}"; short="${meta#*|}"
 
-        printf "%-300s\n" "$(printf '%-26s %-3s %-9s %s' "$s" "$win" "$attached" "$short")"
+        # Append client count to session name if >1
+        local label="$s"
+        (( natt > 1 )) && label="${s}[${natt}]"
+
+        sdir="$(tmux list-panes -t "$s" -F '#{pane_current_path}' 2>/dev/null)"
+        sdir="${sdir%%$'\n'*}"
+        sdir="${sdir/#$HOME/~}"
+
+        # Shorten attached/detached for narrower terminals
+        local cols="${COLUMNS:-80}"
+        if (( cols < 90 )); then
+          [[ $attached == attached ]] && attached=a || attached=d
+        elif (( cols < 120 )); then
+          [[ $attached == attached ]] && attached=att || attached=det
+        fi
+
+        # Truncate path to fit
+        local avail=$(( cols - 38 ))
+        (( avail < 6 )) && avail=6
+        if (( ${#sdir} > avail )); then
+          sdir="…${sdir: -$((avail - 1))}"
+        fi
+
+        lines+=("$(printf '%010d %-18s %-4s %-12s %s' "$activity" "$label" "$attached" "$short" "$sdir")")
+      done
+
+      # Sort by activity descending, strip timestamp prefix
+      printf '%s\n' "${lines[@]}" | sort -rn | while IFS= read -r line; do
+        printf '%s\n' "${line#* }"
       done
     }
 
@@ -49,8 +77,8 @@ tmux-chooser() {
       | fzf --prompt="tmux> " \
             --height=60% --reverse \
             --color='bg+:#d0d0e0,fg+:#202020,hl:#3060b0,hl+:#3060b0,pointer:#3060b0,prompt:#808090' \
-            --preview-window='right:60%:wrap' \
-            --preview=$'s={1}; if [[ "$s" == "➕" ]]; then echo "Create new session:\n  '"$new_session"'"; else tmux list-windows -t "$s" 2>/dev/null; echo; tmux capture-pane -pt "$s" -S -80 2>/dev/null; fi'
+            --preview-window='right:60%:follow' \
+            --preview=$'s={1}; s="${s%%[[]*}"; if [[ "$s" == "➕" ]]; then echo "Create new session:\n  '"$new_session"'"; else tmux list-windows -t "$s" 2>/dev/null; echo; echo "$(tmux capture-pane -pt "$s" 2>/dev/null)"; fi'
     )"
 
     [[ -z "$selection" ]] && return 0
@@ -63,6 +91,7 @@ tmux-chooser() {
       fi
     else
       local target="${selection%% *}"
+      target="${target%%[[]*}"
       if [[ -n "$inside_tmux" ]]; then
         tmux switch-client -t "$target"
       else
