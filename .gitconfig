@@ -15,8 +15,10 @@
 	diff = diff --word-diff
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	pub = "!git push -u origin $(git branch-name)"
+	pu = pub
 	unpub = "!git push origin :$(git branch-name)"
 	poll = "!git pull origin $(git branch-name) && git branch --set-upstream-to=origin/$(git branch-name)"
+	pl = poll
 	mema = "!git fetch && git merge origin/master --ff"
 	me = "!f() { git fetch origin $1 && git merge origin/$1; }; f"
 	rh = reset --hard
