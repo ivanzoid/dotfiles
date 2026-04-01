@@ -29,11 +29,24 @@ tmux-chooser() {
     local new_session="${host}-$(date +%m%d-%H%M%S)"
 
     _tmux_menu_lines() {
-      local s meta activity win attached pid cmdline short sdir
-      local -a lines=()
+      local s meta activity natt attached short sdir
+      local -A dir_max_activity=()
 
       printf '%s\n' "➕ NEW  ($new_session)"
 
+      # First pass: find max activity per working directory
+      for s in ${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"}; do
+        activity="$(tmux display-message -p -t "$s" '#{session_activity}' 2>/dev/null)" || continue
+        sdir="$(tmux list-panes -t "$s" -F '#{pane_current_path}' 2>/dev/null)"
+        sdir="${sdir%%$'\n'*}"
+        sdir="${sdir/#$HOME/~}"
+        if [[ -z "${dir_max_activity[$sdir]}" ]] || (( activity > dir_max_activity[$sdir] )); then
+          dir_max_activity[$sdir]="$activity"
+        fi
+      done
+
+      # Second pass: build display lines with group sort key
+      local -a lines=()
       for s in ${(f)"$(tmux list-sessions -F '#S' 2>/dev/null)"}; do
         meta="$(tmux display-message -p -t "$s" '#{session_activity}|#{session_attached}|#{?session_attached,attached,detached}|#{pane_current_command}' 2>/dev/null)" || continue
         activity="${meta%%|*}"; meta="${meta#*|}"
@@ -59,15 +72,17 @@ tmux-chooser() {
         # Truncate path to fit
         local avail=$(( cols - 38 ))
         (( avail < 6 )) && avail=6
-        if (( ${#sdir} > avail )); then
-          sdir="…${sdir: -$((avail - 1))}"
+        local display_dir="$sdir"
+        if (( ${#display_dir} > avail )); then
+          display_dir="…${display_dir: -$((avail - 1))}"
         fi
 
-        lines+=("$(printf '%010d %-18s %-4s %-12s %s' "$activity" "$label" "$attached" "$short" "$sdir")")
+        local ga="${dir_max_activity[$sdir]}"
+        lines+=("$(printf '%010d %-18s %-4s %-12s %s' "$ga" "$label" "$attached" "$short" "$display_dir")")
       done
 
-      # Sort by activity descending, strip timestamp prefix
-      printf '%s\n' "${lines[@]}" | sort -rn | while IFS= read -r line; do
+      # Sort by group activity descending, then session name ascending; strip sort key
+      printf '%s\n' "${lines[@]}" | sort -k1,1rn -k2,2 | while IFS= read -r line; do
         printf '%s\n' "${line#* }"
       done
     }
