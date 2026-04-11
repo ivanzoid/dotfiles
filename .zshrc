@@ -82,6 +82,9 @@ check_uncommited_changes_in() {
 # SSH tmux auto-attach & chooser
 [[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
 
+# Directory-based background color for Ghostty
+[[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
+
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
@@ -99,3 +102,6 @@ if [[ -x '/usr/local/opt/micromamba/bin/mamba' ]]; then
 fi
 # <<< mamba initialize <<<
 
+if [[ -d '/home/linuxbrew/' ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
