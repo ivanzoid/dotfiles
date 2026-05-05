@@ -91,12 +91,12 @@ zstyle ':completion:*' menu select # improve completion menu style
 [[ -d "$HOME/opt/zsh-completions" ]] && fpath=($HOME/opt/zsh-completions/src $fpath)
 
 # >>> mamba initialize >>>
-if [[ -x '/usr/local/opt/micromamba/bin/mamba' ]]; then
-	export MAMBA_ROOT_PREFIX="$HOME/mamba"
-	eval "$(/usr/local/bin/micromamba shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX")"
-	export PATH="$HOME/mamba/bin:$PATH"
-	#micromamba activate base
-fi
+#if [[ -x '/usr/local/opt/micromamba/bin/mamba' ]]; then
+#	export MAMBA_ROOT_PREFIX="$HOME/mamba"
+#	eval "$(/usr/local/bin/micromamba shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX")"
+#	export PATH="$HOME/mamba/bin:$PATH"
+#	#micromamba activate base
+#fi
 # <<< mamba initialize <<<
 
 # Rust
