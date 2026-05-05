@@ -47,10 +47,10 @@ export CLICOLOR=1
 unset MAILCHECK
 
 # Aliases
-alias ls='ls -h --color=auto'
-alias ll='ls -l'	# hide hidden files, details format (table)
-alias l1='ls -1'	# hide hidden files, short format (single column)
-alias l='ls -A'		# all files, short format (multi-columns)
+alias ls='ls -Ah --color=auto'
+alias ll='/bin/ls -l --color=auto'	# hide hidden files, details format (table)
+alias l1='/bin/ls -1 --color=auto'	# hide hidden files, short format (single column)
+alias l='/bin/ls --color=auto'		# all files, short format (multi-columns)
 alias la='ls -lA'	# all files, details format (table)
 alias g='git'
 compdef g=git
@@ -82,6 +82,9 @@ check_uncommited_changes_in() {
 # SSH tmux auto-attach & chooser
 [[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
 
+# Directory-based background color for Ghostty
+[[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
+
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
@@ -101,3 +104,8 @@ zstyle ':completion:*' menu select # improve completion menu style
 
 # Rust
 [[ -r "$HOME/.cargo" ]] && source "$HOME/.cargo/env"
+
+# Linux homebrew
+if [[ -d '/home/linuxbrew/' ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
