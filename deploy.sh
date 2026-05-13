@@ -35,6 +35,7 @@ pushd ~ >/dev/null
 
 if is_osx; then
 	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
+	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.KeyRemapping.plist ~/Library/LaunchAgents
 	symlink "$HOME/dotfiles/Library/Application Support/com.mitchellh.ghostty" "$HOME/Library/Application Support"
 fi
 

@@ -7,12 +7,12 @@
 # https://ghostty.org/docs/config/reference
 #
 
-theme = Alabaster
-background = #ffffff
+theme = light:Alabaster, dark:Afterglow
+#background = light:#ffffff, dark:#000000
 # theme = Broadcast
 cursor-color = #666666
 font-family = Fira Code Retina
-font-size = 16.5
+font-size = 15.5
 adjust-cell-height = +16%
 adjust-cell-width = -4%
 cursor-style = bar
