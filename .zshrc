@@ -103,7 +103,7 @@ zstyle ':completion:*' menu select # improve completion menu style
 # <<< mamba initialize <<<
 
 # Rust
-[[ -r "$HOME/.cargo" ]] && source "$HOME/.cargo/env"
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # Linux homebrew
 if [[ -d '/home/linuxbrew/' ]]; then
