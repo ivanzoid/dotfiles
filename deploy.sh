@@ -1,54 +1,87 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
-objectNotExcluded()
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+EXCLUDE_LIST=(".git" ".gitignore" "deploy.sh" ".config/hub")
+DRY_RUN=0
+
+is_osx()
 {
-	object=$1
-	array=$2
-	case "$array[@]"
-		in *"$object"*)
-			return 1
+	[[ $OSTYPE == darwin* ]]
+}
+
+if ! is_osx; then
+	EXCLUDE_LIST+=("Library")
+fi
+
+for arg in "$@"; do
+	case "$arg" in
+		--dry-run|-n) DRY_RUN=1 ;;
 	esac
-	return 0
+done
+
+if [[ $DRY_RUN -ne 0 ]]; then
+	echo "DRY RUN — no changes will be made"
+fi
+
+isExcluded()
+{
+	local rel=$1
+	local e
+	for e in "${EXCLUDE_LIST[@]}"; do
+		[[ "$rel" == "$e" ]] && return 0
+	done
+	return 1
+}
+
+prettyPath()
+{
+	local tilde="~"
+	echo "${1/#$HOME/$tilde}"
 }
 
 symlink()
 {
-	from=$1
-	to=$2
+	local fromFile=$1
+	local toDir=$2
 
-	mkdir -p "$to"
-	fullTo="${to}/$(basename "$from")"
-	rm -rf "$fullTo"
-	ln -sf "$from" "$fullTo"
-}
-
-is_osx()
-{
-	if [[ $OSTYPE == darwin* ]]; then
-		return 0
-	else
+	if [[ ! -e "$fromFile" ]]; then
+		echo "link: error: source does not exist: $(prettyPath "$fromFile")" >&2
 		return 1
 	fi
+
+	local toFile="${toDir}/$(basename "$fromFile")"
+	echo "link: $(prettyPath "$toFile") -> $(prettyPath "$fromFile")"
+	if [[ $DRY_RUN -ne 0 ]]; then
+		return
+	fi
+	ln -sfn "$fromFile" "$toFile"
 }
 
-pushd ~ >/dev/null
+deploy()
+{
+	local fromFile=$1
+	local toDir=$2
+	local toFile="${toDir}/$(basename "$fromFile")"
 
-if is_osx; then
-	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.ssh-tunnel.plist ~/Library/LaunchAgents
-	symlink ~/dotfiles/Library/LaunchAgents/com.ivanzoid.KeyRemapping.plist ~/Library/LaunchAgents
-	symlink "$HOME/dotfiles/Library/Application Support/com.mitchellh.ghostty" "$HOME/Library/Application Support"
-fi
+	local rel="${fromFile#$SCRIPT_DIR/}"
+	isExcluded "$rel" && return
 
-mkdir -p ~/.config/mc
-symlink ~/dotfiles/mc/ini ~/.config/mc
-
-excludeList=(.git .config/hub)
-
-for f in dotfiles/.[^.]*; do
-	if objectNotExcluded "$(basename $f)" $excludeList ; then
-		symlink "$f" ~
+	if [[ -d "$fromFile" && -d "$toFile" && ! -L "$toFile" ]]; then
+		# Both source and destination are real directories — merge by
+		# recursing into contents so we don't clobber unrelated entries in
+		# the destination (e.g. ~/.config, ~/Library). In every other case
+		# the source is symlinked as a whole.
+		local sub
+		for sub in "$fromFile"/.[^.]* "$fromFile"/*; do
+			[[ -e "$sub" ]] || continue
+			deploy "$sub" "$toFile"
+		done
+	else
+		symlink "$fromFile" "$toDir"
 	fi
+}
+
+for f in "$SCRIPT_DIR"/.[^.]* "$SCRIPT_DIR"/*; do
+	[[ -e "$f" ]] || continue
+	deploy "$f" "$HOME"
 done
-
-popd >/dev/null
-
