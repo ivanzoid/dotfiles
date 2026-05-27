@@ -109,3 +109,9 @@ zstyle ':completion:*' menu select # improve completion menu style
 if [[ -d '/home/linuxbrew/' ]]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
+
+# Outer terminal window title: "user@host:cwd" — shown by Ghostty when SSH'd in.
+# Inside tmux, this becomes pane_title; tmux re-emits it via set-titles.
+autoload -Uz add-zsh-hook
+_set_term_title() { print -Pn '\e]2;%n@%m:%~\a' }
+add-zsh-hook precmd _set_term_title
