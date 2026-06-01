@@ -2,6 +2,13 @@
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 EXCLUDE_LIST=(".git" ".gitignore" "deploy.sh" ".config/hub" "firefox")
+# Direct children of these directories are created as real dirs and their
+# contents symlinked, instead of the child being symlinked as a whole — even
+# on a fresh machine where the destination doesn't exist yet. Use it for
+# parents of dirs an app writes into at runtime (e.g. ~/.config/<tool>/), so
+# those runtime files don't land in this repo. Everything below the child is
+# still symlinked as usual. Paths are relative to the repo root.
+MERGE_PARENTS=(".config" "Library/LaunchAgents")
 DRY_RUN=0
 
 is_osx()
@@ -29,6 +36,17 @@ isExcluded()
 	local e
 	for e in "${EXCLUDE_LIST[@]}"; do
 		[[ "$rel" == "$e" ]] && return 0
+	done
+	return 1
+}
+
+# True if $rel is one of the MERGE_PARENTS or a direct child of one.
+isMerged()
+{
+	local rel=$1
+	local m
+	for m in "${MERGE_PARENTS[@]}"; do
+		[[ "$rel" == "$m" || "${rel%/*}" == "$m" ]] && return 0
 	done
 	return 1
 }
@@ -66,11 +84,15 @@ deploy()
 	local rel="${fromFile#$SCRIPT_DIR/}"
 	isExcluded "$rel" && return
 
-	if [[ -d "$fromFile" && -d "$toFile" && ! -L "$toFile" ]]; then
-		# Both source and destination are real directories — merge by
-		# recursing into contents so we don't clobber unrelated entries in
-		# the destination (e.g. ~/.config, ~/Library). In every other case
-		# the source is symlinked as a whole.
+	# Merge a directory (recurse and symlink each entry) instead of
+	# symlinking it as a whole when either:
+	#   - the destination is already a real directory, so we don't clobber
+	#     unrelated entries already there (e.g. ~/.config, ~/Library), or
+	#   - it is a MERGE_PARENTS entry or a direct child of one, which forces
+	#     per-file linking even on a fresh machine (see MERGE_PARENTS above).
+	# In every other case the source is symlinked as a whole.
+	if [[ -d "$fromFile" ]] && { [[ -d "$toFile" && ! -L "$toFile" ]] || isMerged "$rel"; }; then
+		[[ $DRY_RUN -eq 0 ]] && mkdir -p "$toFile"
 		local sub
 		for sub in "$fromFile"/.[^.]* "$fromFile"/*; do
 			[[ -e "$sub" ]] || continue
