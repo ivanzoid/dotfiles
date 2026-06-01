@@ -110,11 +110,21 @@ done
 
 # Firefox userChrome (macOS only) — symlink firefox/chrome into every profile
 # whose dir name contains "default", skipping named profiles like "Mobbiz".
+# If a profile already has a real chrome/ dir (not our symlink), move it aside
+# first — ln can't replace a non-empty dir, and we never clobber a backup.
 if is_osx; then
 	ff_root="$HOME/Library/Application Support/Firefox/Profiles"
 	if [[ -d "$ff_root" ]]; then
 		for prof in "$ff_root"/*default*/; do
 			[[ -d "$prof" ]] || continue
+			dest="${prof%/}/chrome"
+			if [[ -d "$dest" && ! -L "$dest" ]]; then
+				bak="$dest.bak"
+				n=1
+				while [[ -e "$bak" ]]; do bak="$dest.bak.$n"; n=$((n + 1)); done
+				echo "backup: $(prettyPath "$dest") -> $(prettyPath "$bak")"
+				[[ $DRY_RUN -eq 0 ]] && mv "$dest" "$bak"
+			fi
 			symlink "$SCRIPT_DIR/firefox/chrome" "${prof%/}"
 		done
 	fi
