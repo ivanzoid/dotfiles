@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-EXCLUDE_LIST=(".git" ".gitignore" "deploy.sh" ".config/hub")
+EXCLUDE_LIST=(".git" ".gitignore" "deploy.sh" ".config/hub" "firefox")
 DRY_RUN=0
 
 is_osx()
@@ -85,3 +85,18 @@ for f in "$SCRIPT_DIR"/.[^.]* "$SCRIPT_DIR"/*; do
 	[[ -e "$f" ]] || continue
 	deploy "$f" "$HOME"
 done
+
+# Firefox userChrome — symlink firefox/chrome into every profile whose dir
+# name contains "default". 
+if is_osx; then
+	ff_root="$HOME/Library/Application Support/Firefox/Profiles"
+else
+	ff_root="$HOME/.mozilla/firefox"
+fi
+
+if [[ -d "$ff_root" ]]; then
+	for prof in "$ff_root"/*default*/; do
+		[[ -d "$prof" ]] || continue
+		symlink "$SCRIPT_DIR/firefox/chrome" "${prof%/}"
+	done
+fi
