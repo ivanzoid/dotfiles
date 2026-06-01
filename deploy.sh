@@ -108,17 +108,14 @@ for f in "$SCRIPT_DIR"/.[^.]* "$SCRIPT_DIR"/*; do
 	deploy "$f" "$HOME"
 done
 
-# Firefox userChrome — symlink firefox/chrome into every profile whose dir
-# name contains "default". 
+# Firefox userChrome (macOS only) — symlink firefox/chrome into every profile
+# whose dir name contains "default", skipping named profiles like "Mobbiz".
 if is_osx; then
 	ff_root="$HOME/Library/Application Support/Firefox/Profiles"
-else
-	ff_root="$HOME/.mozilla/firefox"
-fi
-
-if [[ -d "$ff_root" ]]; then
-	for prof in "$ff_root"/*default*/; do
-		[[ -d "$prof" ]] || continue
-		symlink "$SCRIPT_DIR/firefox/chrome" "${prof%/}"
-	done
+	if [[ -d "$ff_root" ]]; then
+		for prof in "$ff_root"/*default*/; do
+			[[ -d "$prof" ]] || continue
+			symlink "$SCRIPT_DIR/firefox/chrome" "${prof%/}"
+		done
+	fi
 fi
