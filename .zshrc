@@ -55,6 +55,9 @@ alias la='ls -lA'	# all files, details format (table)
 alias g='git'
 compdef g=git
 
+# docker compose containers grouped by working dir, with up/down status
+alias dps='docker ps -a --format '\''{{.Label "com.docker.compose.project.working_dir"}}\t{{.Names}}\t{{.Status}}'\'' | sort | awk -F'\''\t'\'' '\''$1!=p{print $1;p=$1} {s=($3~/^Up/)?"up ─":"down"; print "└─ " s " " $2}'\'''
+
 # Utils
 run_cmds() {
   while IFS= read -r cmd; do
