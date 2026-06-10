@@ -34,7 +34,8 @@
 	excludesfile = /Users/ivan/.gitignore_global
 	autocrlf = false
 [push]
-	default = simple
+	default = current
+	autoSetupRemote = true
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

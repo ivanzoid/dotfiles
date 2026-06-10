@@ -6,7 +6,7 @@ setopt EMACS
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS
+setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS HIST_IGNORE_SPACE
 fpath=($HOME $fpath)
 autoload -Uz .zprompt && .zprompt
 
@@ -54,6 +54,9 @@ alias l='/bin/ls --color=auto'		# all files, short format (multi-columns)
 alias la='ls -lA'	# all files, details format (table)
 alias g='git'
 compdef g=git
+
+# docker compose containers grouped by working dir, with up/down status
+alias dps='docker ps -a --format '\''{{.Label "com.docker.compose.project.working_dir"}}\t{{.Names}}\t{{.Status}}'\'' | sort | awk -F'\''\t'\'' '\''$1!=p{print $1;p=$1} {s=($3~/^Up/)?"up ─":"down"; print "└─ " s " " $2}'\'''
 
 # Utils
 run_cmds() {
@@ -103,9 +106,15 @@ zstyle ':completion:*' menu select # improve completion menu style
 # <<< mamba initialize <<<
 
 # Rust
-[[ -r "$HOME/.cargo" ]] && source "$HOME/.cargo/env"
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # Linux homebrew
 if [[ -d '/home/linuxbrew/' ]]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
+
+# Outer terminal window title: "user@host:cwd" — shown by Ghostty when SSH'd in.
+# Inside tmux, this becomes pane_title; tmux re-emits it via set-titles.
+autoload -Uz add-zsh-hook
+_set_term_title() { print -Pn '\e]2;%n@%m:%~\a' }
+add-zsh-hook precmd _set_term_title
