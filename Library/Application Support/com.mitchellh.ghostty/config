@@ -24,15 +24,11 @@ working-directory = home
 
 # custom-shader = ~/icloud/Resources/ghostty-shaders/cursor_blaze2.glsl
 
-# macos-icon = retro
-
 macos-icon = custom
 macos-custom-icon = ~/icloud/Resources/ghostty-icons/ghostty-black.icns
 
-#macos-icon = custom-style
-#macos-icon-frame = plastic
-#macos-icon-screen-color = #000000
-#macos-icon-ghost-color = #0000FF
-
-# ↓ 100MB
+# 100MB
 scrollback-limit = 104857600
+
+keybind = cmd+shift+a=text:ssh ivan@ai.local\n
+
