@@ -48,10 +48,10 @@ unset MAILCHECK
 
 # Aliases
 alias ls='ls -Ah --color=auto'
-alias ll='/bin/ls -l --color=auto'	# hide hidden files, details format (table)
-alias l1='/bin/ls -1 --color=auto'	# hide hidden files, short format (single column)
-alias l='/bin/ls --color=auto'		# all files, short format (multi-columns)
-alias la='ls -lA'	# all files, details format (table)
+alias ll='/bin/ls -lh --color=auto'	# hide hidden files, details format (table)
+alias l1='/bin/ls -1h --color=auto'	# hide hidden files, short format (single column)
+alias l='/bin/ls -h --color=auto'		# all files, short format (multi-columns)
+alias la='ls -lAh'	# all files, details format (table)
 alias g='git'
 compdef g=git
 
