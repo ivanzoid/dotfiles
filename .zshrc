@@ -119,8 +119,14 @@ if [[ -d '/home/linuxbrew/' ]]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
 
-# Mise
-if [[ -x "$HOME/.local/bin/mise" ]]; then
-	eval "$("$HOME/.local/bin/mise" activate zsh)"
-fi
+# Mise — interactive activation (precmd hook needs an interactive shell, so this
+# belongs in .zshrc, not .zprofile). Find mise wherever it lives: already on PATH,
+# Linux installer (~/.local/bin), or macOS Homebrew (/opt/homebrew, /usr/local).
+mise_bin="$(command -v mise 2>/dev/null)"
+for _candidate in "$HOME/.local/bin/mise" /opt/homebrew/bin/mise /usr/local/bin/mise; do
+	[[ -n "$mise_bin" ]] && break
+	[[ -x "$_candidate" ]] && mise_bin="$_candidate"
+done
+[[ -n "$mise_bin" ]] && eval "$("$mise_bin" activate zsh)"
+unset mise_bin _candidate
 
