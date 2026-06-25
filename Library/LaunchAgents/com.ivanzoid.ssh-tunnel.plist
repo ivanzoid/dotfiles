@@ -9,15 +9,17 @@
   <key>ProgramArguments</key>
   <array>
     <string>/usr/bin/ssh</string>
-	<string>-o StrictHostKeyChecking=no</string>
-    <string>-C</string>
     <string>-N</string>
     <string>-o</string>
-    <string>ServerAliveInterval=3</string>
+    <string>StrictHostKeyChecking=accept-new</string>
     <string>-D</string>
     <string>8000</string>
     <string>ivan@vpn.zoid.cc</string>
   </array>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
 </dict>
 </plist>
 

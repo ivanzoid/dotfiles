@@ -36,3 +36,6 @@ macos-custom-icon = ~/icloud/Resources/ghostty-icons/ghostty-black.icns
 
 # ↓ 100MB
 scrollback-limit = 104857600
+
+# mouse-scroll-multiplier = precision:0.5,discrete:3
+scroll-to-bottom = keystroke
