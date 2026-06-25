@@ -6,7 +6,7 @@ setopt EMACS
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
 HISTFILE=~/.zsh_history
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS
+setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY HIST_FIND_NO_DUPS HIST_IGNORE_SPACE
 fpath=($HOME $fpath)
 autoload -Uz .zprompt && .zprompt
 
@@ -40,6 +40,12 @@ bind-updown viins "$terminfo[kcuu1]" "$terminfo[kcud1]"
 bind-updown emacs '^[[A' '^[[B'
 bind-updown viins '^[[A' '^[[B'
 
+# Outer terminal window title: "user@host:cwd" — shown by Ghostty when SSH'd in.
+# Inside tmux, this becomes pane_title; tmux re-emits it via set-titles.
+autoload -Uz add-zsh-hook
+_set_term_title() { print -Pn '\e]2;%n@%m:%~\a' }
+add-zsh-hook precmd _set_term_title
+
 
 # Shell
 export LANG='en_US.UTF-8'
@@ -47,13 +53,16 @@ export CLICOLOR=1
 unset MAILCHECK
 
 # Aliases
-alias ls='ls -h --color=auto'
-alias ll='ls -l'	# hide hidden files, details format (table)
-alias l1='ls -1'	# hide hidden files, short format (single column)
-alias l='ls -A'		# all files, short format (multi-columns)
-alias la='ls -lA'	# all files, details format (table)
+alias ls='ls -Ah --color=auto'
+alias ll='/bin/ls -lh --color=auto'	# hide hidden files, details format (table)
+alias l1='/bin/ls -1h --color=auto'	# hide hidden files, short format (single column)
+alias l='/bin/ls -h --color=auto'		# all files, short format (multi-columns)
+alias la='ls -lAh'	# all files, details format (table)
 alias g='git'
 compdef g=git
+
+# docker compose containers grouped by working dir, with up/down status
+alias dps='docker ps -a --format '\''{{.Label "com.docker.compose.project.working_dir"}}\t{{.Names}}\t{{.Status}}'\'' | sort | awk -F'\''\t'\'' '\''$1!=p{print $1;p=$1} {s=($3~/^Up/)?"up ─":"down"; print "└─ " s " " $2}'\'''
 
 # Utils
 run_cmds() {
@@ -82,6 +91,9 @@ check_uncommited_changes_in() {
 # SSH tmux auto-attach & chooser
 [[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
 
+# Directory-based background color for Ghostty
+[[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
+
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
@@ -91,11 +103,30 @@ zstyle ':completion:*' menu select # improve completion menu style
 [[ -d "$HOME/opt/zsh-completions" ]] && fpath=($HOME/opt/zsh-completions/src $fpath)
 
 # >>> mamba initialize >>>
-if [[ -x '/usr/local/opt/micromamba/bin/mamba' ]]; then
-	export MAMBA_ROOT_PREFIX="$HOME/mamba"
-	eval "$(/usr/local/bin/micromamba shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX")"
-	export PATH="$HOME/mamba/bin:$PATH"
-	#micromamba activate base
-fi
+#if [[ -x '/usr/local/opt/micromamba/bin/mamba' ]]; then
+#	export MAMBA_ROOT_PREFIX="$HOME/mamba"
+#	eval "$(/usr/local/bin/micromamba shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX")"
+#	export PATH="$HOME/mamba/bin:$PATH"
+#	#micromamba activate base
+#fi
 # <<< mamba initialize <<<
+
+# Rust
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+# Linux homebrew
+if [[ -d '/home/linuxbrew/' ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
+
+# Mise — interactive activation (precmd hook needs an interactive shell, so this
+# belongs in .zshrc, not .zprofile). Find mise wherever it lives: already on PATH,
+# Linux installer (~/.local/bin), or macOS Homebrew (/opt/homebrew, /usr/local).
+mise_bin="$(command -v mise 2>/dev/null)"
+for _candidate in "$HOME/.local/bin/mise" /opt/homebrew/bin/mise /usr/local/bin/mise; do
+	[[ -n "$mise_bin" ]] && break
+	[[ -x "$_candidate" ]] && mise_bin="$_candidate"
+done
+[[ -n "$mise_bin" ]] && eval "$("$mise_bin" activate zsh)"
+unset mise_bin _candidate
 

@@ -1,0 +1,25 @@
+@import url(chrome/tabs_on_bottom_v2.css);
+@import url(chrome/hide_tabs_with_one_tab.css);
+@import url(chrome/combined_favicon_and_tab_close_button.css);
+@import url(chrome/urlbar_centered_text.css);
+
+/* Fix for macOS: restore window controls (traffic lights) when using
+   tabs_on_bottom_v2.css + hide_tabs_with_one_tab.css.
+
+   On macOS, #toolbar-menubar has no autohide/collapsed attributes
+   because macOS uses a native menu bar. This causes the selector in
+   tabs_on_bottom_v2.css (which moves window controls to #nav-bar)
+   to never match, leaving them hidden. */
+
+  @media (-moz-platform: macos) {
+    @media not -moz-pref("sidebar.verticalTabs") {
+      :root[customtitlebar]:not([inFullscreen]) #nav-bar > .titlebar-buttonbox-container {
+        display: flex !important;
+      }
+      :root[customtitlebar]:not([inFullscreen]) #nav-bar > .titlebar-spacer[type="pre-tabs"] {
+        display: flex !important;
+        width: 6px !important;
+      }
+    }
+  }
+
