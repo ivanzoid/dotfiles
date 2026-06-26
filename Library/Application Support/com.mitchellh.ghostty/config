@@ -9,7 +9,7 @@
 
 theme = light:Alabaster, dark:Afterglow
 # background = light:#ffffff, dark:#000000
-background = #ffffff
+# background = #ffffff
 # theme = Broadcast
 cursor-color = #666666
 font-family = Fira Code Retina
@@ -31,5 +31,6 @@ macos-custom-icon = ~/icloud/Resources/ghostty-icons/ghostty-black.icns
 # 100MB
 scrollback-limit = 104857600
 
+# mouse-scroll-multiplier = precision:0.5,discrete:3
+scroll-to-bottom = keystroke
 keybind = cmd+shift+a=text:ssh ivan@ai.local\n
-
