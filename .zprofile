@@ -33,6 +33,9 @@ if (( $+commands[nodenv] )); then
     eval "$(nodenv init - zsh)"
 fi
 
+# Mise 
+[[ -d "$HOME/.local/share/mise/shims" ]] && path=("$HOME/.local/share/mise/shims" $path)
+
 [[ -f "$HOME/.jetbrains.vmoptions.sh" ]] && source "$HOME/.jetbrains.vmoptions.sh"
 
 # Java
