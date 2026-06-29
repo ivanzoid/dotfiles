@@ -34,3 +34,7 @@ scrollback-limit = 104857600
 # mouse-scroll-multiplier = precision:0.5,discrete:3
 scroll-to-bottom = keystroke
 keybind = cmd+shift+a=text:ssh ivan@ai.local\n
+
+# Recover terminal after a dropped SSH/tmux session leaves mouse-reporting
+# on (random chars on mouse move). Like `reset`; press Enter after.
+keybind = ctrl+shift+r=reset
