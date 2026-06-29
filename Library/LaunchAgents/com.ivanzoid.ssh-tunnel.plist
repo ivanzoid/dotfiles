@@ -12,6 +12,18 @@
     <string>-N</string>
     <string>-o</string>
     <string>StrictHostKeyChecking=accept-new</string>
+    <string>-o</string>
+    <string>ControlMaster=no</string>
+    <string>-o</string>
+    <string>ControlPath=none</string>
+    <string>-o</string>
+    <string>ExitOnForwardFailure=yes</string>
+    <string>-o</string>
+    <string>ServerAliveInterval=15</string>
+    <string>-o</string>
+    <string>ServerAliveCountMax=3</string>
+    <string>-o</string>
+    <string>TCPKeepAlive=no</string>
     <string>-D</string>
     <string>8000</string>
     <string>ivan@vpn.zoid.cc</string>
@@ -20,6 +32,9 @@
   <true/>
   <key>ThrottleInterval</key>
   <integer>10</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/ivan/Library/Logs/ssh-tunnel.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/ivan/Library/Logs/ssh-tunnel.err.log</string>
 </dict>
 </plist>
-
