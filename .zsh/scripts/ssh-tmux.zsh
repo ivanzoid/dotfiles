@@ -126,6 +126,10 @@ tmux-chooser() {
 
 # Auto-attach on SSH login (skip the chooser when all sessions are busy)
 _tmux_ssh_auto() {
+  # Bail if tmux is missing, otherwise the exec below kills the login shell
+  # and closes the SSH session (you'd be locked out of the host).
+  command -v tmux >/dev/null 2>&1 || return
+
   local host="${HOST%%.*}"
 
   # If all sessions are attached, start a new one directly

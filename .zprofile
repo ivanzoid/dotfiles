@@ -29,7 +29,13 @@ fi
 [[ -d "$HOME/flutter/bin" ]] && path=("$HOME/flutter/bin" $path)
 [[ -d "$HOME/.local/bin" ]] && path+=("$HOME/.local/bin")
 
-if (( $+commands[nodenv] )); then
+# Node version manager: prefer mise, fall back to nodenv.
+# mise lives in ~/.local/bin (added to path above), so $commands sees it here.
+if (( $+commands[mise] )); then
+    # Put mise shims on PATH so node/npm/npx work in non-interactive shells too
+    # (the activate hook in .zshrc only runs in interactive shells).
+    [[ -d "$HOME/.local/share/mise/shims" ]] && path=("$HOME/.local/share/mise/shims" $path)
+elif (( $+commands[nodenv] )); then
     eval "$(nodenv init - zsh)"
 fi
 
