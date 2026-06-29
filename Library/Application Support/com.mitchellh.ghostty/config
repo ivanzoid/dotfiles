@@ -9,11 +9,12 @@
 
 theme = light:Alabaster, dark:Afterglow
 # background = light:#ffffff, dark:#000000
-# background = #ffffff
+background = #ffffff
 # theme = Broadcast
+# macos-titlebar-style = tabs
 cursor-color = #666666
 font-family = Fira Code Retina
-font-size = 15.5
+font-size = 16.5
 adjust-cell-height = +16%
 adjust-cell-width = -4%
 cursor-style = bar
@@ -33,4 +34,4 @@ scrollback-limit = 104857600
 
 # mouse-scroll-multiplier = precision:0.5,discrete:3
 scroll-to-bottom = keystroke
-keybind = cmd+shift+a=text:ssh ivan@ai.local\n
+keybind = cmd+shift+a=text:ssh ivan@ai\n

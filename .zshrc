@@ -48,7 +48,8 @@ add-zsh-hook precmd _set_term_title
 
 
 # Shell
-export LANG='en_US.UTF-8'
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export CLICOLOR=1
 unset MAILCHECK
 
