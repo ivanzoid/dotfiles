@@ -8,8 +8,8 @@
 #
 
 theme = light:Alabaster, dark:Afterglow
-# background = light:#ffffff, dark:#000000
 # background = #ffffff
+# background = #000000
 # theme = Broadcast
 cursor-color = #666666
 font-family = Fira Code Retina
