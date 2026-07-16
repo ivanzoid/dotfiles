@@ -93,7 +93,7 @@ check_uncommited_changes_in() {
 [[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
 
 # Directory-based background color for Ghostty
-[[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
+#[[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
 
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
