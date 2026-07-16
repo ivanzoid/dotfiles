@@ -62,8 +62,7 @@ alias la='ls -lAh'	# all files, details format (table)
 alias g='git'
 compdef g=git
 
-# docker compose containers grouped by working dir, with up/down status
-alias dps='docker ps -a --format '\''{{.Label "com.docker.compose.project.working_dir"}}\t{{.Names}}\t{{.Status}}'\'' | sort | awk -F'\''\t'\'' '\''$1!=p{print $1;p=$1} {s=($3~/^Up/)?"up ─":"down"; print "└─ " s " " $2}'\'''
+# dps: docker compose containers as a tree (add -m for memory). Now ~/bin/dps.
 
 # Utils
 run_cmds() {
@@ -88,6 +87,17 @@ check_uncommited_changes_in() {
 [[ -d ~/bin ]] && check_uncommited_changes_in ~/bin
 [[ -d ~/private ]] && check_uncommited_changes_in ~/private
 [[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
+
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+    printf '\e[6 q'
+}
+
 
 # SSH tmux auto-attach & chooser
 [[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
@@ -130,4 +140,5 @@ for _candidate in "$HOME/.local/bin/mise" /opt/homebrew/bin/mise /usr/local/bin/
 done
 [[ -n "$mise_bin" ]] && eval "$("$mise_bin" activate zsh)"
 unset mise_bin _candidate
+
 

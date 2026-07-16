@@ -61,3 +61,7 @@
 	required = true
 [fetch]
 	prune = true
+[safe]
+	directory = /var/lib/hermes/.hermes
+	directory = /var/lib/hermes/.hermes/hermes-agent
+	directory = /var/lib/hermes/hermes-agent
