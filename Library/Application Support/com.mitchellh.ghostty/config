@@ -8,10 +8,8 @@
 #
 
 theme = light:Alabaster, dark:Afterglow
-# background = light:#ffffff, dark:#000000
-background = #ffffff
-# theme = Broadcast
-# macos-titlebar-style = tabs
+# background = #ffffff
+# background = #000000
 cursor-color = #666666
 font-family = Fira Code Retina
 font-size = 16.5
