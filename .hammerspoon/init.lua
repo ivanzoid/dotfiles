@@ -1,3 +1,9 @@
+-- Open the IPC message port so the `hs` command-line tool can talk to us
+-- (e.g. `hs -c "hs.reload()"`). Requires the `hs` binary to be installed once
+-- from the Console: hs.ipc.cliInstall().
+require("hs.ipc")
+
+
 -- Fire ~/bin/ssh-tint-flip on every macOS light/dark appearance change,
 -- event-driven (no polling). Pair with `SSH_TINT_POLL=0` in the ssh/mosh
 -- wrapper (~/bin/ssh) to rely purely on this hook.
