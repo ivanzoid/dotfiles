@@ -141,3 +141,4 @@ done
 [[ -n "$mise_bin" ]] && eval "$("$mise_bin" activate zsh)"
 unset mise_bin _candidate
 
+
