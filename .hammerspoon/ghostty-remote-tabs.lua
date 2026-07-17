@@ -73,10 +73,10 @@ local function connectCommand(transport, host, dir)
             -- session in that dir. "--" goes *before* the host so mosh's option
             -- parser doesn't eat the command's flags (e.g. zsh's "-lc").
             return string.format(
-                "mosh -- %s zsh -lc 'cd \"%s\" 2>/dev/null; exec tmux new-session'\n",
+                "mosh -- %s zsh -lc 'cd \"%s\" 2>/dev/null; exec tmux new-session'",
                 target, remoteDir)
         end
-        return string.format("mosh %s\n", target)
+        return string.format("mosh %s", target)
     else -- ssh
         if dir then
             local remoteDir = dir:gsub("^~", "$HOME") -- expanded by the remote $SHELL -c
@@ -84,14 +84,23 @@ local function connectCommand(transport, host, dir)
             -- explicit shell is needed; -t forces a PTY for tmux. tmux is on the
             -- default PATH, and running non-interactively skips the tmux chooser.
             return string.format(
-                "ssh -t %s 'cd \"%s\" 2>/dev/null; exec tmux new-session'\n",
+                "ssh -t %s 'cd \"%s\" 2>/dev/null; exec tmux new-session'",
                 target, remoteDir)
         end
-        return string.format("ssh %s\n", target)
+        return string.format("ssh %s", target)
     end
 end
 
--- Type the command once the new local tab reaches its shell prompt (its title
+-- Type the command, then press Return. keyStrokes types via a unicode payload on
+-- a keycode-0 event; a literal "\n" isn't read from that payload, so the terminal
+-- falls back to keycode 0 (an "a") instead of executing. So type the text, then
+-- send a real Return key event (small delay so all typed chars land first).
+local function typeAndRun(cmd)
+    hs.eventtap.keyStrokes(cmd)
+    hs.timer.doAfter(0.05, function() hs.eventtap.keyStroke({}, "return") end)
+end
+
+-- Run the command once the new local tab reaches its shell prompt (its title
 -- looks like "user@host:"). Never type while the focused tab still shows a remote
 -- "[host] …" title — that would start the connection inside the existing session.
 -- Give up after ~3s rather than risk that.
@@ -102,9 +111,9 @@ local function typeWhenReady(cmd, attempts)
     local isRemote = t:match("^%[") ~= nil
     local ready = (not isRemote) and t:match("^[%w._%-]+@[%w._%-]+:") ~= nil
     if ready then
-        hs.eventtap.keyStrokes(cmd)
+        typeAndRun(cmd)
     elseif attempts >= 30 then
-        if not isRemote then hs.eventtap.keyStrokes(cmd) end -- last resort, only if not still remote
+        if not isRemote then typeAndRun(cmd) end -- last resort, only if not still remote
     else
         hs.timer.doAfter(0.1, function() typeWhenReady(cmd, attempts + 1) end)
     end
