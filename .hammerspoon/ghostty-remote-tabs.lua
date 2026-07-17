@@ -8,9 +8,10 @@
 -- what actually reaches Ghostty is "[mosh] [host] cmd: path" (the prefix can also
 -- read "[mosh: 5s]" etc. when the link stalls). So we read the focused Ghostty
 -- window title, skip any leading status brackets to the real "[host]", pull out
--- host + dir, open a *native* new tab/window (the cmd+ctrl+t / cmd+ctrl+n binds in
--- the Ghostty config), wait for its local shell prompt, then type a connect
--- command that lands in that dir in a fresh tmux session.
+-- host + dir, open a *native* new tab/window (via Ghostty's "New Tab"/"New Window"
+-- menu item, falling back to the cmd+ctrl+t / cmd+ctrl+n binds), wait for its local
+-- shell prompt, then type a connect command that lands in that dir in a fresh tmux
+-- session.
 --
 -- The transport is mirrored from the current tab: the "[mosh]" prefix means the
 -- session is mosh (reconnect with mosh), its absence means ssh (reconnect with
@@ -109,19 +110,32 @@ local function typeWhenReady(cmd, attempts)
     end
 end
 
-local function ghosttyNewSurface(nativeKey)
+-- Open a native Ghostty tab/window. The menu item is primary: synthesising a
+-- keystroke is unreliable while the Cmd key that triggered us is still physically
+-- held, whereas selecting the menu item goes through Accessibility and is not
+-- affected. Fall back to the cmd+ctrl+* keybind only if the menu title isn't found.
+local function openNative(menuTitle, fallbackKey)
+    local app = hs.application.get(GHOSTTY_BID)
+    if app and app:selectMenuItem(menuTitle) then return end
+    hs.eventtap.keyStroke({ "cmd", "ctrl" }, fallbackKey)
+end
+
+local function ghosttyNewSurface(kind)
     local win = hs.window.focusedWindow()
     local transport, host, dir = parseRemoteTitle(win and win:title())
 
-    -- Open Ghostty's native new tab/window (cmd+ctrl+<key> in the config).
-    hs.eventtap.keyStroke({ "cmd", "ctrl" }, nativeKey)
+    if kind == "tab" then
+        openNative("New Tab", "t")
+    else
+        openNative("New Window", "n")
+    end
 
     if not host then return end -- local tab: leave it as a plain local shell
     typeWhenReady(connectCommand(transport, host, dir))
 end
 
-M.newTab = hs.hotkey.new({ "cmd" }, "t", function() ghosttyNewSurface("t") end)
-M.newWin = hs.hotkey.new({ "cmd" }, "n", function() ghosttyNewSurface("n") end)
+M.newTab = hs.hotkey.new({ "cmd" }, "t", function() ghosttyNewSurface("tab") end)
+M.newWin = hs.hotkey.new({ "cmd" }, "n", function() ghosttyNewSurface("window") end)
 
 -- Only capture Cmd+T / Cmd+N while Ghostty is frontmost, so every other app
 -- keeps its normal new-tab/new-window shortcuts.
