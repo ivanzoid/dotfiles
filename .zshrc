@@ -105,6 +105,9 @@ function y() {
 # Directory-based background color for Ghostty
 [[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
 
+# Dynamic completions parsed from a command's --help (fallback for unknown commands)
+[[ -r "$HOME/.zsh/scripts/help-complete.zsh" ]] && source "$HOME/.zsh/scripts/help-complete.zsh"
+
 # zsh-z
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
