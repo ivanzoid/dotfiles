@@ -19,8 +19,8 @@
 #       require  as auto, but skip the command entirely if no sandbox is available
 #       off      never sandbox
 #       "<cmd>"  custom wrapper prefix, e.g. "firejail --net=none --read-only=/"
-#     The sandbox blocks network and mounts the filesystem read-only (throwaway
-#     /tmp), so a speculative --help can't phone home or write anything.
+#     The sandbox blocks network and mounts the whole filesystem read-only, so a
+#     speculative --help can't phone home or write anything.
 #
 # Opt-in mode instead of global fallback: comment out the `compdef ... -default-`
 # line at the bottom and use `compdef _help_complete mytool othertool` per command.
@@ -56,7 +56,9 @@ typeset -g  __HC_SANDBOX_OK=1
     *) __HC_SANDBOX=( ${=mode} ); return ;;         # custom wrapper prefix
   esac
   if (( $+commands[bwrap] )); then                  # Linux: bubblewrap, unprivileged
-    __HC_SANDBOX=( bwrap --ro-bind / / --dev /dev --proc /proc --tmpfs /tmp
+    # Whole FS read-only (incl. /tmp, so /tmp commands can still be completed),
+    # no network, isolated PID/IPC. No writable mount: --help must not write.
+    __HC_SANDBOX=( bwrap --ro-bind / / --dev /dev --proc /proc
                    --unshare-net --unshare-pid --unshare-ipc --die-with-parent -- )
   elif (( $+commands[sandbox-exec] )); then         # macOS: deny network + all writes
     __HC_SANDBOX=( sandbox-exec -p '(version 1)(allow default)(deny network*)(deny file-write*)' )
