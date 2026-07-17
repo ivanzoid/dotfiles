@@ -96,9 +96,15 @@ __hc_generate() {                       # $1=bin -> prints "flag<TAB>desc" lines
 
 __hc_load() {                           # $1=array name to fill (value:desc); $2=command name
   local arrname=$1 cmd=$2
-  local bin=${commands[$cmd]}
-  [[ -n $bin ]] || return 1                                   # external commands only
-  (( ${ZSH_HELP_COMPLETE_DENY[(Ie)$cmd]} )) && return 1       # denylisted
+  local bin
+  if [[ $cmd == */* ]]; then                                  # path form: ./tool, /opt/x/tool
+    bin=${cmd:A}                                              # resolve relative to $PWD
+    [[ -f $bin && -x $bin ]] || return 1
+  else
+    bin=${commands[$cmd]}                                     # bare name: resolve via $PATH
+    [[ -n $bin ]] || return 1
+  fi
+  (( ${ZSH_HELP_COMPLETE_DENY[(Ie)$cmd]} || ${ZSH_HELP_COMPLETE_DENY[(Ie)${cmd:t}]} )) && return 1
 
   local dir=${ZSH_HELP_COMPLETE_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/zsh-help-complete}
   [[ -d $dir ]] || command mkdir -p -- "$dir" 2>/dev/null
