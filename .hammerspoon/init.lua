@@ -35,3 +35,8 @@ kbBacklightTap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, function(e
 end)
 
 kbBacklightTap:start()
+
+
+-- Ghostty Cmd+T / Cmd+N -> new tab/window that re-connects (ssh/mosh) into the
+-- same remote directory as the current tab. See ghostty-remote-tabs.lua.
+ghosttyRemoteTabs = require("ghostty-remote-tabs")

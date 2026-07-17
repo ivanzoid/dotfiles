@@ -35,3 +35,10 @@ scroll-to-bottom = keystroke
 
 keybind = cmd+shift+a=text:mosh ivan@ai.local\n
 keybind = cmd+shift+r=reset
+
+# Cmd+N / Cmd+T are intercepted by Hammerspoon (~/.hammerspoon/init.lua) so a new
+# window/tab re-connects (mosh) into the current tab's remote dir. Hammerspoon
+# triggers Ghostty's *native* new tab/window via these dedicated binds, avoiding
+# recursion with the Cmd+N / Cmd+T it captures.
+keybind = cmd+ctrl+t=new_tab
+keybind = cmd+ctrl+n=new_window
