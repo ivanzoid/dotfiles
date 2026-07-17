@@ -5,6 +5,8 @@
 # builtins, ...) still uses that. This only kicks in for commands zsh knows nothing
 # about. On first Tab it runs `<cmd> --help` (then -h, then help), scrapes the flags
 # with help-complete.awk, and caches the result; later Tabs are served from cache.
+# The --help run is sandboxed (no network + read-only filesystem) and hard-killed
+# after 2s, so a speculative run can't phone home, write files, or hang.
 #
 # Config (set before sourcing, or anytime for the runtime ones):
 #   ZSH_HELP_COMPLETE=0            disable entirely
@@ -12,6 +14,13 @@
 #   ZSH_HELP_COMPLETE_TTL=SECONDS  re-run --help after this if binary mtime unknown (default 7d)
 #   ZSH_HELP_COMPLETE_TIMEOUT=N    per-command hard-kill (SIGKILL) timeout secs (default 2)
 #   ZSH_HELP_COMPLETE_DENY=(a b)   never run --help for these command names
+#   ZSH_HELP_COMPLETE_SANDBOX=M    sandbox for the --help run (default auto):
+#       auto     use bwrap (Linux) / sandbox-exec (macOS) if present, else run unsandboxed
+#       require  as auto, but skip the command entirely if no sandbox is available
+#       off      never sandbox
+#       "<cmd>"  custom wrapper prefix, e.g. "firejail --net=none --read-only=/"
+#     The sandbox blocks network and mounts the filesystem read-only (throwaway
+#     /tmp), so a speculative --help can't phone home or write anything.
 #
 # Opt-in mode instead of global fallback: comment out the `compdef ... -default-`
 # line at the bottom and use `compdef _help_complete mytool othertool` per command.
@@ -35,17 +44,39 @@ if   (( $+commands[timeout]  )); then __HC_TIMEOUT=timeout
 elif (( $+commands[gtimeout] )); then __HC_TIMEOUT=gtimeout
 fi
 
-__hc_run() {                            # run "$@" with a hard SIGKILL timeout, stdin from /dev/null
+# Sandbox prefix detected once at source time (no network + read-only filesystem).
+# __HC_SANDBOX_OK stays 1 unless mode=require and nothing suitable was found.
+typeset -ga __HC_SANDBOX=()
+typeset -g  __HC_SANDBOX_OK=1
+() {
+  local mode=${ZSH_HELP_COMPLETE_SANDBOX:-auto}
+  case $mode in
+    off) return ;;
+    auto|require) ;;
+    *) __HC_SANDBOX=( ${=mode} ); return ;;         # custom wrapper prefix
+  esac
+  if (( $+commands[bwrap] )); then                  # Linux: bubblewrap, unprivileged
+    __HC_SANDBOX=( bwrap --ro-bind / / --dev /dev --proc /proc --tmpfs /tmp
+                   --unshare-net --unshare-pid --unshare-ipc --die-with-parent -- )
+  elif (( $+commands[sandbox-exec] )); then         # macOS: deny network + all writes
+    __HC_SANDBOX=( sandbox-exec -p '(version 1)(allow default)(deny network*)(deny file-write*)' )
+  elif [[ $mode == require ]]; then
+    __HC_SANDBOX_OK=0
+  fi
+}
+
+__hc_run() {                            # run "$@" sandboxed + hard SIGKILL timeout, stdin </dev/null
   local secs=${ZSH_HELP_COMPLETE_TIMEOUT:-2}
+  local -a inner=( $__HC_SANDBOX "$@" )  # sandbox prefix (maybe empty) wraps the command
   if [[ -n $__HC_TIMEOUT ]]; then
-    $__HC_TIMEOUT -s KILL "$secs" "$@" </dev/null 2>&1
+    $__HC_TIMEOUT -s KILL "$secs" "${inner[@]}" </dev/null 2>&1
   elif (( $+commands[perl] )); then     # portable: SIGKILL the whole process group at the deadline
     perl -e 'my $t=shift; my $p=fork(); if(!defined $p){exec @ARGV}
              if($p==0){setpgrp(0,0); exec @ARGV or exit 127}
              local $SIG{ALRM}=sub{kill "KILL",-$p}; alarm $t; waitpid($p,0); alarm 0' \
-         "$secs" "$@" </dev/null 2>&1
+         "$secs" "${inner[@]}" </dev/null 2>&1
   else                                  # last resort: pure-zsh watchdog (direct child only)
-    "$@" </dev/null 2>&1 &
+    "${inner[@]}" </dev/null 2>&1 &
     local cpid=$!
     ( sleep "$secs"; kill -KILL $cpid 2>/dev/null ) &!
     wait $cpid 2>/dev/null
@@ -53,6 +84,7 @@ __hc_run() {                            # run "$@" with a hard SIGKILL timeout, 
 }
 
 __hc_generate() {                       # $1=bin -> prints "flag<TAB>desc" lines, or fails
+  (( __HC_SANDBOX_OK )) || return 1     # mode=require but no sandbox available
   local bin=$1 out a
   for a in --help -h help; do
     out=$( __hc_run "$bin" $a | head -c 200000 )
