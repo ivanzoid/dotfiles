@@ -73,7 +73,7 @@ local function connectCommand(transport, host, dir)
             -- session in that dir. "--" goes *before* the host so mosh's option
             -- parser doesn't eat the command's flags (e.g. zsh's "-lc").
             return string.format(
-                "mosh -- %s zsh -lc 'cd \"%s\" 2>/dev/null; exec tmux new-session'",
+                "mosh -- %s zsh -lc 'cd \"%s\" 2>/dev/null; exec tmux new-session -s \"$($HOME/.tmux/session-name.sh)\"'",
                 target, remoteDir)
         end
         return string.format("mosh %s", target)
@@ -84,7 +84,7 @@ local function connectCommand(transport, host, dir)
             -- explicit shell is needed; -t forces a PTY for tmux. tmux is on the
             -- default PATH, and running non-interactively skips the tmux chooser.
             return string.format(
-                "ssh -t %s 'cd \"%s\" 2>/dev/null; exec tmux new-session'",
+                "ssh -t %s 'cd \"%s\" 2>/dev/null; exec tmux new-session -s \"$($HOME/.tmux/session-name.sh)\"'",
                 target, remoteDir)
         end
         return string.format("ssh %s", target)

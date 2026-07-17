@@ -9,7 +9,6 @@ tmux-chooser() {
   fi
 
   local inside_tmux="${TMUX:+1}"
-  local host="${HOST%%.*}"
 
   # Count existing sessions (0 if tmux server not running)
   local session_count="$(tmux list-sessions -F '#S' 2>/dev/null | wc -l | tr -d ' ')"
@@ -26,7 +25,7 @@ tmux-chooser() {
 
   # Detached sessions exist: show a chooser (requires fzf); otherwise attach to last
   if command -v fzf >/dev/null 2>&1; then
-    local new_session="${host}-$(date +%m%d-%H%M%S)"
+    local new_session="$(~/.tmux/session-name.sh)"
 
     _tmux_menu_lines() {
       local s meta activity natt attached short sdir
@@ -130,12 +129,10 @@ _tmux_ssh_auto() {
   # and closes the SSH session (you'd be locked out of the host).
   command -v tmux >/dev/null 2>&1 || return
 
-  local host="${HOST%%.*}"
-
   # If all sessions are attached, start a new one directly
   local detached_count="$(tmux list-sessions -F '#{session_attached}' 2>/dev/null | grep -c '^0$')"
   if [[ "$detached_count" == "0" ]]; then
-    exec tmux new -s "${host}-$(date +%m%d-%H%M%S)"
+    exec tmux new -s "$(~/.tmux/session-name.sh)"
   fi
 
   tmux-chooser
