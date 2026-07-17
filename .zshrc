@@ -112,6 +112,7 @@ function y() {
 source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
 zstyle ':completion:*' menu select # improve completion menu style
+zstyle ':completion:*' list-separator '—' # em dash instead of the default --
 
 # zsh-completions
 [[ -d "$HOME/opt/zsh-completions" ]] && fpath=($HOME/opt/zsh-completions/src $fpath)
