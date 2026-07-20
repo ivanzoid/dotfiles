@@ -18,3 +18,11 @@ set line-graphics = utf-8
 # "auto" by default). Force it always visible:
 set tree-view-file-name  = always
 set blame-view-file-name = always
+
+# --- diff colors ---
+# Added -> green background, removed -> red background (text keeps default fg).
+# The *2 variants are the second column shown in merge/combined diffs.
+color diff-add   default green
+color diff-add2  default green
+color diff-del   default red
+color diff-del2  default red
