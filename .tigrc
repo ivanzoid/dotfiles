@@ -30,3 +30,11 @@ color diff-add   color236 color194
 color diff-add2  color236 color194
 color diff-del   color236 color224
 color diff-del2  color236 color224
+
+# Intra-line word highlighting: needs Git's diff-highlight program. It isn't on
+# PATH by default, so ~/bin/diff-highlight wraps it (locates + runs it cross-OS).
+# Changed words get a brighter shade, like Claude Code's #C1FDB4.
+#   157 = #afffaf (brighter green)   217 = #ffafaf (brighter pink)
+set diff-highlight = true
+color diff-add-highlight color236 color157
+color diff-del-highlight color236 color217
