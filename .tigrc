@@ -60,9 +60,9 @@ color diff-stat      color66  default
 # redundant index / --- / +++ lines are muted grey so they recede (tig can't
 # drop them); each @@ hunk gets its own band. "--- "/"+++ " match only real
 # header lines, not content that happens to contain those markers.
-#   238 = #444444 (file band)   60 = #5f5f87 (hunk band)   244 = #808080 (muted)
+#   238 = #444444 (file band)   189 = #d7d7ff (pale lavender hunk)  244 = #808080 (muted)
 color diff-header    color231 color238 bold
 color diff-index     color244 default
 color "--- "         color244 default
 color "+++ "         color244 default
-color diff-chunk     color231 color60
+color diff-chunk     color236 color189
