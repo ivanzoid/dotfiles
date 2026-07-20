@@ -19,6 +19,13 @@ set line-graphics = utf-8
 set tree-view-file-name  = always
 set blame-view-file-name = always
 
+# --- selection (cursor line) ---
+# Blue highlight for the selected line (was bold white-on-green by default); a
+# deeper blue for the selection in a backgrounded/split view.
+#   33 = #0087ff (active)   24 = #005f87 (inactive / blurred)
+color cursor      color231 color33
+color cursor-blur color231 color24
+
 # --- diff colors ---
 # Pale pastel backgrounds like Claude Code's diff, with dark text.
 # tig 2.6.1 has no truecolor, so use fixed xterm-256 cube entries (16-255),
