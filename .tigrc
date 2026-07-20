@@ -20,9 +20,13 @@ set tree-view-file-name  = always
 set blame-view-file-name = always
 
 # --- diff colors ---
-# Added -> green background, removed -> red background (text keeps default fg).
+# Pale pastel backgrounds like Claude Code's diff, with dark text.
+# tig 2.6.1 has no truecolor, so use fixed xterm-256 cube entries (16-255),
+# which themes don't remap -> stays the same regardless of terminal theme:
+#   194 = #d7ffd7 (~Claude #e0fed9 added)   224 = #ffd7d7 (~Claude #f9d8d8 removed)
+#   236 = #303030 (Claude's dark diff text)
 # The *2 variants are the second column shown in merge/combined diffs.
-color diff-add   default color10
-color diff-add2  default color10
-color diff-del   default color9
-color diff-del2  default color9
+color diff-add   color236 color194
+color diff-add2  color236 color194
+color diff-del   color236 color224
+color diff-del2  color236 color224
