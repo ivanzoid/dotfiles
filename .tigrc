@@ -22,7 +22,7 @@ set blame-view-file-name = always
 # --- diff colors ---
 # Added -> green background, removed -> red background (text keeps default fg).
 # The *2 variants are the second column shown in merge/combined diffs.
-color diff-add   default green
-color diff-add2  default green
-color diff-del   default red
-color diff-del2  default red
+color diff-add   default color10
+color diff-add2  default color10
+color diff-del   default color9
+color diff-del2  default color9
