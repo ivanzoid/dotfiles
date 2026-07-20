@@ -1,0 +1,20 @@
+# --- main view defaults ---
+
+# Custom date format -> "26-07-06 15:04"
+set main-view-date        = custom
+set main-view-date-format = "%y-%m-%d %H:%M"
+
+# Short author -> initials (e.g. "IZ")
+set main-view-author      = abbreviated
+
+# Show the commit hash / ID column (":toggle id")
+set main-view-id          = yes
+
+# Revision graph on by default, drawn with box-drawing chars ("line-graphics")
+set main-view-commit-title-graph = yes
+set line-graphics = utf-8
+
+# file-name is not a main-view column; it lives in these views (shown on
+# "auto" by default). Force it always visible:
+set tree-view-file-name  = always
+set blame-view-file-name = always
