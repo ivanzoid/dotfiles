@@ -38,3 +38,31 @@ color diff-del2  color236 color224
 set diff-highlight = true
 color diff-add-highlight color236 color157
 color diff-del-highlight color236 color217
+
+# --- diff view layout: band the three regions so boundaries are scannable ---
+# Region 1 - commit header. Blue banner marks the top of each commit; the
+# metadata sits on a light-grey card (teal labels, grey dates) so it reads as
+# one block rather than diff content. Each line is matched by its literal
+# marker prefix ("commit ", "Author: ", ...), which tig treats as that line
+# type only - it will not paint content that happens to contain the text.
+#   24 = #005f87 (banner blue)   254 = #e4e4e4 (card)   66 = #5f8787 (teal)
+#   240 = #585858 (date grey)    231 = #ffffff
+color "commit "      color231 color24  bold
+color "Author: "     color66  color254
+color "AuthorDate: " color240 color254
+color "Commit: "     color66  color254
+color "CommitDate: " color240 color254
+
+# Region 2 - diffstat ("N files changed"): filenames bold teal, read as a list.
+color diff-stat      color66  default
+
+# Region 3 - per-file diff. A grey band marks where each file's diff starts; the
+# redundant index / --- / +++ lines are muted grey so they recede (tig can't
+# drop them); each @@ hunk gets its own band. "--- "/"+++ " match only real
+# header lines, not content that happens to contain those markers.
+#   238 = #444444 (file band)   60 = #5f5f87 (hunk band)   244 = #808080 (muted)
+color diff-header    color231 color238 bold
+color diff-index     color244 default
+color "--- "         color244 default
+color "+++ "         color244 default
+color diff-chunk     color231 color60
