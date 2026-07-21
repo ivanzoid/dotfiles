@@ -33,6 +33,12 @@ scrollback-limit = 104857600
 # mouse-scroll-multiplier = precision:0.5,discrete:3
 scroll-to-bottom = keystroke
 
+# Shift+drag does a local Ghostty selection (mouse-shift-capture defaults to
+# false, so Shift overrides tmux's mouse grab) and this copies it straight to
+# the macOS clipboard. Needed because mosh drops tmux's OSC 52 clipboard writes,
+# so mouse-select copy that works over ssh is dead over mosh.
+copy-on-select = clipboard
+
 keybind = cmd+shift+a=text:mosh ivan@ai.local\n
 keybind = cmd+shift+r=reset
 
