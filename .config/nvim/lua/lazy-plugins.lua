@@ -17,9 +17,9 @@ require('lazy').setup({
   -- ══════════════════════════════════════════════════════════════════════════
   -- ENABLED NOW — your minimal starting set
   -- ══════════════════════════════════════════════════════════════════════════
-  require 'kickstart.plugins.telescope', -- fuzzy finder (<leader>sf files, <leader>sg grep, …)
-  require 'kickstart.plugins.solarized', -- colorscheme (Solarized; honors background=light)
-  require 'kickstart.plugins.lualine', --  statusline (replaces kickstart's mini.statusline)
+  require 'kickstart.plugins.telescope', --   fuzzy finder (<leader>sf files, <leader>sg grep, …)
+  require 'kickstart.plugins.colorscheme', -- theme + auto light/dark (catppuccin; :ToggleBg)
+  require 'kickstart.plugins.lualine', --     statusline (replaces kickstart's mini.statusline)
   require 'kickstart.plugins.oil', --      file explorer; edit the filesystem as a buffer (press `-`)
 
   -- ══════════════════════════════════════════════════════════════════════════

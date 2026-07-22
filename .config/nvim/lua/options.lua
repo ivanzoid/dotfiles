@@ -80,9 +80,9 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = false
 vim.o.wrap = true -- your `set wrap` (soft-wrap long lines)
 
--- Solarized Light (your `set background=light`); the colorscheme itself is a
--- plugin — see lua/kickstart/plugins/solarized.lua.
-vim.o.background = 'light'
+-- NOTE: &background is NOT hardcoded here anymore. It's driven by the theme
+-- machinery in lua/kickstart/plugins/colorscheme.lua, which reads a shared state
+-- file (defaulting to light) and follows macOS light/dark. See that file + README.
 
 -- Command-line completion + split behaviour (your wildmode / switchbuf).
 vim.o.wildmode = 'list:longest'

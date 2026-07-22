@@ -18,7 +18,7 @@ symlinked into `~/.config/nvim` by `deploy.sh`.
 
 ## Enabled now
 
-`telescope` (fuzzy finder) · `solarized` (colorscheme) · `lualine` (statusline) · `oil` (file explorer).
+`telescope` (fuzzy finder) · `colorscheme` (theme + auto light/dark) · `lualine` (statusline) · `oil` (file explorer).
 
 Everything else in the kickstart kit is present but commented out in
 `lua/lazy-plugins.lua`. To turn one on: uncomment its line, restart nvim, done.
@@ -35,6 +35,39 @@ The big ones waiting there: **treesitter**, **lspconfig** (IDE features — run
 
 The plugin lockfile (`lazy-lock.json`) is written straight into this repo so
 pinned versions sync to your Macs — commit it after `:Lazy update`.
+
+## Themes & auto light/dark
+
+Config: `lua/kickstart/plugins/colorscheme.lua`. Active theme is **catppuccin**
+(latte = light, mocha = dark). Also installed for previewing: **tokyonight**
+(day/night/moon/storm) and **solarized8**.
+
+- **Change theme temporarily:** `:Telescope colorscheme` — scroll for a live
+  preview, `<CR>` to pick. (Not persisted.)
+- **Change the default:** edit `local ACTIVE = 'catppuccin'` at the top of
+  `colorscheme.lua` (add a `variants` entry if the theme isn't catppuccin/
+  tokyonight/solarized8), then restart.
+- **Manual light/dark:** `:Light`, `:Dark`, `:ToggleBg`, or `<leader>tt`. A toggle
+  propagates to all your other running nvims (shared state file, below).
+
+### How auto light/dark works (mosh-proof)
+
+nvim runs on this box; macOS appearance lives on the Mac. mosh can't carry the
+in-band theme protocol (OSC 11 / DEC 2031), so we ride your **existing** pipeline
+instead of the terminal:
+
+```
+macOS appearance flip
+  → Mac's ~/bin/ssh tint wrapper (or tmux client-*-theme hook, or prefix+N)
+  → sets tmux  @appearance = light|dark   (pushed to this box over ssh)
+  → ~/.tmux/refresh-appearance.sh  writes  $XDG_STATE_HOME/nvim/background
+  → every running nvim watches that file (libuv fs_event) and re-skins instantly
+```
+
+A newly launched nvim reads `@appearance` (or the file) at startup, so it opens in
+the right mode too. No Mac-side changes were needed — the only added piece is the
+`nvim/background` write inside `refresh-appearance.sh`. `prefix+N` now flips the
+tmux strip **and** every nvim together.
 
 ## From your old Vim — what changed
 

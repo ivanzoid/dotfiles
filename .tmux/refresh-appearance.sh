@@ -12,6 +12,14 @@
 
 here="$(cd "$(dirname "$0")" && pwd)"
 
+# Mirror the appearance into Neovim's state file. nvim runs on this box behind
+# mosh, which can't carry the theme protocol in-band, so every running nvim
+# watches this file (libuv fs_event) and re-skins when it changes. Unlike Claude
+# Code, nvim hot-reloads its colors cleanly, so it's safe to auto-flip.
+appearance="$(tmux show -gqv @appearance)"; [[ "$appearance" == dark ]] || appearance=light
+nvim_state="${XDG_STATE_HOME:-$HOME/.local/state}/nvim/background"
+mkdir -p "$(dirname "$nvim_state")" 2>/dev/null && printf '%s\n' "$appearance" > "$nvim_state"
+
 tmux list-sessions -F '#{session_name}' 2>/dev/null | while read -r session; do
     path=$(tmux display-message -p -t "$session" '#{pane_current_path}' 2>/dev/null)
     [[ -n "$path" ]] || continue
