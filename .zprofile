@@ -1,5 +1,26 @@
 # ~/.zprofile
 
+# Ghostty Cmd+T / Cmd+N remote reconnect. Hammerspoon (ghostty-remote-tabs.lua)
+# stages a request file just before opening a native new tab/window; if it is
+# fresh (<3s), hand off to ~/bin/ghostty-reconnect *now* — before any heavy init
+# below runs — so a new Ghostty surface connects straight out to the same remote
+# dir without first paying for a full local login shell. The freshness gate is
+# the real guard (only the surface Hammerspoon just opened finds the file fresh);
+# the top-level interactive + no-TMUX + no-SSH_TTY checks keep the remote from
+# ever tripping it (the file only exists on the Mac anyway). Deliberately does
+# NOT test TERM_PROGRAM: Ghostty may set it after .zprofile runs, which would
+# silently disable this.
+if [[ -o interactive && -z "$TMUX" && -z "$SSH_TTY" ]]; then
+	_grf="$HOME/.cache/ghostty-reconnect"
+	if [[ -r "$_grf" ]]; then
+		read -r _grts < "$_grf"
+		if [[ "$_grts" == <-> && $(( $(date +%s) - _grts )) -le 3 ]]; then
+			exec "$HOME/bin/ghostty-reconnect" "$_grf"
+		fi
+	fi
+	unset _grf _grts
+fi
+
 # Go
 if [[ -d $HOME/go ]]; then 
 	export GOPATH="$HOME/go"
