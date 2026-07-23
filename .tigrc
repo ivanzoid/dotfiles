@@ -1,11 +1,18 @@
 # --- main view defaults ---
 
+# Show commits from all branches (and remotes/tags), not just the current
+# branch, and interleave them strictly by commit date rather than grouping
+# each branch's history together. Appended to the underlying `git log`.
+#   --all        walk every ref
+#   --date-order sort by commit timestamp (parents still stay below children)
+set main-options = --all --date-order
+
 # Custom date format -> "26-07-06 15:04"
 set main-view-date        = custom
 set main-view-date-format = "%y-%m-%d %H:%M"
 
 # Short author -> initials (e.g. "IZ")
-set main-view-author      = abbreviated
+#set main-view-author      = abbreviated
 
 # Show the commit hash / ID column (":toggle id")
 set main-view-id          = yes
