@@ -1,0 +1,82 @@
+# --- main view defaults ---
+
+# Show commits from all branches (and remotes/tags), not just the current
+# branch, and interleave them strictly by commit date rather than grouping
+# each branch's history together. Appended to the underlying `git log`.
+#   --all        walk every ref
+#   --date-order sort by commit timestamp (parents still stay below children)
+set main-options = --all --date-order
+
+# Custom date format -> "26-07-06 15:04"
+set main-view-date        = custom
+set main-view-date-format = "%y-%m-%d %H:%M"
+
+# Short author -> initials (e.g. "IZ")
+#set main-view-author      = abbreviated
+
+# Show the commit hash / ID column (":toggle id")
+set main-view-id          = yes
+
+# Revision graph on by default, drawn with box-drawing chars ("line-graphics")
+set main-view-commit-title-graph = yes
+set line-graphics = utf-8
+
+# file-name is not a main-view column; it lives in these views (shown on
+# "auto" by default). Force it always visible:
+set tree-view-file-name  = always
+set blame-view-file-name = always
+
+# --- selection (cursor line) ---
+# Blue highlight for the selected line (was bold white-on-green by default); a
+# deeper blue for the selection in a backgrounded/split view.
+#   33 = #0087ff (active)   24 = #005f87 (inactive / blurred)
+color cursor      color231 color33
+color cursor-blur color231 color24
+
+# --- diff colors ---
+# Pale pastel backgrounds like Claude Code's diff, with dark text.
+# tig 2.6.1 has no truecolor, so use fixed xterm-256 cube entries (16-255),
+# which themes don't remap -> stays the same regardless of terminal theme:
+#   194 = #d7ffd7 (~Claude #e0fed9 added)   224 = #ffd7d7 (~Claude #f9d8d8 removed)
+#   236 = #303030 (Claude's dark diff text)
+# The *2 variants are the second column shown in merge/combined diffs.
+color diff-add   color236 color194
+color diff-add2  color236 color194
+color diff-del   color236 color224
+color diff-del2  color236 color224
+
+# Intra-line word highlighting: needs Git's diff-highlight program. It isn't on
+# PATH by default, so ~/bin/diff-highlight wraps it (locates + runs it cross-OS).
+# Changed words get a brighter shade, like Claude Code's #C1FDB4.
+#   157 = #afffaf (brighter green)   217 = #ffafaf (brighter pink)
+set diff-highlight = true
+color diff-add-highlight color236 color157
+color diff-del-highlight color236 color217
+
+# --- diff view layout: band the three regions so boundaries are scannable ---
+# Region 1 - commit header. Blue banner marks the top of each commit; the
+# metadata sits on a light-grey card (teal labels, grey dates) so it reads as
+# one block rather than diff content. Each line is matched by its literal
+# marker prefix ("commit ", "Author: ", ...), which tig treats as that line
+# type only - it will not paint content that happens to contain the text.
+#   24 = #005f87 (banner blue)   254 = #e4e4e4 (card)   66 = #5f8787 (teal)
+#   240 = #585858 (date grey)    231 = #ffffff
+color "commit "      color231 color24  bold
+color "Author: "     color66  color254
+color "AuthorDate: " color240 color254
+color "Commit: "     color66  color254
+color "CommitDate: " color240 color254
+
+# Region 2 - diffstat ("N files changed"): filenames bold teal, read as a list.
+color diff-stat      color66  default
+
+# Region 3 - per-file diff. A grey band marks where each file's diff starts; the
+# redundant index / --- / +++ lines are muted grey so they recede (tig can't
+# drop them); each @@ hunk gets its own band. "--- "/"+++ " match only real
+# header lines, not content that happens to contain those markers.
+#   238 = #444444 (file band)   189 = #d7d7ff (pale lavender hunk)  244 = #808080 (muted)
+color diff-header    color231 color238 bold
+color diff-index     color244 default
+color "--- "         color244 default
+color "+++ "         color244 default
+color diff-chunk     color236 color189

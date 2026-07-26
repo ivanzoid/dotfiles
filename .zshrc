@@ -76,17 +76,20 @@ run_cmds() {
 
 check_uncommited_changes_in() {
     local dir=$1
-    pushd "$dir" >/dev/null 2>&1
-    if ! git diff --quiet HEAD; then
+    if ! git -C "$dir" diff --quiet HEAD 2>/dev/null; then
         echo "Uncommitted changes in $dir:"
-        git status -s
+        git -C "$dir" status -s 2>/dev/null
     fi
-    popd >/dev/null 2>&1
 }
 
-[[ -d ~/bin ]] && check_uncommited_changes_in ~/bin
-[[ -d ~/private ]] && check_uncommited_changes_in ~/private
-[[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
+# Run the checks in the background so the 3x `git status` (~0.1-0.25s on a cold
+# cache) stays off shell startup — it runs on every new tmux session/pane. Output
+# is rare (only when a repo is dirty) and lands a moment after the prompt.
+{
+    [[ -d ~/bin ]]      && check_uncommited_changes_in ~/bin
+    [[ -d ~/private ]]  && check_uncommited_changes_in ~/private
+    [[ -d ~/dotfiles ]] && check_uncommited_changes_in ~/dotfiles
+} &!
 
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -103,7 +106,7 @@ function y() {
 [[ -r "$HOME/.zsh/scripts/ssh-tmux.zsh" ]] && source "$HOME/.zsh/scripts/ssh-tmux.zsh"
 
 # Directory-based background color for Ghostty
-#[[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
+[[ -r "$HOME/.zsh/scripts/dir-background.zsh" ]] && source "$HOME/.zsh/scripts/dir-background.zsh"
 
 # Dynamic completions parsed from a command's --help (fallback for unknown commands)
 [[ -r "$HOME/.zsh/scripts/help-complete.zsh" ]] && source "$HOME/.zsh/scripts/help-complete.zsh"
