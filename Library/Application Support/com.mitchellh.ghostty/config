@@ -39,7 +39,7 @@ scroll-to-bottom = keystroke
 # so mouse-select copy that works over ssh is dead over mosh.
 copy-on-select = clipboard
 
-keybind = cmd+shift+a=text:mosh ivan@ai.local\n
+keybind = cmd+shift+a=text:mosh ivan@ai\n
 keybind = cmd+shift+r=reset
 
 # Cmd+N / Cmd+T are intercepted by Hammerspoon (~/.hammerspoon/init.lua) so a new
