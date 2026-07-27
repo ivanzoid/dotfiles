@@ -40,14 +40,14 @@ index=$(( hash % ${#LIGHT_COLORS[@]} ))
 appearance=$(tmux show-options -gqv @appearance 2>/dev/null)
 if [[ "$appearance" == dark ]]; then
     bg="${DARK_COLORS[$index]}"
-    fg="colour250"   # pale grey — legible on the dark hue backgrounds
+    fg="colour183"   # light violet — legible on the dark hue backgrounds
 else
     bg="${LIGHT_COLORS[$index]}"
-    fg="colour59"    # dark grey — legible on the pale pastels
+    fg="colour91"    # dark magenta/purple — high contrast on the pale pastels
 fi
 
 if [[ -n "$target" ]]; then
-    tmux set-option -t "$target" status-style "bg=$bg,fg=$fg"
+    tmux set-option -t "$target" status-style "bg=$bg,fg=$fg,nobold"
 else
-    tmux set-option status-style "bg=$bg,fg=$fg"
+    tmux set-option status-style "bg=$bg,fg=$fg,nobold"
 fi
