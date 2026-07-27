@@ -1,0 +1,35 @@
+# Afterglow with a gray cursor (upstream is #d0d0d0, same as the foreground).
+#
+# Exists only so the cursor can differ between light and dark mode: a top-level
+# `cursor-color` in the config overrides whatever the theme sets, in BOTH modes
+# (loadTheme applies the config on top of the theme — Config.zig), and `theme` is
+# the only key taking light:/dark: prefixes. So the per-mode cursor has to live
+# in the two theme files. Light side: Alabaster-White.
+#
+# #999999 on this #212121 background lands at roughly the same contrast as the
+# light side's #666666 on white, so the cursor reads equally dim in both modes.
+#
+# Everything below is verbatim Afterglow except `cursor-color`.
+
+palette = 0=#151515
+palette = 1=#ac4142
+palette = 2=#7e8e50
+palette = 3=#e5b567
+palette = 4=#6c99bb
+palette = 5=#9f4e85
+palette = 6=#7dd6cf
+palette = 7=#d0d0d0
+palette = 8=#505050
+palette = 9=#ac4142
+palette = 10=#7e8e50
+palette = 11=#e5b567
+palette = 12=#6c99bb
+palette = 13=#9f4e85
+palette = 14=#7dd6cf
+palette = 15=#f5f5f5
+background = #212121
+foreground = #d0d0d0
+cursor-color = #999999
+cursor-text = #151515
+selection-background = #303030
+selection-foreground = #d0d0d0

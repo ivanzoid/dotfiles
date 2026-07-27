@@ -7,14 +7,10 @@
 # https://ghostty.org/docs/config/reference
 #
 
-# Alabaster-White is a custom theme (Alabaster + pure white bg), and custom
-# themes only load from ~/.config/ghostty/themes — see .config/ghostty/themes
-# in this repo. A plain `background =` here can't do it: it would apply to both
-# modes, since `theme` is the only key that takes light:/dark: prefixes.
-theme = light:Alabaster-White, dark:Afterglow
-# background = #ffffff
-# background = #000000
-cursor-color = #666666
+# Custom themes, from ~/.config/ghostty/themes (see .config/ghostty in this repo).
+# Per-mode colors have to live in those files — a `background`/`cursor-color` here
+# is applied on top of the theme in both modes, defeating the light/dark split.
+theme = light:Alabaster-White, dark:Afterglow-Gray-Cursor
 font-family = Fira Code Retina
 font-size = 16.5
 adjust-cell-height = +16%

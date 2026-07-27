@@ -4,7 +4,10 @@
 # ~/.config/ghostty/themes — NOT the macOS ~/Library/Application Support dir
 # that holds the config itself. Referenced from there as light:Alabaster-White.
 #
-# Everything below is verbatim Alabaster except `background`.
+# `cursor-color` is here rather than in the config because a top-level one would
+# apply to dark mode too — see Afterglow-Gray-Cursor for the dark counterpart.
+#
+# Everything below is verbatim Alabaster except `background` and `cursor-color`.
 
 palette = 0=#000000
 palette = 1=#aa3731
@@ -24,7 +27,7 @@ palette = 14=#00aacb
 palette = 15=#f7f7f7
 background = #ffffff
 foreground = #000000
-cursor-color = #007acc
+cursor-color = #666666
 cursor-text = #bfdbfe
 selection-background = #bfdbfe
 selection-foreground = #000000
