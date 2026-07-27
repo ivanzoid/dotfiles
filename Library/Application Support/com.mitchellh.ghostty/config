@@ -43,7 +43,10 @@ scroll-to-bottom = keystroke
 # so mouse-select copy that works over ssh is dead over mosh.
 copy-on-select = clipboard
 
-keybind = cmd+shift+a=text:mosh ivan@ai\n
+# `&& exit` closes the tab on a single Ctrl+D: mosh exits 0 when the remote
+# session ends, so the local shell that launched it exits too. A failed connect
+# returns nonzero, short-circuits the `exit`, and leaves the error on screen.
+keybind = cmd+shift+a=text:mosh ivan@ai && exit\n
 keybind = cmd+shift+r=reset
 
 # Cmd+N / Cmd+T are intercepted by Hammerspoon (~/.hammerspoon/init.lua) so a new
