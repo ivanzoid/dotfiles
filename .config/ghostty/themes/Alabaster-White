@@ -1,0 +1,30 @@
+# Alabaster with a pure white background (upstream is #f7f7f7).
+#
+# Custom themes are only searched for in $XDG_CONFIG_HOME/ghostty/themes, i.e.
+# ~/.config/ghostty/themes — NOT the macOS ~/Library/Application Support dir
+# that holds the config itself. Referenced from there as light:Alabaster-White.
+#
+# Everything below is verbatim Alabaster except `background`.
+
+palette = 0=#000000
+palette = 1=#aa3731
+palette = 2=#448c27
+palette = 3=#cb9000
+palette = 4=#325cc0
+palette = 5=#7a3e9d
+palette = 6=#0083b2
+palette = 7=#b7b7b7
+palette = 8=#777777
+palette = 9=#f05050
+palette = 10=#60cb00
+palette = 11=#f2af50
+palette = 12=#007acc
+palette = 13=#e64ce6
+palette = 14=#00aacb
+palette = 15=#f7f7f7
+background = #ffffff
+foreground = #000000
+cursor-color = #007acc
+cursor-text = #bfdbfe
+selection-background = #bfdbfe
+selection-foreground = #000000

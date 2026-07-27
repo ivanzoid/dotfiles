@@ -7,7 +7,11 @@
 # https://ghostty.org/docs/config/reference
 #
 
-theme = light:Alabaster, dark:Afterglow
+# Alabaster-White is a custom theme (Alabaster + pure white bg), and custom
+# themes only load from ~/.config/ghostty/themes — see .config/ghostty/themes
+# in this repo. A plain `background =` here can't do it: it would apply to both
+# modes, since `theme` is the only key that takes light:/dark: prefixes.
+theme = light:Alabaster-White, dark:Afterglow
 # background = #ffffff
 # background = #000000
 cursor-color = #666666
