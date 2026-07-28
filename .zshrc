@@ -53,6 +53,26 @@ export LC_ALL=en_US.UTF-8
 export CLICOLOR=1
 unset MAILCHECK
 
+# ls colors. Without LS_COLORS, ls falls back to compiled-in defaults that have
+# no `or` (orphan) entry, so a dangling symlink is the same cyan as a live one.
+# Loading the dircolors database fixes that; `or`/`mi` are then overridden to be
+# louder than the stock 40;31;01, whose hardcoded black background reads badly
+# on a light theme. Cost: with `or` set, ls stat()s every link target — only
+# noticeable on slow mounts (~/mnt/ha over sshfs).
+if (( $+commands[dircolors] )); then
+  if [[ -r ~/.dircolors ]]; then
+    eval "$(dircolors -b ~/.dircolors)"
+  else
+    eval "$(dircolors -b)"
+  fi
+  # replace, don't append: a duplicate key is last-wins for ls but first-wins
+  # for zsh's list-colors, which would make the two disagree.
+  _lsc=(${${(s.:.)LS_COLORS}:#(or|mi)=*})
+  _lsc+=('or=01;97;41' 'mi=01;97;41')     # broken symlink: bold white on red
+  export LS_COLORS="${(j.:.)_lsc}"
+  unset _lsc
+fi
+
 # Aliases
 alias ls='ls -Ah --color=auto'
 alias ll='/bin/ls -lh --color=auto'	# hide hidden files, details format (table)
@@ -116,6 +136,8 @@ source ~/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 ZSH_CASE=smart                     # lower case patterns are treated as case insensitive
 zstyle ':completion:*' menu select # improve completion menu style
 zstyle ':completion:*' list-separator '—' # em dash instead of the default --
+# color filenames in completion menus with the same palette as ls (incl. broken symlinks)
+[[ -n "$LS_COLORS" ]] && zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # zsh-completions
 [[ -d "$HOME/opt/zsh-completions" ]] && fpath=($HOME/opt/zsh-completions/src $fpath)
