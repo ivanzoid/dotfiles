@@ -42,14 +42,6 @@
 	smudge = git-media-smudge %f
 [credential]
 	helper = osxkeychain
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[mergetool "mergepbx"]
-    cmd = /Users/ivan/bin/mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
 [gui]
 	fontdiff = -family \"Fira Code\" -size 16 -weight normal -slant roman -underline 0 -overstrike 0
 	fontui = -family \"SF UI Display\" -size 15 -weight normal -slant roman -underline 0 -overstrike 0
