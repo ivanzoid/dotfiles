@@ -18,10 +18,17 @@
 # %m => shortname host
 # %(?..) => prompt conditional - %(condition.true.false)
 
+# Skip git probes on slow network mounts (NFS/sshfs under ~/mnt): `git status`
+# walks the working tree over the network and can take many seconds, blocking
+# the prompt. The branch name (via vcs_info) is cheap and still shown; only the
+# porcelain-status scan below is skipped there.
+_prompt_on_slow_fs() { [[ $PWD/ == $HOME/mnt/* ]] }
+
 # Display git status
 # TODO to refactor with switch / using someting else than grep
 # Might be faster using ripgrep too
 git_prompt_status() {
+  _prompt_on_slow_fs && return
   local INDEX STATUS
 
   INDEX=$(command git status --porcelain -b 2> /dev/null)

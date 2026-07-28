@@ -1,0 +1,9 @@
+# Applied ONLY to git repos whose .git dir lives under ~/mnt (NFS/sshfs),
+# via the [includeIf "gitdir:~/mnt/"] rule in .gitconfig.
+#
+# fsmonitor uses OS-native change notification (FSEvents on macOS, inotify on
+# Linux), which does NOT work on network mounts — leaving it on there can make
+# `git status` silently MISS changes. So force it off for network repos while
+# local repos keep whatever they use.
+[core]
+	fsmonitor = false

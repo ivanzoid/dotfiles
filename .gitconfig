@@ -33,6 +33,7 @@
 	quotepath = false
 	excludesfile = /Users/ivan/.gitignore_global
 	autocrlf = false
+	untrackedCache = true
 [push]
 	default = current
 	autoSetupRemote = true
@@ -65,3 +66,7 @@
 	directory = /var/lib/hermes/.hermes
 	directory = /var/lib/hermes/.hermes/hermes-agent
 	directory = /var/lib/hermes/hermes-agent
+# NFS/sshfs repos under ~/mnt get network-safe overrides (see .gitconfig-nfs).
+# Placed last so it wins over the settings above.
+[includeIf "gitdir:~/mnt/"]
+	path = ~/dotfiles/.gitconfig-nfs
