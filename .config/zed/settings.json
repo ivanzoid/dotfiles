@@ -1,0 +1,57 @@
+{
+  "gutter": {
+    "line_numbers": false
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "current_line_highlight": "none",
+  "cursor_blink": false,
+  "agent_buffer_font_size": 17.0,
+  "ui_font_size": 17.0,
+  "ui_font_family": ".SystemUIFont",
+  "buffer_line_height": "comfortable",
+  "buffer_font_weight": 400.0,
+  "buffer_font_size": 18.0,
+  "buffer_font_family": "FiraCode Nerd Font",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "diff_view_style": "unified",
+  "git_panel": {
+    "dock": "left"
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "ssh_connections": [
+    {
+      "host": "ai",
+      "username": "ivan",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/w/be3"
+          ]
+        }
+      ]
+    }
+  ],
+  "disable_ai": true,
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_user_picture": false,
+    "show_sign_in": false,
+  },
+  "theme_overrides": {
+      "One Light": {
+        "editor.background": "#ffffff",
+        "editor.gutter.background": "#ffffff",
+      }
+    }
+}
