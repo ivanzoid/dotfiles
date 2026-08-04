@@ -1,0 +1,7 @@
+# Only the keys here override yazi's built-in preset; everything else
+# keeps its default. The hovered ("selection") row is styled per-pane:
+#   current = focused (middle) pane, parent = left pane, preview = right pane.
+[indicator]
+current = { fg = "#11111b", bg = "#89b4fa" }   # in focus  -> blue bar
+parent  = { fg = "#11111b", bg = "#c6c6c6" }   # out of focus -> neutral gray bar (no blue tint)
+# preview = { underline = true }               # left at default; uncomment to change

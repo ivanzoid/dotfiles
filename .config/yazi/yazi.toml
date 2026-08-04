@@ -1,0 +1,6 @@
+# Only these keys override yazi's built-in preset; everything else keeps its default.
+[mgr]
+# parent : current : preview  ->  1/4 : 1/4 : 1/2
+ratio = [1, 1, 2]
+# show dotfiles by default
+show_hidden = true
