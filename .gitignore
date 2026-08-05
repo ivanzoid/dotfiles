@@ -8,3 +8,4 @@ Sublime Text 3/Cache
 **/*.cache
 **/log.txt
 .vim/.netrwhist
+.config/zed/prompts
