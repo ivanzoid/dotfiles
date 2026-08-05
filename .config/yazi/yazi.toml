@@ -4,3 +4,7 @@
 ratio = [1, 1, 2]
 # show dotfiles by default
 show_hidden = true
+
+[preview]
+# word-wrap long lines in text previews instead of truncating
+wrap = "yes"
