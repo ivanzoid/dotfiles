@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  HTTP proxy on 127.0.0.1:4281, tunnelled out through the SOCKS5 proxy that
+  com.ivanzoid.ssh-tunnel puts on 127.0.0.1:8000 (ssh -D to vpn.zoid.cc).
+  For apps that only speak HTTP CONNECT and can't use SOCKS.
+
+  Requires: brew install gost
+  Apple Silicon: change the path below to /opt/homebrew/bin/gost
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ivanzoid.http-proxy</string>
+  <key>OnDemand</key>
+  <false/>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/gost</string>
+    <string>-L</string>
+    <string>http://127.0.0.1:4281</string>
+    <string>-F</string>
+    <string>socks5://127.0.0.1:8000</string>
+  </array>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/ivan/Library/Logs/http-proxy.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/ivan/Library/Logs/http-proxy.err.log</string>
+</dict>
+</plist>
