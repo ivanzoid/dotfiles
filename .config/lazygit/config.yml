@@ -1,0 +1,19 @@
+gui:
+  # files can't be hidden; worktrees + stash as tabs beside it, drop submodules
+  sidePanels:
+    - [status]
+    - [worktrees, files, stash]
+    - [branches, remotes, tags]
+    - [commits, reflog]
+  # unfocused panels shrink to their content, freeing height for the rest
+  shrinkSidePanelsToContent: true
+  # focused panel gets more height
+  expandFocusedSidePanel: true
+  expandedSidePanelWeight: 3
+git:
+  diffRenderers:
+    # cycle between these with `|` in lazygit
+    - colorArg: always
+      command: delta --light --paging=never
+    - colorArg: always
+      command: delta --light --paging=never --side-by-side --line-numbers

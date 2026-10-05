@@ -35,6 +35,7 @@
 	excludesFile = /home/ivan/.gitignore_global
 	autocrlf = false
 	untrackedCache = true
+	pager = command -v delta >/dev/null 2>&1 && delta || less
 [push]
 	default = current
 	autoSetupRemote = true
@@ -63,3 +64,9 @@
 # Placed last so it wins over the settings above.
 [includeIf "gitdir:~/mnt/"]
 	path = ~/dotfiles/.gitconfig-nfs
+[interactive]
+	diffFilter = command -v delta >/dev/null 2>&1 && delta --color-only || cat
+[delta]
+	light = true
+	navigate = true
+	line-numbers = true
