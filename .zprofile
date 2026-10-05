@@ -34,8 +34,28 @@ else
 fi
 
 
+# Keep PATH duplicate-free: the first occurrence of a dir wins, later copies
+# are dropped. Lets the prepends below override whatever order an earlier
+# player (macOS path_helper, /etc/paths.d) already put the same dir in.
+typeset -U path PATH
+
 [[ -d /usr/local/bin ]] && path=("/usr/local/bin" $path)
 [[ -d /usr/local/sbin ]] && path=("/usr/local/sbin" $path)
+
+# Homebrew (macOS). /etc/zprofile has already run path_helper by the time this
+# file is sourced, which hoists /usr/bin & friends to the front of PATH; put
+# brew's prefix back ahead of them so its programs shadow the system ones
+# (otherwise `brew doctor` warns about it). shellenv sets HOMEBREW_*, MANPATH
+# and INFOPATH, but it won't re-order a bin dir it already finds on PATH, so
+# the ordering is done here explicitly.
+for _brew in /opt/homebrew /usr/local; do
+	if [[ -x "$_brew/bin/brew" ]]; then
+		eval "$("$_brew/bin/brew" shellenv zsh)"
+		path=("$_brew/bin" "$_brew/sbin" $path)
+		break
+	fi
+done
+unset _brew
 
 [[ -d ~/bin ]] && path=("$HOME/bin" $path)
 [[ -d ~/private/bin ]] && path=("$HOME/private/bin" $path)
@@ -46,8 +66,9 @@ fi
 
 [[ -d "$HOME/.fastlane/bin" ]] && path+=("$HOME/.fastlane/bin")
 [[ -d "$HOME/.spicetify" ]] && path+=("$HOME/.spicetify")
-[[ -d "$HOME/fvm/default/bin" ]] && path+=("$HOME/fvm/default/bin")
 [[ -d "$HOME/flutter/bin" ]] && path=("$HOME/flutter/bin" $path)
+# FVM default SDK takes precedence over the plain ~/flutter checkout
+[[ -d "$HOME/fvm/default/bin" ]] && path=("$HOME/fvm/default/bin" $path)
 [[ -d "$HOME/.local/bin" ]] && path+=("$HOME/.local/bin")
 
 # Node version manager: prefer mise, fall back to nodenv.

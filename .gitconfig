@@ -32,7 +32,7 @@
 	interactive = auto
 [core]
 	quotepath = false
-	excludesfile = /Users/ivan/.gitignore_global
+	excludesFile = /home/ivan/.gitignore_global
 	autocrlf = false
 	untrackedCache = true
 [push]
