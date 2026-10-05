@@ -80,6 +80,7 @@ alias l1='/bin/ls -1h --color=auto'	# hide hidden files, short format (single co
 alias l='/bin/ls -h --color=auto'		# all files, short format (multi-columns)
 alias la='ls -lAh'	# all files, details format (table)
 alias g='git'
+alias lg='lazygit'
 compdef g=git
 
 # dps: docker compose containers as a tree (add -m for memory). Now ~/bin/dps.

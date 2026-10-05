@@ -8,7 +8,7 @@ EXCLUDE_LIST=(".git" ".gitignore" "deploy.sh" ".config/hub" "firefox")
 # parents of dirs an app writes into at runtime (e.g. ~/.config/<tool>/), so
 # those runtime files don't land in this repo. Everything below the child is
 # still symlinked as usual. Paths are relative to the repo root.
-MERGE_PARENTS=(".config" "Library/LaunchAgents" ".hammerspoon")
+MERGE_PARENTS=(".config" "Library/LaunchAgents" "Library/Application Support/lazygit" ".hammerspoon")
 DRY_RUN=0
 
 is_osx()
