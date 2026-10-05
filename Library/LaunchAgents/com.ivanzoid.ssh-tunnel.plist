@@ -25,7 +25,7 @@
     <string>-o</string>
     <string>TCPKeepAlive=no</string>
     <string>-D</string>
-    <string>8000</string>
+    <string>7000</string>
     <string>ivan@vpn.zoid.cc</string>
   </array>
   <key>KeepAlive</key>

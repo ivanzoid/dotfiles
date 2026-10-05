@@ -29,8 +29,8 @@ end
 kbBacklightTap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, function(e)
     if not e:getFlags().fn then return false end
     local key = hs.keycodes.map[e:getKeyCode()]
-    if key == "f5" then illum("ILLUMINATION_DOWN"); return true end
-    if key == "f6" then illum("ILLUMINATION_UP");   return true end
+--    if key == "f5" then illum("ILLUMINATION_DOWN"); return true end
+--    if key == "f6" then illum("ILLUMINATION_UP");   return true end
     return false
 end)
 
