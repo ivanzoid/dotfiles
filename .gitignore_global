@@ -20,3 +20,5 @@ xcuserdata
 
 *.moved-aside
 
+
+**/.claude/settings.local.json
