@@ -1,6 +1,8 @@
 # ~/.zshrc
 
 setopt EMACS
+# No ZLE beeps: Ghostty plays a sound on BEL, reserved for Claude Code alerts.
+unsetopt BEEP
 
 # Zsh
 HISTSIZE=100000000
