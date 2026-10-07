@@ -45,6 +45,14 @@ copy-on-select = clipboard
 keybind = cmd+shift+a=text:mosh ivan@ai && exit\n
 keybind = cmd+shift+r=reset
 
+# Play a sound on BEL. The Claude Code Notification hook (~/.claude/scripts/
+# notify-tmux.sh on the server) sends OSC 777 + BEL, but mosh drops the OSC 777
+# banner, so the bell is the only signal that reaches us. Defaults (attention =
+# dock bounce, title = 🔔 in tab title) stay on.
+bell-features = audio
+bell-audio-path = /System/Library/Sounds/Glass.aiff
+bell-audio-volume = 0.6
+
 # Cmd+N / Cmd+T are intercepted by Hammerspoon (~/.hammerspoon/init.lua) so a new
 # window/tab re-connects (mosh) into the current tab's remote dir. Hammerspoon
 # triggers Ghostty's *native* new tab/window via these dedicated binds, avoiding
