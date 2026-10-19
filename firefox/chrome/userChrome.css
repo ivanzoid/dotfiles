@@ -3,6 +3,21 @@
 @import url(chrome/combined_favicon_and_tab_close_button.css);
 @import url(chrome/urlbar_centered_text.css);
 
+/* hide_tabs_with_one_tab.css hides the tab strip via height: 0.1px, but
+   Firefox's own min-height/padding on #TabsToolbar still leave an empty
+   gray band under the nav-bar. Same conditions as that file. */
+@media not -moz-pref("sidebar.verticalTabs") {
+  #TabsToolbar:has(#pinned-tabs-container:empty ~ #tabbrowser-arrowscrollbox > .tabbrowser-tab:first-child + hbox),
+  #TabsToolbar:has(#tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery:first-child) {
+    &:not(:has(#tabbrowser-tabs > #pinned-tabs-container > .tabbrowser-tab + .tabbrowser-tab)) {
+      min-height: 0 !important;
+      padding-block: 0 !important;
+      margin-block: 0 !important;
+      border-block: 0 !important;
+    }
+  }
+}
+
 /* Fix for macOS: restore window controls (traffic lights) when using
    tabs_on_bottom_v2.css + hide_tabs_with_one_tab.css.
 
