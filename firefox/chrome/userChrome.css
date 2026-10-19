@@ -20,6 +20,12 @@
         display: flex !important;
         width: 6px !important;
       }
+      /* Newer Firefox marks #toolbar-menubar as autohide/collapsed on macOS
+         too, so tabs_on_bottom_v2.css shows the 40px post-tabs drag spacer
+         at the right end of #nav-bar, pushing the toolbar buttons inward. */
+      #nav-bar > .titlebar-spacer[type="post-tabs"] {
+        display: none !important;
+      }
     }
   }
 
