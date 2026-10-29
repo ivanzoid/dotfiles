@@ -4,7 +4,11 @@
 # already has a real compsys/plugin completion (git, docker, your zsh-completions,
 # builtins, ...) still uses that. This only kicks in for commands zsh knows nothing
 # about. On first Tab it runs `<cmd> --help` (then -h, then help), scrapes the flags
-# with help-complete.awk, and caches the result; later Tabs are served from cache.
+# and subcommands with help-complete.awk, and caches the result; later Tabs are
+# served from cache. Prose-style help (synopsis lines + paragraphs, no option table)
+# is handled too: flags come from the synopsis, subcommands from "cmd [<n>] up ..."
+# lines and from a "Commands:" section. The loader never writes to the terminal;
+# anything that does reach stdout/stderr is shown as a completion message instead.
 # The --help run is sandboxed (no network + read-only filesystem) and hard-killed
 # after 2s, so a speculative run can't phone home, write files, or hang.
 #
@@ -93,11 +97,12 @@ __hc_generate() {                       # $1=bin -> prints "flag<TAB>desc" lines
     [[ -n $out ]] && break
   done
   [[ -n $out ]] || return 1
-  print -r -- "$out" | command awk -f "$__HC_AWK"
+  print -r -- "$out" | command awk -v cmd="${bin:t}" -f "$__HC_AWK"
 }
 
-__hc_load() {                           # $1=array name to fill (value:desc); $2=command name
-  local arrname=$1 cmd=$2
+__hc_load() {                           # $1/$2=array names to fill with options / subcommands (value:desc); $3=command name
+  local arrname=$1 subname=$2 cmd=$3
+  setopt localoptions extendedglob   # for the `#` quantifier in the cache-line check below
   local bin
   if [[ $cmd == */* ]]; then                                  # path form: ./tool, /opt/x/tool
     bin=${cmd:A}                                              # resolve relative to $PWD
@@ -132,19 +137,27 @@ __hc_load() {                           # $1=array name to fill (value:desc); $2
   fi
 
   if (( ! valid )); then
-    local gen; gen=$(__hc_generate "$bin") || return 1
-    { print -r -- "#$mt $now"; print -r -- "$gen" } >| "$cache" 2>/dev/null
-    lines=( "#$mt $now" "${(@f)gen}" )
+    # NB: not `local gen` again — re-declaring an existing local without a value
+    # makes zsh *print* it (name=value) unless TYPESET_SILENT is set.
+    local parsed; parsed=$(__hc_generate "$bin") || return 1
+    { print -r -- "#$mt $now"; print -r -- "$parsed" } >| "$cache" 2>/dev/null
+    lines=( "#$mt $now" "${(@f)parsed}" )
   fi
 
-  local -a out; local l flag desc
+  local -a __hc_o __hc_s; local l flag desc entry   # odd names: must not shadow the caller's arrays
   for l in "${lines[@]}"; do
     [[ -z $l || $l == '#'* ]] && continue
     flag=${l%%$'\t'*}; desc=${l#*$'\t'}
     [[ $desc == $l ]] && desc=''
-    [[ -n $desc ]] && out+=( "${flag}:${desc}" ) || out+=( "$flag" )
+    if [[ $flag != (-[-A-Za-z0-9?][-A-Za-z0-9?_]#|[a-z][-a-z0-9_]#) ]]; then   # parser only emits these shapes
+      print -u2 -r -- "help-complete: malformed cache line for $cmd in $cache: ${(q)l}"
+      continue
+    fi
+    [[ -n $desc ]] && entry="${flag}:${desc//:/\\:}" || entry=$flag
+    if [[ $flag == -* ]]; then __hc_o+=( "$entry" ); else __hc_s+=( "$entry" ); fi
   done
-  set -A $arrname "${out[@]}"
+  set -A $arrname "${__hc_o[@]}"
+  set -A $subname "${__hc_s[@]}"
   return 0
 }
 
@@ -152,9 +165,27 @@ _help_complete() {
   # NB: no `emulate -L zsh` here — the completion system already runs with a
   # normalized option set (notably NOMATCH off, which _files relies on).
   local cmd=${words[1]} ret=1
-  local -a opts
-  if __hc_load opts "$cmd" && (( ${#opts} )); then
-    _describe -t options 'option (--help)' opts && ret=0
+  local -a opts subs
+  # Nothing in the loader is meant to write to the terminal. Anything that does
+  # (a shell error, awk failure, stray print) must not land on the command line
+  # as if it were typed: capture it and surface it as a completion message.
+  local stray loaded=0
+  local tmp=${TMPDIR:-/tmp}/zsh-help-complete.$$.$RANDOM   # (a subshell capture would lose opts)
+  if __hc_load opts subs "$cmd" >| "$tmp" 2>&1; then loaded=1; fi
+  [[ -s $tmp ]] && stray=$(<"$tmp")
+  command rm -f -- "$tmp" 2>/dev/null
+  if [[ -n $stray ]]; then
+    _message -r "help-complete: unexpected output while loading ${cmd}: ${stray//$'\n'/ | }"
+  fi
+  if (( loaded )); then
+    # Subcommands are offered until one of them has been typed ("bpm-slot 3 <Tab>"
+    # still offers up/down/..., "bpm-slot 3 up <Tab>" no longer does).
+    if (( ${#subs} )); then
+      local w seen=0; local -a names=( "${subs[@]%%:*}" )
+      for w in "${words[@]:1:$((CURRENT-2))}"; do (( ${names[(Ie)$w]} )) && { seen=1; break }; done
+      (( seen )) || { _describe -t subcommands 'subcommand (--help)' subs && ret=0 }
+    fi
+    (( ${#opts} )) && { _describe -t options 'option (--help)' opts && ret=0 }
   fi
   _files && ret=0
   return ret
