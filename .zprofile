@@ -19,6 +19,11 @@ if [[ -o interactive && -z "$TMUX" && -z "$SSH_TTY" ]]; then
 		fi
 	fi
 	unset _grf _grts
+	# A tab Ghostty restored after a quit (window-save-state) starts in the
+	# marker dir ghostty-reconnect reported for it; reconnect it to its session.
+	if [[ "$PWD" == "$HOME"/.cache/ghostty-tabs/* && -r "$PWD/target" ]]; then
+		exec "$HOME/bin/ghostty-reconnect" --restore "$PWD"
+	fi
 fi
 
 # Go
