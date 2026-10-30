@@ -84,8 +84,11 @@ end
 -- keystroke is unreliable while the Cmd key that triggered us is still physically
 -- held, whereas selecting the menu item goes through Accessibility and is not
 -- affected. Fall back to the cmd+ctrl+* keybind only if the menu title isn't found.
+-- The frontmost app, not hs.application.get(): with a second Ghostty instance
+-- (open -na Ghostty) get() returns the first one, and the tab would open there.
 local function openNative(menuTitle, fallbackKey)
-    local app = hs.application.get(GHOSTTY_BID)
+    local app = hs.application.frontmostApplication()
+    if app and app:bundleID() ~= GHOSTTY_BID then app = nil end
     if app and app:selectMenuItem(menuTitle) then return end
     hs.eventtap.keyStroke({ "cmd", "ctrl" }, fallbackKey)
 end
