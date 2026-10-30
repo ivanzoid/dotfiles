@@ -4,11 +4,10 @@
 --
 -- The only channel that carries the live remote cwd back to the Mac is the outer
 -- window title: ~/.tmux.conf sets it to "[host] cmd: path" (tmux swallows OSC-7,
--- so there is no other signal). mosh-client prepends its own status bracket, so
--- what actually reaches Ghostty is "[mosh] [host] cmd: path" (the prefix can also
--- read "[mosh: 5s]" etc. when the link stalls). So we read the focused Ghostty
--- window title, skip any leading status brackets to the real "[host]", pull out
--- host + dir, then hand off to the shell:
+-- so there is no other signal). The mosh wrapper (~/bin/ssh) sets
+-- MOSH_TITLE_NOPREFIX, so mosh-client adds no "[mosh] " bracket of its own. So we
+-- read the focused Ghostty window title, pull out host + dir, then hand off to
+-- the shell:
 --
 --   1. Stage a tiny request file (host + dir + transport) that the new surface's
 --      shell claims on startup.
@@ -21,9 +20,9 @@
 -- ~/bin/ghostty-reconnect for the connect logic (host->target mapping, the
 -- mosh/ssh command, cd + fresh tmux session).
 --
--- The transport is mirrored from the current tab: the "[mosh]" prefix means the
--- session is mosh (reconnect with mosh), its absence means ssh (reconnect with
--- ssh).
+-- The transport is always mosh: with the "[mosh]" prefix gone the title no
+-- longer says how the current tab is connected, so an ssh tab also reconnects
+-- with mosh.
 --
 -- A local (non-ssh) tab has a title like "ivan@mac:~" (no leading "["), so it
 -- just gets a normal local new tab/window (and any stale request is cleared).
@@ -44,16 +43,16 @@ local function requestPath()
     return base .. "/ghostty-reconnect"
 end
 
--- Parse "[mosh] [host] cmd: ~/path" (mosh prefix and "cmd:" both optional) ->
--- transport ("mosh"|"ssh"), host, path. Returns nil host for local tabs (no
--- "[host]" bracket).
+-- Parse "[host] cmd: ~/path" ("cmd:" optional) -> transport ("mosh"), host,
+-- path. Returns nil host for local tabs (no "[host]" bracket).
 local function parseRemoteTitle(title)
     if not title then return nil, nil, nil end
     local s = title:gsub("^%s+", "")
-    local transport = s:match("^%[mosh") and "mosh" or "ssh"
-    -- Skip leading status brackets (mosh's "[mosh]" etc.): keep dropping a
-    -- "[...]" while it is immediately followed by another "[...]", so we land on
-    -- the last leading bracket, which is the real host.
+    local transport = "mosh"
+    -- Skip any leading status brackets (a "[mosh]" from a mosh-client without
+    -- MOSH_TITLE_NOPREFIX): keep dropping a "[...]" while it is immediately
+    -- followed by another "[...]", so we land on the last leading bracket, which
+    -- is the real host.
     while true do
         local nxt = s:match("^%[[^%]]*%]%s*(.*)$")
         if nxt and nxt:match("^%[") then s = nxt else break end
