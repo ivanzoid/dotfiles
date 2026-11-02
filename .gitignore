@@ -9,3 +9,4 @@ Sublime Text 3/Cache
 **/log.txt
 .vim/.netrwhist
 .config/zed/prompts
+.claude/worktrees/
