@@ -16,7 +16,12 @@ _tmux_ssh_auto() {
   # If all sessions are attached, start a new one directly
   local detached_count="$(tmux list-sessions -F '#{session_attached}' 2>/dev/null | grep -c '^0$')"
   if [[ "$detached_count" == "0" ]]; then
-    exec tmux new -s "$(~/.tmux/session-name.sh)"
+    # Tag it with the Ghostty tab id the Mac mosh wrapper passed in, if any
+    # (see _tab_tag in ~/.tmux/chooser.sh).
+    local name="$(~/.tmux/session-name.sh)"
+    local -a tag=()
+    [[ -n "$GHOSTTY_TAB" ]] && tag=(\; set -t "=$name:" @ghostty_tab "$GHOSTTY_TAB")
+    exec tmux new -s "$name" "${tag[@]}"
   fi
 
   # Close the login shell after a real attach+detach, like the exec paths

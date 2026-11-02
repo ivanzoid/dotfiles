@@ -20,6 +20,7 @@ cursor-style-blink = false
 shell-integration-features = no-cursor, title
 adjust-cursor-thickness = +200%
 window-inherit-working-directory = false
+window-save-state = always
 working-directory = home
 
 # custom-shader = ~/icloud/Resources/ghostty-shaders/cursor_blaze2.glsl

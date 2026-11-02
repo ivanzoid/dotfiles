@@ -118,13 +118,22 @@ fi
 
 inside_tmux="${TMUX:+1}"
 
+# Extra tmux commands that tag session $1 with the Ghostty tab id the Mac mosh
+# wrapper passed in ($GHOSTTY_TAB), so ghostty-reconnect --restore can find the
+# session again after a Ghostty quit. Empty when there is no id. Sets $reply.
+_tab_tag() {
+  reply=()
+  [[ -n "$GHOSTTY_TAB" ]] && reply=(\; set -t "=$1:" @ghostty_tab "$GHOSTTY_TAB")
+}
+
 # If no sessions exist, start a stable default
 if ! tmux has-session 2>/dev/null; then
   if [[ -n "$inside_tmux" ]]; then
     tmux new -ds main && tmux switch-client -t main
     exit
   fi
-  exec tmux new -s main
+  _tab_tag main
+  exec tmux new -s main "${reply[@]}"
 fi
 
 # No fzf available -> just attach/switch to whatever tmux picks
@@ -159,7 +168,8 @@ if [[ "$selection" == ➕* ]]; then
     tmux new -ds "$TMUX_CHOOSER_NEW" && tmux switch-client -t "$TMUX_CHOOSER_NEW"
     exit
   fi
-  exec tmux new -s "$TMUX_CHOOSER_NEW"
+  _tab_tag "$TMUX_CHOOSER_NEW"
+  exec tmux new -s "$TMUX_CHOOSER_NEW" "${reply[@]}"
 fi
 
 target="$(_session_of "${selection%% *}")"
@@ -167,4 +177,5 @@ if [[ -n "$inside_tmux" ]]; then
   tmux switch-client -t "=$target"
   exit
 fi
-exec tmux attach -t "=$target"
+_tab_tag "$target"
+exec tmux attach -t "=$target" "${reply[@]}"

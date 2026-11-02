@@ -11,12 +11,18 @@ auto_switch = false
 dark_name = "catppuccin"
 light_name = "catppuccin-latte"
 
-# Latte's separators nearly vanish on a white bg. Inactive pane splits are
-# drawn in overlay0, the sidebar|pane divider in surface_dim, the focused
-# pane's border in accent.
-# Sidebar colors match the latte mock on herdr.dev (--term-sidebar-bg etc.).
-[theme.custom]
+# Latte's split separators (overlay0 = #9ca0b0) nearly vanish on a white bg.
+# Inactive splits are drawn in overlay0, the focused pane's border in accent.
+name = "catppuccin-latte"
+[theme.custom.light]
 overlay0 = "#7c7f93"      # latte overlay2 (default overlay0 #9ca0b0)
 surface_dim = "#ccd0da"   # sidebar divider; latte surface0 (default #e6e9ef)
 sidebar_bg = "#e6e9ef"    # latte mantle; default "reset" = Ghostty's white
 active_row_bg = "#dce0e8" # latte crust; default #e6e9ef would match sidebar_bg
+
+[ui]
+
+[ui.sidebar]
+
+[ui.sidebar.agents]
+rows = [["state_icon", "machine", "workspace", "tab"], ["agent"]]
