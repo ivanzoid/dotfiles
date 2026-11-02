@@ -21,8 +21,16 @@ if [[ -o interactive && -z "$TMUX" && -z "$SSH_TTY" ]]; then
 	unset _grf _grts
 	# A tab Ghostty restored after a quit (window-save-state) starts in the
 	# marker dir ghostty-reconnect reported for it; reconnect it to its session.
+	# A new tab/split opened with a native shortcut inherits that cwd too, while
+	# its source tab is still live: then the id is in a running mosh-client's
+	# args (mosh passes its whole command line there), and restoring would steal
+	# the session (attach -d), so just start a normal shell in ~ instead.
 	if [[ "$PWD" == "$HOME"/.cache/ghostty-tabs/* && -r "$PWD/target" ]]; then
-		exec "$HOME/bin/ghostty-reconnect" --restore "$PWD"
+		if ps -axo args= | awk -v id="${PWD:t}" '$1 ~ /mosh-client$/ && index($0, id) { f = 1 } END { exit !f }'; then
+			cd ~
+		else
+			exec "$HOME/bin/ghostty-reconnect" --restore "$PWD"
+		fi
 	fi
 fi
 
