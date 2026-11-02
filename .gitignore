@@ -10,3 +10,4 @@ Sublime Text 3/Cache
 .vim/.netrwhist
 .config/zed/prompts
 .claude/worktrees/
+**/*.gpui-lock
