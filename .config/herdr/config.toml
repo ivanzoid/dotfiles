@@ -14,3 +14,10 @@ name = "catppuccin-latte"
 [theme.custom.light]
 overlay0 = "#7c7f93"   # latte overlay2
 sidebar_bg = "#eff1f5" # latte base; default is "reset" (= Ghostty's white)
+
+[ui]
+
+[ui.sidebar]
+
+[ui.sidebar.agents]
+rows = [["state_icon", "machine", "workspace", "tab"], ["agent"]]
