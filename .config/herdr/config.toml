@@ -1,16 +1,22 @@
 onboarding = false
 
 [theme]
-# Follow Ghostty's light/dark switch (light:Alabaster-White, dark:Afterglow-Gray-Cursor).
 # herdr never paints the pane background — panes show the host terminal's bg,
 # so the pane color comes from the Ghostty theme, not from here.
+name = "catppuccin-latte"
+# auto_switch can't see Ghostty's appearance through mosh+tmux, so it's off.
+# If turned back on, move [theme.custom] below to [theme.custom.light] —
+# otherwise these latte tweaks would also apply to the dark theme.
 auto_switch = false
 dark_name = "catppuccin"
 light_name = "catppuccin-latte"
 
-# Latte's split separators (overlay0 = #9ca0b0) nearly vanish on a white bg.
-# Inactive splits are drawn in overlay0, the focused pane's border in accent.
-name = "catppuccin-latte"
-[theme.custom.light]
-overlay0 = "#7c7f93"   # latte overlay2
-sidebar_bg = "#eff1f5" # latte base; default is "reset" (= Ghostty's white)
+# Latte's separators nearly vanish on a white bg. Inactive pane splits are
+# drawn in overlay0, the sidebar|pane divider in surface_dim, the focused
+# pane's border in accent.
+# Sidebar colors match the latte mock on herdr.dev (--term-sidebar-bg etc.).
+[theme.custom]
+overlay0 = "#7c7f93"      # latte overlay2 (default overlay0 #9ca0b0)
+surface_dim = "#ccd0da"   # sidebar divider; latte surface0 (default #e6e9ef)
+sidebar_bg = "#e6e9ef"    # latte mantle; default "reset" = Ghostty's white
+active_row_bg = "#dce0e8" # latte crust; default #e6e9ef would match sidebar_bg

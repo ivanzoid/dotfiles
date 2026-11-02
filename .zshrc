@@ -75,6 +75,48 @@ if (( $+commands[dircolors] )); then
   unset _lsc
 fi
 
+# Markdown rendering style for glamour-based tools (glow, gh). Their "auto" mode
+# asks the terminal for its background (OSC 11) via termenv, but termenv skips the
+# query when TERM is tmux*/screen* and assumes black -> dark style. gh reads
+# GLAMOUR_STYLE; glow 3.x ignores it and reads GLOW_STYLE (viper env binding).
+#
+# Static guess for GLAMOUR_STYLE: macOS appearance (AppleInterfaceStyle exists only
+# in Dark mode), else light.
+if [[ $OSTYPE == darwin* && "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == Dark ]]; then
+  export GLAMOUR_STYLE=${GLAMOUR_STYLE:-dark}
+else
+  export GLAMOUR_STYLE=${GLAMOUR_STYLE:-light}
+fi
+
+# Ask the terminal for its background colour and set REPLY to light/dark.
+# Only used inside tmux: tmux (3.4+) answers OSC 11 itself from its copy of the
+# client's colours, so the reply is local and fast. Fails if nothing answers.
+_term_bg_style() {
+  [[ -t 0 && -t 1 ]] || return 1
+  local reply= c
+  print -n '\e]11;?\a' > /dev/tty
+  while read -rs -k1 -t 0.3 c; do
+    reply+=$c
+    [[ $c == $'\a' || $reply == *$'\e\\' ]] && break
+  done
+  [[ $reply =~ 'rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+)' ]] || return 1
+  local r=$(( 16#${match[1][1,2]} )) g=$(( 16#${match[2][1,2]} )) b=$(( 16#${match[3][1,2]} ))
+  if (( (299*r + 587*g + 114*b) / 1000 > 128 )); then REPLY=light; else REPLY=dark; fi
+}
+
+# glow: in tmux detect the background per call (follows a theme switch); if tmux
+# doesn't know it, use the static guess. Outside tmux glow's own auto works.
+# -w 0 = no hard wrapping (the terminal soft-wraps); must be a flag, since
+# `width: 0` in glow.yml counts as unset and wraps at 120. A later -w overrides.
+glow() {
+  if [[ -n $TMUX ]]; then
+    _term_bg_style || REPLY=$GLAMOUR_STYLE
+    GLOW_STYLE=$REPLY command glow -w 0 "$@"
+  else
+    command glow -w 0 "$@"
+  fi
+}
+
 # Aliases
 alias ls='ls -Ah --color=auto'
 alias ll='/bin/ls -lh --color=auto'	# hide hidden files, details format (table)
