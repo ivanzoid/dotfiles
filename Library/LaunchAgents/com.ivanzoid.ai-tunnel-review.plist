@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Equivalent of: ssh-tunnel ivan@ai -p 17140
+  (~/bin/ssh-tunnel spelled out as plain ssh -L forwards, so launchd has no
+  script dependency). KeepAlive restarts ssh whenever it dies; with
+  ExitOnForwardFailure a busy local port makes it exit and retry every
+  ThrottleInterval seconds instead of running half-forwarded.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ivanzoid.ai-tunnel-review</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/ssh</string>
+    <string>-N</string>
+    <string>-o</string>
+    <string>BatchMode=yes</string>
+    <string>-o</string>
+    <string>ExitOnForwardFailure=yes</string>
+    <string>-o</string>
+    <string>ControlMaster=no</string>
+    <string>-o</string>
+    <string>ControlPath=none</string>
+    <string>-o</string>
+    <string>ServerAliveInterval=30</string>
+    <string>-o</string>
+    <string>ServerAliveCountMax=3</string>
+    <string>-L</string>
+    <string>127.0.0.1:17140:localhost:17140</string>
+    <string>ivan@ai</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/ivan/Library/Logs/ai-tunnel-review.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/ivan/Library/Logs/ai-tunnel-review.err.log</string>
+</dict>
+</plist>

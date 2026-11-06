@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Equivalent of: ssh-tunnel ivan@ai -p 8000-8010,9000-9010
+  (~/bin/ssh-tunnel spelled out as plain ssh -L forwards, so launchd has no
+  script dependency). KeepAlive restarts ssh whenever it dies; with
+  ExitOnForwardFailure a busy local port makes it exit and retry every
+  ThrottleInterval seconds instead of running half-forwarded.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ivanzoid.ai-tunnel-bpm-dev</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/ssh</string>
+    <string>-N</string>
+    <string>-o</string>
+    <string>BatchMode=yes</string>
+    <string>-o</string>
+    <string>ExitOnForwardFailure=yes</string>
+    <string>-o</string>
+    <string>ControlMaster=no</string>
+    <string>-o</string>
+    <string>ControlPath=none</string>
+    <string>-o</string>
+    <string>ServerAliveInterval=30</string>
+    <string>-o</string>
+    <string>ServerAliveCountMax=3</string>
+    <string>-L</string>
+    <string>127.0.0.1:8000:localhost:8000</string>
+    <string>-L</string>
+    <string>127.0.0.1:8001:localhost:8001</string>
+    <string>-L</string>
+    <string>127.0.0.1:8002:localhost:8002</string>
+    <string>-L</string>
+    <string>127.0.0.1:8003:localhost:8003</string>
+    <string>-L</string>
+    <string>127.0.0.1:8004:localhost:8004</string>
+    <string>-L</string>
+    <string>127.0.0.1:8005:localhost:8005</string>
+    <string>-L</string>
+    <string>127.0.0.1:8006:localhost:8006</string>
+    <string>-L</string>
+    <string>127.0.0.1:8007:localhost:8007</string>
+    <string>-L</string>
+    <string>127.0.0.1:8008:localhost:8008</string>
+    <string>-L</string>
+    <string>127.0.0.1:8009:localhost:8009</string>
+    <string>-L</string>
+    <string>127.0.0.1:8010:localhost:8010</string>
+    <string>-L</string>
+    <string>127.0.0.1:9000:localhost:9000</string>
+    <string>-L</string>
+    <string>127.0.0.1:9001:localhost:9001</string>
+    <string>-L</string>
+    <string>127.0.0.1:9002:localhost:9002</string>
+    <string>-L</string>
+    <string>127.0.0.1:9003:localhost:9003</string>
+    <string>-L</string>
+    <string>127.0.0.1:9004:localhost:9004</string>
+    <string>-L</string>
+    <string>127.0.0.1:9005:localhost:9005</string>
+    <string>-L</string>
+    <string>127.0.0.1:9006:localhost:9006</string>
+    <string>-L</string>
+    <string>127.0.0.1:9007:localhost:9007</string>
+    <string>-L</string>
+    <string>127.0.0.1:9008:localhost:9008</string>
+    <string>-L</string>
+    <string>127.0.0.1:9009:localhost:9009</string>
+    <string>-L</string>
+    <string>127.0.0.1:9010:localhost:9010</string>
+    <string>ivan@ai</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/ivan/Library/Logs/ai-tunnel-bpm-dev.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/ivan/Library/Logs/ai-tunnel-bpm-dev.err.log</string>
+</dict>
+</plist>
